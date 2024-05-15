@@ -18,6 +18,8 @@
 		382020462BF3046B00368FA7 /* MusicAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382020452BF3046B00368FA7 /* MusicAppUITestsLaunchTests.swift */; };
 		382020542BF30B0200368FA7 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382020532BF30B0200368FA7 /* CoordinatorProtocol.swift */; };
 		382020592BF3100F00368FA7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382020582BF3100F00368FA7 /* HomeViewController.swift */; };
+		3857EDC32BF53EE900F2B8ED /* ServiceLocatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDC22BF53EE900F2B8ED /* ServiceLocatorProtocol.swift */; };
+		3857EDC52BF540EF00F2B8ED /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDC42BF540EF00F2B8ED /* ServiceLocator.swift */; };
 		385D0A482BF45AB80076A5F3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385D0A3A2BF45AB80076A5F3 /* NetworkManager.swift */; };
 		385D0A492BF45AB80076A5F3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385D0A3A2BF45AB80076A5F3 /* NetworkManager.swift */; };
 		385D0A4A2BF45AB80076A5F3 /* NetworkManagerErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385D0A3B2BF45AB80076A5F3 /* NetworkManagerErrors.swift */; };
@@ -89,6 +91,8 @@
 		382020452BF3046B00368FA7 /* MusicAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		382020532BF30B0200368FA7 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		382020582BF3100F00368FA7 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		3857EDC22BF53EE900F2B8ED /* ServiceLocatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocatorProtocol.swift; sourceTree = "<group>"; };
+		3857EDC42BF540EF00F2B8ED /* ServiceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
 		385D0A3A2BF45AB80076A5F3 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		385D0A3B2BF45AB80076A5F3 /* NetworkManagerErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManagerErrors.swift; sourceTree = "<group>"; };
 		385D0A3C2BF45AB80076A5F3 /* CachedResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedResponse.swift; sourceTree = "<group>"; };
@@ -157,6 +161,7 @@
 		382020212BF3046800368FA7 /* MusicApp */ = {
 			isa = PBXGroup;
 			children = (
+				3857EDC12BF5293F00F2B8ED /* Extensions */,
 				385D0A6E2BF464BA0076A5F3 /* Models */,
 				385D0A352BF4597B0076A5F3 /* Services */,
 				382020302BF3046B00368FA7 /* Info.plist */,
@@ -221,9 +226,34 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		3857EDBF2BF528D800F2B8ED /* ServiceLocator */ = {
+			isa = PBXGroup;
+			children = (
+				3857EDC02BF528E400F2B8ED /* Protocols */,
+				3857EDC42BF540EF00F2B8ED /* ServiceLocator.swift */,
+			);
+			path = ServiceLocator;
+			sourceTree = "<group>";
+		};
+		3857EDC02BF528E400F2B8ED /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				3857EDC22BF53EE900F2B8ED /* ServiceLocatorProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		3857EDC12BF5293F00F2B8ED /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		385D0A352BF4597B0076A5F3 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				3857EDBF2BF528D800F2B8ED /* ServiceLocator */,
 				385D0A372BF4599C0076A5F3 /* AuthManager */,
 				385D0A362BF4598E0076A5F3 /* NetworkManager */,
 			);
@@ -431,9 +461,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3857EDC32BF53EE900F2B8ED /* ServiceLocatorProtocol.swift in Sources */,
 				3801A7E32BF3132500AD60DE /* AppCoordinator.swift in Sources */,
 				385D0A5A2BF45AB80076A5F3 /* RecommendationsEndpoint.swift in Sources */,
 				382020592BF3100F00368FA7 /* HomeViewController.swift in Sources */,
+				3857EDC52BF540EF00F2B8ED /* ServiceLocator.swift in Sources */,
 				385D0A542BF45AB80076A5F3 /* EndpointProtocol.swift in Sources */,
 				382020272BF3046900368FA7 /* WelcomeViewController.swift in Sources */,
 				385D0A482BF45AB80076A5F3 /* NetworkManager.swift in Sources */,

@@ -1,6 +1,6 @@
 //
 //  ProfileEndpoint.swift
-//  SpotifyCloneUIkit
+//  MusicApp
 //
 //  Created by Damien L Thompson on 2024-02-19.
 //

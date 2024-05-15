@@ -1,6 +1,6 @@
 //
 //  AuthManager.swift
-//  SpotifyCloneUIkit
+//  MusicApp
 //
 //  Created by Damien L Thompson on 2024-02-15.
 //

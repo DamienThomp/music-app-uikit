@@ -1,6 +1,6 @@
 //
 //  NetworkManager.swift
-//  SpotifyCloneUIkit
+//  MusicApp
 //
 //  Created by Damien L Thompson on 2024-02-15.
 //
@@ -12,10 +12,6 @@ final class NetworkManager: NetworkManagerProtocol {
     var authManager: AuthManagerProtocol?
     var baseUrl: String?
     var apiVersion: String?
-
-    private init(authManager: AuthManagerProtocol) {
-        self.authManager = authManager
-    }
 
     private let validResponseCodes = 200...299
 
