@@ -7,30 +7,84 @@
 
 import UIKit
 
+enum AppState {
+
+    case signedIn
+    case signedOut
+}
+
 class AppCoordinator: Coordinator {
 
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
+
+    var serviceResolver: ServiceLocatorProtocol?
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
 
     func start() {
-        navigationController.navigationBar.prefersLargeTitles = true
-        showWelcomeView()
+
+        guard let serviceResolver = setupServices() else {
+            #warning("handle service resolver error for appstart")
+            return
+        }
+
+        resolveViewForAppstate(with: serviceResolver)
     }
 
-    func showWelcomeView() {
-        let viewController = WelcomeViewController()
-        viewController.title = "Welcome"
-        viewController.coordinator = self
-        navigationController.pushViewController(viewController, animated: false)
+    private func setupServices() -> ServiceLocatorProtocol? {
+
+        let serviceResolver = ServiceLocator()
+        self.serviceResolver = serviceResolver
+
+        serviceResolver.register(AuthManager())
+        serviceResolver.register(NetworkManager())
+
+        guard let networkManager: NetworkManager = serviceResolver.resolve(),
+              let authManager: AuthManager = serviceResolver.resolve() 
+        else {
+            return nil
+        }
+
+        networkManager.authManager = authManager
+
+        return serviceResolver
     }
 
-    func showHomeView() {
-        let viewController = HomeViewController()
-        viewController.title = "Home"
-        navigationController.pushViewController(viewController, animated: true)
+    private func resolveViewForAppstate(with serviceResolver: ServiceLocatorProtocol) {
+
+        let appState = resolveAppState(with: serviceResolver)
+
+        switch appState {
+        case .signedIn:
+            #warning("implement signedIn route")
+        case .signedOut:
+            showWelcomeView(serviceResolver: serviceResolver)
+        }
+    }
+
+    private func resolveAppState(with serviceResolver: ServiceLocatorProtocol) -> AppState {
+
+        guard let authManager: AuthManager = serviceResolver.resolve() else {
+            return .signedOut
+        }
+
+        return authManager.isSignedIn ? .signedIn : .signedOut
+    }
+
+    private func showWelcomeView(serviceResolver: ServiceLocatorProtocol) {
+
+        let coordinator = AuthCoordinator(
+            navigationController: navigationController,
+            serviceResolver: serviceResolver
+        )
+        childCoordinators.append(coordinator)
+        coordinator.start()
+    }
+
+    private func showHomeView() {
+        #warning("implement HomeTabBarViewController")
     }
 }

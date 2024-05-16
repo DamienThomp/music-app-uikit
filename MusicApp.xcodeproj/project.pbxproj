@@ -20,6 +20,8 @@
 		382020592BF3100F00368FA7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382020582BF3100F00368FA7 /* HomeViewController.swift */; };
 		3857EDC32BF53EE900F2B8ED /* ServiceLocatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDC22BF53EE900F2B8ED /* ServiceLocatorProtocol.swift */; };
 		3857EDC52BF540EF00F2B8ED /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDC42BF540EF00F2B8ED /* ServiceLocator.swift */; };
+		3857EDC72BF5692700F2B8ED /* UIView+AddSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDC62BF5692700F2B8ED /* UIView+AddSubviews.swift */; };
+		3857EDCA2BF56A1100F2B8ED /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDC92BF56A1100F2B8ED /* AuthCoordinator.swift */; };
 		385D0A482BF45AB80076A5F3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385D0A3A2BF45AB80076A5F3 /* NetworkManager.swift */; };
 		385D0A492BF45AB80076A5F3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385D0A3A2BF45AB80076A5F3 /* NetworkManager.swift */; };
 		385D0A4A2BF45AB80076A5F3 /* NetworkManagerErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385D0A3B2BF45AB80076A5F3 /* NetworkManagerErrors.swift */; };
@@ -93,6 +95,8 @@
 		382020582BF3100F00368FA7 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3857EDC22BF53EE900F2B8ED /* ServiceLocatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocatorProtocol.swift; sourceTree = "<group>"; };
 		3857EDC42BF540EF00F2B8ED /* ServiceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
+		3857EDC62BF5692700F2B8ED /* UIView+AddSubviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AddSubviews.swift"; sourceTree = "<group>"; };
+		3857EDC92BF56A1100F2B8ED /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		385D0A3A2BF45AB80076A5F3 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		385D0A3B2BF45AB80076A5F3 /* NetworkManagerErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManagerErrors.swift; sourceTree = "<group>"; };
 		385D0A3C2BF45AB80076A5F3 /* CachedResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedResponse.swift; sourceTree = "<group>"; };
@@ -220,7 +224,7 @@
 		382020572BF30FE300368FA7 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				382020262BF3046900368FA7 /* WelcomeViewController.swift */,
+				3857EDC82BF569FA00F2B8ED /* Auth */,
 				382020582BF3100F00368FA7 /* HomeViewController.swift */,
 			);
 			path = ViewControllers;
@@ -246,8 +250,18 @@
 		3857EDC12BF5293F00F2B8ED /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				3857EDC62BF5692700F2B8ED /* UIView+AddSubviews.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3857EDC82BF569FA00F2B8ED /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				382020262BF3046900368FA7 /* WelcomeViewController.swift */,
+				3857EDC92BF56A1100F2B8ED /* AuthCoordinator.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		385D0A352BF4597B0076A5F3 /* Services */ = {
@@ -469,6 +483,7 @@
 				385D0A542BF45AB80076A5F3 /* EndpointProtocol.swift in Sources */,
 				382020272BF3046900368FA7 /* WelcomeViewController.swift in Sources */,
 				385D0A482BF45AB80076A5F3 /* NetworkManager.swift in Sources */,
+				3857EDC72BF5692700F2B8ED /* UIView+AddSubviews.swift in Sources */,
 				385D0A6C2BF45D4D0076A5F3 /* AuthConstants.swift in Sources */,
 				385D0A5C2BF45AB80076A5F3 /* SearchEndpoint.swift in Sources */,
 				385D0A4E2BF45AB80076A5F3 /* AlbumEndpoint.swift in Sources */,
@@ -478,6 +493,7 @@
 				385D0A502BF45AB80076A5F3 /* ArtistEndpoint.swift in Sources */,
 				385D0A662BF45B900076A5F3 /* AuthManagerProtocol.swift in Sources */,
 				382020542BF30B0200368FA7 /* CoordinatorProtocol.swift in Sources */,
+				3857EDCA2BF56A1100F2B8ED /* AuthCoordinator.swift in Sources */,
 				382020252BF3046900368FA7 /* SceneDelegate.swift in Sources */,
 				385D0A582BF45AB80076A5F3 /* ProfileEndpoint.swift in Sources */,
 				385D0A4A2BF45AB80076A5F3 /* NetworkManagerErrors.swift in Sources */,

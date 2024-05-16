@@ -10,8 +10,6 @@ import Foundation
 final class NetworkManager: NetworkManagerProtocol {
 
     var authManager: AuthManagerProtocol?
-    var baseUrl: String?
-    var apiVersion: String?
 
     private let validResponseCodes = 200...299
 
@@ -62,18 +60,19 @@ final class NetworkManager: NetworkManagerProtocol {
 
         endPoint.headers?.forEach { request.setValue($0.value, forHTTPHeaderField: $0.key) }
         authHeader?.forEach { request.setValue($0.value, forHTTPHeaderField: $0.key) }
-
+        
+        #if DEBUG
         print(String(describing: request))
+        #endif
+
         return request
     }
 
     private func buildURL(with endPoint: EndpointProtocol) -> URL? {
 
-        guard let baseUrl = baseUrl,
-              let apiVersion = apiVersion,
-              var url = URL(string: baseUrl) else { return nil }
+        guard var url = URL(string: endPoint.baseUrl) else { return nil }
 
-        url.appendPathComponent(apiVersion)
+        url.appendPathComponent(endPoint.apiVersion)
         url.appendPathComponent(endPoint.path)
 
         var urlComponents = URLComponents(string: url.absoluteString)

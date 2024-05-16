@@ -8,6 +8,7 @@
 import Foundation
 
 public enum HTTPMethod: String {
+
     case get = "GET"
     case head = "HEAD"
     case post = "POST"
@@ -17,10 +18,15 @@ public enum HTTPMethod: String {
 }
 
 public enum ContentType: String {
+
     case applicationJson = "application/json"
 }
 
 protocol EndpointProtocol {
+
+    var baseUrl: String { get }
+
+    var apiVersion: String { get }
 
     var path: String { get }
 
@@ -40,6 +46,14 @@ protocol EndpointProtocol {
 
 // MARK: - Default Values
 extension EndpointProtocol {
+
+    var baseUrl: String {
+        return AuthConstants.apiBaseUrl
+    }
+
+    var apiVersion: String {
+        return AuthConstants.apiVersion
+    }
 
     var contentType: ContentType? {
         return .applicationJson
