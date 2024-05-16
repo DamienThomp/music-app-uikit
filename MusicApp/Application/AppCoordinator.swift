@@ -80,6 +80,7 @@ class AppCoordinator: Coordinator {
             navigationController: navigationController,
             serviceResolver: serviceResolver
         )
+
         childCoordinators.append(coordinator)
         coordinator.start()
     }

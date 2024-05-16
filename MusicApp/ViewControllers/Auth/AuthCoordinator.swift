@@ -23,10 +23,13 @@ class AuthCoordinator: Coordinator {
     }
 
     func start() {
-        print("start")
         let viewController = WelcomeViewController()
         viewController.coordinator = self
         navigationController.pushViewController(viewController, animated: false)
+    }
+
+    func showSignInView() {
+        print("show sign in view")
     }
 
 }

@@ -18,8 +18,6 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print("view did load")
-
         view.backgroundColor = .systemBackground
 
         configurelabel()
@@ -28,11 +26,10 @@ class WelcomeViewController: UIViewController {
         configureButtonAction()
         configureLayout()
     }
+}
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    }
-
+//MARK: - Layout
+extension WelcomeViewController {
 
     func configureLogo() {
         logoImage.image = UIImage(resource: .logoClear)
@@ -59,12 +56,6 @@ class WelcomeViewController: UIViewController {
         signInButton.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    func configureButtonAction() {
-        signInButton.addAction(UIAction(handler: { _ in
-            print("navigate to auth screen")
-        }), for: .primaryActionTriggered)
-    }
-
     func configureLayout() {
 
         view.addSubViews(
@@ -85,6 +76,17 @@ class WelcomeViewController: UIViewController {
             signInButton.heightAnchor.constraint(equalToConstant: 50),
             signInButton.widthAnchor.constraint(equalToConstant: 200)
         ])
+    }
+}
+
+//MARK: - Actions
+extension WelcomeViewController {
+
+    func configureButtonAction() {
+
+        signInButton.addAction(UIAction(handler: { [weak self] _ in
+            self?.coordinator?.showSignInView()
+        }), for: .primaryActionTriggered)
     }
 }
 
