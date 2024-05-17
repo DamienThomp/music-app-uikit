@@ -22,6 +22,12 @@
 		3857EDC52BF540EF00F2B8ED /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDC42BF540EF00F2B8ED /* ServiceLocator.swift */; };
 		3857EDC72BF5692700F2B8ED /* UIView+AddSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDC62BF5692700F2B8ED /* UIView+AddSubviews.swift */; };
 		3857EDCA2BF56A1100F2B8ED /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDC92BF56A1100F2B8ED /* AuthCoordinator.swift */; };
+		3857EDCD2BF69CE800F2B8ED /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDCC2BF69CE800F2B8ED /* SignInViewModel.swift */; };
+		3857EDCF2BF69CF800F2B8ED /* SignInDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDCE2BF69CF800F2B8ED /* SignInDataSource.swift */; };
+		3857EDD12BF69D1600F2B8ED /* SignInViewAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDD02BF69D1600F2B8ED /* SignInViewAssembly.swift */; };
+		3857EDD32BF69D3500F2B8ED /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDD22BF69D3500F2B8ED /* SignInViewController.swift */; };
+		3857EDD72BF69D7B00F2B8ED /* AssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDD62BF69D7B00F2B8ED /* AssemblyProtocol.swift */; };
+		3857EDD92BF6B16600F2B8ED /* ServiceDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDD82BF6B16600F2B8ED /* ServiceDataSourceProtocol.swift */; };
 		385D0A482BF45AB80076A5F3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385D0A3A2BF45AB80076A5F3 /* NetworkManager.swift */; };
 		385D0A492BF45AB80076A5F3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385D0A3A2BF45AB80076A5F3 /* NetworkManager.swift */; };
 		385D0A4A2BF45AB80076A5F3 /* NetworkManagerErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385D0A3B2BF45AB80076A5F3 /* NetworkManagerErrors.swift */; };
@@ -97,6 +103,12 @@
 		3857EDC42BF540EF00F2B8ED /* ServiceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
 		3857EDC62BF5692700F2B8ED /* UIView+AddSubviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AddSubviews.swift"; sourceTree = "<group>"; };
 		3857EDC92BF56A1100F2B8ED /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
+		3857EDCC2BF69CE800F2B8ED /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		3857EDCE2BF69CF800F2B8ED /* SignInDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInDataSource.swift; sourceTree = "<group>"; };
+		3857EDD02BF69D1600F2B8ED /* SignInViewAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewAssembly.swift; sourceTree = "<group>"; };
+		3857EDD22BF69D3500F2B8ED /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		3857EDD62BF69D7B00F2B8ED /* AssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyProtocol.swift; sourceTree = "<group>"; };
+		3857EDD82BF6B16600F2B8ED /* ServiceDataSourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDataSourceProtocol.swift; sourceTree = "<group>"; };
 		385D0A3A2BF45AB80076A5F3 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		385D0A3B2BF45AB80076A5F3 /* NetworkManagerErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManagerErrors.swift; sourceTree = "<group>"; };
 		385D0A3C2BF45AB80076A5F3 /* CachedResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedResponse.swift; sourceTree = "<group>"; };
@@ -198,6 +210,8 @@
 			isa = PBXGroup;
 			children = (
 				382020532BF30B0200368FA7 /* CoordinatorProtocol.swift */,
+				3857EDD62BF69D7B00F2B8ED /* AssemblyProtocol.swift */,
+				3857EDD82BF6B16600F2B8ED /* ServiceDataSourceProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -258,10 +272,22 @@
 		3857EDC82BF569FA00F2B8ED /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				3857EDCB2BF69CB600F2B8ED /* SignIn */,
 				382020262BF3046900368FA7 /* WelcomeViewController.swift */,
 				3857EDC92BF56A1100F2B8ED /* AuthCoordinator.swift */,
 			);
 			path = Auth;
+			sourceTree = "<group>";
+		};
+		3857EDCB2BF69CB600F2B8ED /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				3857EDCC2BF69CE800F2B8ED /* SignInViewModel.swift */,
+				3857EDCE2BF69CF800F2B8ED /* SignInDataSource.swift */,
+				3857EDD02BF69D1600F2B8ED /* SignInViewAssembly.swift */,
+				3857EDD22BF69D3500F2B8ED /* SignInViewController.swift */,
+			);
+			path = SignIn;
 			sourceTree = "<group>";
 		};
 		385D0A352BF4597B0076A5F3 /* Services */ = {
@@ -482,6 +508,7 @@
 				3857EDC52BF540EF00F2B8ED /* ServiceLocator.swift in Sources */,
 				385D0A542BF45AB80076A5F3 /* EndpointProtocol.swift in Sources */,
 				382020272BF3046900368FA7 /* WelcomeViewController.swift in Sources */,
+				3857EDD12BF69D1600F2B8ED /* SignInViewAssembly.swift in Sources */,
 				385D0A482BF45AB80076A5F3 /* NetworkManager.swift in Sources */,
 				3857EDC72BF5692700F2B8ED /* UIView+AddSubviews.swift in Sources */,
 				385D0A6C2BF45D4D0076A5F3 /* AuthConstants.swift in Sources */,
@@ -489,17 +516,22 @@
 				385D0A4E2BF45AB80076A5F3 /* AlbumEndpoint.swift in Sources */,
 				385D0A5E2BF45AB80076A5F3 /* UsersSavedAlbums.swift in Sources */,
 				382020232BF3046900368FA7 /* AppDelegate.swift in Sources */,
+				3857EDCF2BF69CF800F2B8ED /* SignInDataSource.swift in Sources */,
 				385D0A522BF45AB80076A5F3 /* BrowseEndpoint.swift in Sources */,
 				385D0A502BF45AB80076A5F3 /* ArtistEndpoint.swift in Sources */,
 				385D0A662BF45B900076A5F3 /* AuthManagerProtocol.swift in Sources */,
 				382020542BF30B0200368FA7 /* CoordinatorProtocol.swift in Sources */,
 				3857EDCA2BF56A1100F2B8ED /* AuthCoordinator.swift in Sources */,
 				382020252BF3046900368FA7 /* SceneDelegate.swift in Sources */,
+				3857EDD92BF6B16600F2B8ED /* ServiceDataSourceProtocol.swift in Sources */,
 				385D0A582BF45AB80076A5F3 /* ProfileEndpoint.swift in Sources */,
+				3857EDD72BF69D7B00F2B8ED /* AssemblyProtocol.swift in Sources */,
 				385D0A4A2BF45AB80076A5F3 /* NetworkManagerErrors.swift in Sources */,
 				385D0A562BF45AB80076A5F3 /* PlaylistsEndpoint.swift in Sources */,
 				385D0A4C2BF45AB80076A5F3 /* CachedResponse.swift in Sources */,
+				3857EDCD2BF69CE800F2B8ED /* SignInViewModel.swift in Sources */,
 				385D0A692BF45BE90076A5F3 /* AuthManager.swift in Sources */,
+				3857EDD32BF69D3500F2B8ED /* SignInViewController.swift in Sources */,
 				385D0A632BF45AD20076A5F3 /* NetworkManagerProtocol.swift in Sources */,
 				385D0A712BF465DE0076A5F3 /* AuthResponse.swift in Sources */,
 				385D0A602BF45AB80076A5F3 /* UsersTopArtistEnpoint.swift in Sources */,
@@ -701,6 +733,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -728,6 +761,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

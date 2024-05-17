@@ -29,7 +29,12 @@ class AuthCoordinator: Coordinator {
     }
 
     func showSignInView() {
-        print("show sign in view")
+        let signInViewAssembly = SignInViewAssembly()
+        let viewController = signInViewAssembly.assemble(serviceResolver, coordinator: self)
+        navigationController.pushViewController(viewController, animated: true)
     }
 
+    func didSignIn() {
+        print("redirect to root view")
+    }
 }
