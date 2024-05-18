@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  BrowseViewController.swift
 //  MusicApp
 //
 //  Created by Damien L Thompson on 2024-05-13.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class BrowseViewController: UIViewController {
 
     weak var coordinator: AppCoordinator?
 
@@ -38,6 +38,6 @@ class HomeViewController: UIViewController {
 }
 
 #Preview {
-    return HomeViewController()
+    return BrowseViewController()
 }
 

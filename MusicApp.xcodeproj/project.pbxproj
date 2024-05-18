@@ -17,7 +17,7 @@
 		382020442BF3046B00368FA7 /* MusicAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382020432BF3046B00368FA7 /* MusicAppUITests.swift */; };
 		382020462BF3046B00368FA7 /* MusicAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382020452BF3046B00368FA7 /* MusicAppUITestsLaunchTests.swift */; };
 		382020542BF30B0200368FA7 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382020532BF30B0200368FA7 /* CoordinatorProtocol.swift */; };
-		382020592BF3100F00368FA7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382020582BF3100F00368FA7 /* HomeViewController.swift */; };
+		382020592BF3100F00368FA7 /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382020582BF3100F00368FA7 /* BrowseViewController.swift */; };
 		3857EDC32BF53EE900F2B8ED /* ServiceLocatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDC22BF53EE900F2B8ED /* ServiceLocatorProtocol.swift */; };
 		3857EDC52BF540EF00F2B8ED /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDC42BF540EF00F2B8ED /* ServiceLocator.swift */; };
 		3857EDC72BF5692700F2B8ED /* UIView+AddSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDC62BF5692700F2B8ED /* UIView+AddSubviews.swift */; };
@@ -28,6 +28,12 @@
 		3857EDD32BF69D3500F2B8ED /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDD22BF69D3500F2B8ED /* SignInViewController.swift */; };
 		3857EDD72BF69D7B00F2B8ED /* AssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDD62BF69D7B00F2B8ED /* AssemblyProtocol.swift */; };
 		3857EDD92BF6B16600F2B8ED /* ServiceDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDD82BF6B16600F2B8ED /* ServiceDataSourceProtocol.swift */; };
+		385A70CE2BF867BE00659C2D /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A70CD2BF867BE00659C2D /* MainTabBarController.swift */; };
+		385A70D02BF867FD00659C2D /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A70CF2BF867FD00659C2D /* MainCoordinator.swift */; };
+		385A70D22BF8718900659C2D /* BrowseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A70D12BF8718900659C2D /* BrowseCoordinator.swift */; };
+		385A70D42BF8721600659C2D /* BrowseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A70D32BF8721600659C2D /* BrowseDataSource.swift */; };
+		385A70D62BF8731F00659C2D /* BrowseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A70D52BF8731F00659C2D /* BrowseViewModel.swift */; };
+		385A70D82BF8737E00659C2D /* BrowseViewAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A70D72BF8737E00659C2D /* BrowseViewAssembly.swift */; };
 		385D0A482BF45AB80076A5F3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385D0A3A2BF45AB80076A5F3 /* NetworkManager.swift */; };
 		385D0A492BF45AB80076A5F3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385D0A3A2BF45AB80076A5F3 /* NetworkManager.swift */; };
 		385D0A4A2BF45AB80076A5F3 /* NetworkManagerErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385D0A3B2BF45AB80076A5F3 /* NetworkManagerErrors.swift */; };
@@ -98,7 +104,7 @@
 		382020432BF3046B00368FA7 /* MusicAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicAppUITests.swift; sourceTree = "<group>"; };
 		382020452BF3046B00368FA7 /* MusicAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		382020532BF30B0200368FA7 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
-		382020582BF3100F00368FA7 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		382020582BF3100F00368FA7 /* BrowseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
 		3857EDC22BF53EE900F2B8ED /* ServiceLocatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocatorProtocol.swift; sourceTree = "<group>"; };
 		3857EDC42BF540EF00F2B8ED /* ServiceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
 		3857EDC62BF5692700F2B8ED /* UIView+AddSubviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AddSubviews.swift"; sourceTree = "<group>"; };
@@ -109,6 +115,12 @@
 		3857EDD22BF69D3500F2B8ED /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		3857EDD62BF69D7B00F2B8ED /* AssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyProtocol.swift; sourceTree = "<group>"; };
 		3857EDD82BF6B16600F2B8ED /* ServiceDataSourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDataSourceProtocol.swift; sourceTree = "<group>"; };
+		385A70CD2BF867BE00659C2D /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		385A70CF2BF867FD00659C2D /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		385A70D12BF8718900659C2D /* BrowseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseCoordinator.swift; sourceTree = "<group>"; };
+		385A70D32BF8721600659C2D /* BrowseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseDataSource.swift; sourceTree = "<group>"; };
+		385A70D52BF8731F00659C2D /* BrowseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseViewModel.swift; sourceTree = "<group>"; };
+		385A70D72BF8737E00659C2D /* BrowseViewAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseViewAssembly.swift; sourceTree = "<group>"; };
 		385D0A3A2BF45AB80076A5F3 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		385D0A3B2BF45AB80076A5F3 /* NetworkManagerErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManagerErrors.swift; sourceTree = "<group>"; };
 		385D0A3C2BF45AB80076A5F3 /* CachedResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedResponse.swift; sourceTree = "<group>"; };
@@ -238,7 +250,8 @@
 		382020572BF30FE300368FA7 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				385A70CB2BF85D3400659C2D /* Home */,
+				385A70CC2BF8674100659C2D /* Main */,
+				385A70CB2BF85D3400659C2D /* Browse */,
 				3857EDC82BF569FA00F2B8ED /* Auth */,
 			);
 			path = Modules;
@@ -298,12 +311,25 @@
 			path = Welcome;
 			sourceTree = "<group>";
 		};
-		385A70CB2BF85D3400659C2D /* Home */ = {
+		385A70CB2BF85D3400659C2D /* Browse */ = {
 			isa = PBXGroup;
 			children = (
-				382020582BF3100F00368FA7 /* HomeViewController.swift */,
+				382020582BF3100F00368FA7 /* BrowseViewController.swift */,
+				385A70D12BF8718900659C2D /* BrowseCoordinator.swift */,
+				385A70D32BF8721600659C2D /* BrowseDataSource.swift */,
+				385A70D52BF8731F00659C2D /* BrowseViewModel.swift */,
+				385A70D72BF8737E00659C2D /* BrowseViewAssembly.swift */,
 			);
-			path = Home;
+			path = Browse;
+			sourceTree = "<group>";
+		};
+		385A70CC2BF8674100659C2D /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				385A70CD2BF867BE00659C2D /* MainTabBarController.swift */,
+				385A70CF2BF867FD00659C2D /* MainCoordinator.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		385D0A352BF4597B0076A5F3 /* Services */ = {
@@ -520,7 +546,10 @@
 				3857EDC32BF53EE900F2B8ED /* ServiceLocatorProtocol.swift in Sources */,
 				3801A7E32BF3132500AD60DE /* AppCoordinator.swift in Sources */,
 				385D0A5A2BF45AB80076A5F3 /* RecommendationsEndpoint.swift in Sources */,
-				382020592BF3100F00368FA7 /* HomeViewController.swift in Sources */,
+				382020592BF3100F00368FA7 /* BrowseViewController.swift in Sources */,
+				385A70D62BF8731F00659C2D /* BrowseViewModel.swift in Sources */,
+				385A70D22BF8718900659C2D /* BrowseCoordinator.swift in Sources */,
+				385A70D42BF8721600659C2D /* BrowseDataSource.swift in Sources */,
 				3857EDC52BF540EF00F2B8ED /* ServiceLocator.swift in Sources */,
 				385D0A542BF45AB80076A5F3 /* EndpointProtocol.swift in Sources */,
 				382020272BF3046900368FA7 /* WelcomeViewController.swift in Sources */,
@@ -530,10 +559,12 @@
 				385D0A6C2BF45D4D0076A5F3 /* AuthConstants.swift in Sources */,
 				385D0A5C2BF45AB80076A5F3 /* SearchEndpoint.swift in Sources */,
 				385D0A4E2BF45AB80076A5F3 /* AlbumEndpoint.swift in Sources */,
+				385A70D82BF8737E00659C2D /* BrowseViewAssembly.swift in Sources */,
 				385D0A5E2BF45AB80076A5F3 /* UsersSavedAlbums.swift in Sources */,
 				382020232BF3046900368FA7 /* AppDelegate.swift in Sources */,
 				3857EDCF2BF69CF800F2B8ED /* SignInDataSource.swift in Sources */,
 				385D0A522BF45AB80076A5F3 /* BrowseEndpoint.swift in Sources */,
+				385A70CE2BF867BE00659C2D /* MainTabBarController.swift in Sources */,
 				385D0A502BF45AB80076A5F3 /* ArtistEndpoint.swift in Sources */,
 				385D0A662BF45B900076A5F3 /* AuthManagerProtocol.swift in Sources */,
 				382020542BF30B0200368FA7 /* CoordinatorProtocol.swift in Sources */,
@@ -541,6 +572,7 @@
 				382020252BF3046900368FA7 /* SceneDelegate.swift in Sources */,
 				3857EDD92BF6B16600F2B8ED /* ServiceDataSourceProtocol.swift in Sources */,
 				385D0A582BF45AB80076A5F3 /* ProfileEndpoint.swift in Sources */,
+				385A70D02BF867FD00659C2D /* MainCoordinator.swift in Sources */,
 				3857EDD72BF69D7B00F2B8ED /* AssemblyProtocol.swift in Sources */,
 				385D0A4A2BF45AB80076A5F3 /* NetworkManagerErrors.swift in Sources */,
 				385D0A562BF45AB80076A5F3 /* PlaylistsEndpoint.swift in Sources */,
