@@ -14,8 +14,10 @@ class SignInViewController: UIViewController {
 
         let prefs = WKWebpagePreferences()
         prefs.allowsContentJavaScript = true
+
         let config = WKWebViewConfiguration()
         config.defaultWebpagePreferences = prefs
+
         let webview = WKWebView(frame: .zero, configuration: config)
 
         return webview
@@ -34,6 +36,7 @@ class SignInViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+
         webView.frame = view.bounds
     }
 
@@ -43,18 +46,19 @@ class SignInViewController: UIViewController {
         title = "Log In"
     }
 
-    func loadAuthView() {
-        guard let url = viewModel?.getSignInUrl() else { return }
-
-        webView.load(URLRequest(url: url))
-    }
-
     func configureWebView() {
 
         webView.navigationDelegate = self
         webView.allowsLinkPreview = true
         webView.allowsBackForwardNavigationGestures = true
         view.addSubview(webView)
+    }
+
+    func loadAuthView() {
+        
+        guard let url = viewModel?.signInUrl else { return }
+
+        webView.load(URLRequest(url: url))
     }
 }
 
@@ -86,9 +90,10 @@ extension SignInViewController: WKNavigationDelegate {
 }
 
 //MARK: - SignInViewModel Delegate
-extension SignInViewController: SignInViewModelProtocol {
+extension SignInViewController: SignInViewModelDelegate {
 
     func didSignIn() {
-        coordinator?.didSignIn()
+
+        coordinator?.didReceiveAccessToken()
     }
 }

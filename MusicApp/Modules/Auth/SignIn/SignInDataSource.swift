@@ -8,11 +8,11 @@
 import Foundation
 
 enum SignInError: Error {
-    
+
     case failedToLoadService
 }
 
-protocol SignInDataSourceProtocol: AnyObject {
+protocol SignInDataSourceDelegate: AnyObject {
 
     func didRecieveAccessToken()
 }
@@ -21,11 +21,9 @@ class SignInDataSource {
 
     private var authManager: AuthManager?
 
-    weak var delegate: SignInDataSourceProtocol?
+    weak var delegate: SignInDataSourceDelegate?
 
-    var authUrl: URL? {
-        authManager?.signInUrl
-    }
+    var authUrl: URL? { authManager?.signInUrl }
 
     func getAccessToken(with code: String) async throws {
 
@@ -34,6 +32,7 @@ class SignInDataSource {
         }
 
         try await authManager.exchangeForToken(with: code)
+
         delegate?.didRecieveAccessToken()
     }
 }
@@ -42,6 +41,7 @@ class SignInDataSource {
 extension SignInDataSource: ServiceDataSourceProtocol {
 
     func resolveServices(with serviceResolver: ServiceLocatorProtocol) {
+        
         authManager = serviceResolver.resolve()
     }
 }

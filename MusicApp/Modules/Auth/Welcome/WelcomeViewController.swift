@@ -32,6 +32,7 @@ class WelcomeViewController: UIViewController {
 extension WelcomeViewController {
 
     func configureLogo() {
+        
         logoImage.image = UIImage(resource: .logoClear)
         logoImage.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -65,6 +66,7 @@ extension WelcomeViewController {
         )
 
         NSLayoutConstraint.activate([
+
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
 

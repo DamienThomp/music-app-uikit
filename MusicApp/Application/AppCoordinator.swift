@@ -59,7 +59,7 @@ class AppCoordinator: Coordinator {
 
         switch appState {
         case .signedIn:
-            #warning("implement signedIn route")
+            showHomeView(serviceResolver: serviceResolver)
         case .signedOut:
             showWelcomeView(serviceResolver: serviceResolver)
         }
@@ -80,12 +80,27 @@ class AppCoordinator: Coordinator {
             navigationController: navigationController,
             serviceResolver: serviceResolver
         )
-
+        
         childCoordinators.append(coordinator)
+        coordinator.delegate = self
         coordinator.start()
     }
 
-    private func showHomeView() {
-        #warning("implement HomeTabBarViewController")
+    private func showHomeView(serviceResolver: ServiceLocatorProtocol) {
+
+        let homeView = HomeViewController()
+        homeView.coordinator = self
+
+        navigationController.pushViewController(homeView, animated: false)
+    }
+}
+
+extension AppCoordinator: AuthCoordinatorDelegate {
+
+    func didSignIn(with coordinator: Coordinator, serviceResolver: ServiceLocatorProtocol) {
+        
+        childCoordinators.removeAll()
+        navigationController.popToRootViewController(animated: false)
+        showHomeView(serviceResolver: serviceResolver)
     }
 }

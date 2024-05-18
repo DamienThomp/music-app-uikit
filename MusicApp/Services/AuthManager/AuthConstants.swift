@@ -19,7 +19,6 @@ enum AuthRoutes {
 
 enum AuthConstants {
 
-    static let accountsBaseUrl = "https://accounts.spotify.com"
     static let apiBaseUrl = "https://api.spotify.com"
     static let apiVersion = "v1"
     static let accessTokenKey = "accessToken"

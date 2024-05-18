@@ -181,7 +181,7 @@
 				385D0A6E2BF464BA0076A5F3 /* Models */,
 				385D0A352BF4597B0076A5F3 /* Services */,
 				382020302BF3046B00368FA7 /* Info.plist */,
-				382020572BF30FE300368FA7 /* ViewControllers */,
+				382020572BF30FE300368FA7 /* Modules */,
 				382020562BF30FC500368FA7 /* Resources */,
 				382020552BF30FAF00368FA7 /* Application */,
 				382020522BF30AE600368FA7 /* Protocols */,
@@ -235,13 +235,13 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		382020572BF30FE300368FA7 /* ViewControllers */ = {
+		382020572BF30FE300368FA7 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				385A70CB2BF85D3400659C2D /* Home */,
 				3857EDC82BF569FA00F2B8ED /* Auth */,
-				382020582BF3100F00368FA7 /* HomeViewController.swift */,
 			);
-			path = ViewControllers;
+			path = Modules;
 			sourceTree = "<group>";
 		};
 		3857EDBF2BF528D800F2B8ED /* ServiceLocator */ = {
@@ -272,8 +272,8 @@
 		3857EDC82BF569FA00F2B8ED /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				385A70C92BF85D1400659C2D /* Welcome */,
 				3857EDCB2BF69CB600F2B8ED /* SignIn */,
-				382020262BF3046900368FA7 /* WelcomeViewController.swift */,
 				3857EDC92BF56A1100F2B8ED /* AuthCoordinator.swift */,
 			);
 			path = Auth;
@@ -288,6 +288,22 @@
 				3857EDD22BF69D3500F2B8ED /* SignInViewController.swift */,
 			);
 			path = SignIn;
+			sourceTree = "<group>";
+		};
+		385A70C92BF85D1400659C2D /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				382020262BF3046900368FA7 /* WelcomeViewController.swift */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
+		385A70CB2BF85D3400659C2D /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				382020582BF3100F00368FA7 /* HomeViewController.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		385D0A352BF4597B0076A5F3 /* Services */ = {
