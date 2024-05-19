@@ -40,7 +40,7 @@ protocol EndpointProtocol {
 
     var queryItems: [URLQueryItem]? { get }
 
-    var cachePolicy: URLRequest.CachePolicy?  { get }
+    var cachePolicy: URLRequest.CachePolicy  { get }
 
 }
 
@@ -71,7 +71,7 @@ extension EndpointProtocol {
         return nil
     }
 
-    var cachePolicy: URLRequest.CachePolicy? {
-        return .returnCacheDataElseLoad
+    var cachePolicy: URLRequest.CachePolicy {
+        return .useProtocolCachePolicy
     }
 }

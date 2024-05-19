@@ -9,7 +9,11 @@ import Foundation
 
 enum RecommendationsEndpoint: EndpointProtocol {
 
-    case recommedations(limit: Int, genreSeeds: String? = nil, artistSeeds: String? = nil)
+    case recommedations(
+        limit: Int,
+        genreSeeds: String? = nil,
+        artistSeeds: String? = nil
+    )
     case genre
 
     var httpMethod: HTTPMethod {
@@ -41,5 +45,9 @@ enum RecommendationsEndpoint: EndpointProtocol {
         case .genre:
             return [URLQueryItem(name: "limit", value: "10")]
         }
+    }
+
+    var cachePolicy: URLRequest.CachePolicy {
+        .returnCacheDataElseLoad
     }
 }
