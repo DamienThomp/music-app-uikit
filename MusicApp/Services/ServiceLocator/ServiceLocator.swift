@@ -7,6 +7,11 @@
 
 import Foundation
 
+enum ServiceResolverErrors: Error {
+
+    case failedToResolveService
+}
+
 final class ServiceLocator: ServiceLocatorProtocol {
 
     internal var services: [ObjectIdentifier: Any] = [:]

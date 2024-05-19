@@ -27,7 +27,7 @@ enum ArtistEndpoint: EndpointProtocol {
         switch self {
         case .artist(let id):
             return "/artists/\(id)"
-        case .albums(let id, let includeGroup, let limit, let offset):
+        case .albums(let id, _, _, _):
             return "/artists/\(id)/albums"
         case .topTracks(let id):
             return "/artists/\(id)/top-tracks"
@@ -43,7 +43,7 @@ enum ArtistEndpoint: EndpointProtocol {
         switch self {
         case .artist, .topTracks, .relatedArtists:
             return nil
-        case .albums(let id, let includeGroup, let limit, let offset):
+        case .albums(_, let includeGroup, let limit, let offset):
             return [
                 URLQueryItem(
                     name: "include_group",

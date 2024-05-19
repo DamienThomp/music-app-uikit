@@ -29,7 +29,6 @@ class MainCoordinator: Coordinator {
 
     func setupTabBar() {
         let tabBar = MainTabBarController()
-        
     }
 
 }
