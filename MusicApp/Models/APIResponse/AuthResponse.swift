@@ -14,4 +14,3 @@ struct AuthResponse: Codable {
     let refreshToken: String?
     let tokenType: String
 }
-

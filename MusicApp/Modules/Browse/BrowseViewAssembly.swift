@@ -11,11 +11,15 @@ class BrowseViewAssembly: AssemblyProtocol {
 
     func assemble(_ serviceResolver: ServiceLocatorProtocol, coordinator: Coordinator) -> UIViewController {
 
-        let viewController = BrowseViewController()
         let dataSource = BrowseDataSource()
         dataSource.resolveServices(with: serviceResolver)
 
         let viewModel = BrowseViewModel(dataSource: dataSource)
+        let viewController = BrowseViewController()
+
+        viewModel.delegate = viewController
+        dataSource.delegate = viewModel
+
         return viewController
     }
 }

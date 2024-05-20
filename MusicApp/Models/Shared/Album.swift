@@ -25,30 +25,4 @@ struct Album: Codable {
     let artists: [Artist]
     let genres: [String]?
     let tracks: Tracks?
-
-    var imageUrl: URL? {
-
-        guard let images = self.images,
-              images.count > 0
-        else { return nil }
-
-        return images[0].url
-    }
-
-    var largeImage: URL? {
-
-        guard let images = self.images, 
-              images.count > 0
-        else { return nil }
-
-        let largeImage = images.filter {
-
-            guard let height = $0.height else { return false }
-
-            return height >= 600
-        }
-
-        return !largeImage.isEmpty ? largeImage[0].url : images[0].url
-    }
-
 }

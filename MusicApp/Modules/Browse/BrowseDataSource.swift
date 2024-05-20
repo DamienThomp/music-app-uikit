@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum BrowseSections: Hashable {
+enum BrowseSections: Hashable, CaseIterable {
 
     case newReleases
     case featured
@@ -26,7 +26,7 @@ enum BrowseSections: Hashable {
     }
 }
 
-struct BrowseItem: Hashable {
+struct BrowseItem: CellItemProtocol, Hashable {
 
     let id: String
     let title: String
@@ -36,7 +36,7 @@ struct BrowseItem: Hashable {
 
 protocol BrowseDataSourceDelegate: AnyObject {
 
-    func didLoadData(for section: BrowseSections, with data: Codable)
+    @MainActor func didLoadData(for section: BrowseSections, with data: Codable)
 }
 
 class BrowseDataSource {
@@ -163,17 +163,17 @@ extension BrowseDataSource {
 
                     taskGroup.addTask {
                         let newReleases = try await self.fetchNewReleases()
-                        self.configureViewModel(for: .newReleases, with: newReleases)
+                        await self.delegate?.didLoadData(for: .newReleases, with: newReleases)
                     }
 
                     taskGroup.addTask {
                         let featuredPlaylists = try await self.fetchFeaturedPlaylists()
-                        self.configureViewModel(for: .featured, with: featuredPlaylists)
+                        await self.delegate?.didLoadData(for: .featured, with: featuredPlaylists)
                     }
 
                     taskGroup.addTask {
                         let recommendations = try await self.fetchRecommendations()
-                        self.configureViewModel(for: .recommended, with: recommendations)
+                        await self.delegate?.didLoadData(for: .recommended, with: recommendations)
                     }
 
                     try await taskGroup.waitForAll()

@@ -5,14 +5,18 @@
 //  Created by Damien L Thompson on 2024-05-18.
 //
 
-import Foundation
+import UIKit
 
 protocol BrowseViewModelDelegate: AnyObject {
-
-    func reloadData(for section: BrowseSections, with data: [BrowseItem])
+    
+    @MainActor func reloadData()
 }
 
 class BrowseViewModel {
+
+    typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<BrowseSections, BrowseItem>
+
+    private(set) var snapshot = DataSourceSnapshot()
 
     weak var delegate: BrowseViewModelDelegate?
     var dataSource: BrowseDataSource?
@@ -21,8 +25,22 @@ class BrowseViewModel {
         self.dataSource = dataSource
     }
 
-    func fetchData() async throws {
+    func fetchData() {
         dataSource?.fetchDispayData()
+    }
+
+    func createInitialSnapshot() {
+
+        snapshot.appendSections(BrowseSections.allCases)
+
+        Task { await delegate?.reloadData() }
+    }
+
+    private func updateSnapshot(for section: BrowseSections, with items: [BrowseItem]) {
+
+        snapshot.appendItems(items, toSection: section)
+
+        Task { await delegate?.reloadData() }
     }
 
     private func configureViewModel(for section: BrowseSections, with data: Codable) -> [BrowseItem]? {
@@ -37,7 +55,7 @@ class BrowseViewModel {
                     id: album.id,
                     title: album.name,
                     subTitle: album.artists.first?.name ?? "",
-                    image: album.imageUrl
+                    image: album.images?.imageUrl
                 )
             }
         case .featured:
@@ -49,7 +67,7 @@ class BrowseViewModel {
                     id: playlist.id,
                     title: playlist.name,
                     subTitle: playlist.owner.displayName ?? "",
-                    image: playlist.imageUrl
+                    image: playlist.images?.imageUrl
                 )
             }
         case .recommended:
@@ -61,7 +79,7 @@ class BrowseViewModel {
                     id: track.id,
                     title: track.name,
                     subTitle: track.artists.first?.name ?? "",
-                    image: track.album.imageUrl
+                    image: track.album.images?.imageUrl
                 )
             }
         }
@@ -74,6 +92,6 @@ extension BrowseViewModel: BrowseDataSourceDelegate {
 
         guard let items = configureViewModel(for: section, with: data) else { return }
 
-        delegate?.reloadData(for: section, with: items)
+        updateSnapshot(for: section, with: items)
     }
 }

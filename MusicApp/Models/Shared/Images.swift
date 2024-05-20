@@ -17,24 +17,12 @@ struct Images: Codable {
 protocol ImageUrls {
 
     var imageUrl: URL? { get }
-    var largeImageUrl: URL? { get }
+    var imageUrlWithDimensions: Images? { get }
 }
 
 extension Array: ImageUrls where Element == Images {
 
     var imageUrl: URL? { self.first?.url }
-
-    var largeImageUrl: URL? {
-
-        let largeImage = self.filter {
-
-            guard let height = $0.height else { return false }
-
-            return height >= 600
-        }
-
-        return !largeImage.isEmpty ? largeImage[0].url : self.imageUrl
-    }
 
     var imageUrlWithDimensions: Images? {
         return self.first
