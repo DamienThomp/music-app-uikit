@@ -21,7 +21,7 @@ class BrowseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationController?.navigationBar.barTintColor = .white
+        configureViewController()
 
         viewModel?.createInitialSnapshot()
     }
@@ -31,8 +31,48 @@ class BrowseViewController: UIViewController {
 
         viewModel?.fetchData()
     }
+
+    private func configureViewController() {
+        
+        navigationController?.title = "Browse"
+        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
 }
 
+//MARK: - Collection View Configuration
+extension BrowseViewController {
+    
+    private func configureCollectionView() {
+        //TODO: Configure Collection View
+    }
+
+    private func registerCells() {
+        //TODO: Register Collection View Cells
+    }
+}
+
+//MARK: - Data Source Configuration
+extension BrowseViewController {
+    
+    private func configureDataSource() {
+        //TODO: Configure DataSource
+    }
+
+    private func configureDataSourceSupplement() {
+        //TODO: Configure DataSource SupplementaryViewProvider
+    }
+}
+
+//MARK: - UICollectionViewDelegate {
+extension BrowseViewController: UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //TODO: Handle calls to Coordinator for Routing
+    }
+}
+
+//MARK: - BrowseViewModelDelegate
 extension BrowseViewController: BrowseViewModelDelegate {
 
     func reloadData() {

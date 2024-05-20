@@ -411,6 +411,7 @@
 		385A710A2BFAB17C00659C2D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				385A71122BFB302E00659C2D /* Headers */,
 				385A710B2BFAB18D00659C2D /* Cells */,
 			);
 			path = Views;
@@ -422,6 +423,13 @@
 				385A710C2BFAB1F400659C2D /* CategoryCardCollectionViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		385A71122BFB302E00659C2D /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Headers;
 			sourceTree = "<group>";
 		};
 		385D0A352BF4597B0076A5F3 /* Services */ = {
