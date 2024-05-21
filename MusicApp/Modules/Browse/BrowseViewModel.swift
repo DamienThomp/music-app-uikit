@@ -26,21 +26,19 @@ class BrowseViewModel {
     }
 
     func fetchData() {
+
         dataSource?.fetchDispayData()
     }
 
     func createInitialSnapshot() {
 
         snapshot.appendSections(BrowseSections.allCases)
-
-        Task { await delegate?.reloadData() }
     }
 
     private func updateSnapshot(for section: BrowseSections, with items: [BrowseItem]) {
 
         snapshot.appendItems(items, toSection: section)
 
-        Task { await delegate?.reloadData() }
     }
 
     private func configureViewModel(for section: BrowseSections, with data: Codable) -> [BrowseItem]? {
@@ -87,6 +85,12 @@ class BrowseViewModel {
 }
 
 extension BrowseViewModel: BrowseDataSourceDelegate {
+    
+    func didFinishLoading() {
+
+        delegate?.reloadData()
+    }
+    
 
     func didLoadData(for section: BrowseSections, with data: Codable) {
 

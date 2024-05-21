@@ -24,6 +24,18 @@ class BrowseCoordinator: Coordinator {
     }
 
     func start() {
+        showBrowseView()
+    }
 
+    func showBrowseView() {
+
+        let browseAssembly = BrowseViewAssembly()
+        let viewController = browseAssembly.assemble(serviceResolver, coordinator: self)
+
+        viewController.title = "Browse"
+        viewController.navigationItem.largeTitleDisplayMode = .always
+        navigationController.title = "Browse"
+        navigationController.navigationBar.prefersLargeTitles = true
+        navigationController.pushViewController(viewController, animated: false)
     }
 }

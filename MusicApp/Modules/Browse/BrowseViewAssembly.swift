@@ -15,7 +15,10 @@ class BrowseViewAssembly: AssemblyProtocol {
         dataSource.resolveServices(with: serviceResolver)
 
         let viewModel = BrowseViewModel(dataSource: dataSource)
+        
         let viewController = BrowseViewController()
+        viewController.coordinator = coordinator as? BrowseCoordinator
+        viewController.viewModel = viewModel
 
         viewModel.delegate = viewController
         dataSource.delegate = viewModel

@@ -9,7 +9,7 @@ import UIKit
 
 class BrowseViewController: UIViewController {
 
-    weak var coordinator: AppCoordinator?
+    weak var coordinator: BrowseCoordinator?
     var viewModel: BrowseViewModel?
 
     typealias DataSource = UICollectionViewDiffableDataSource<BrowseSections, BrowseItem>
@@ -34,9 +34,6 @@ class BrowseViewController: UIViewController {
     private func configureViewController() {
 
         view.backgroundColor = .systemBackground
-        navigationController?.title = "Browse"
-        navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.prefersLargeTitles = true
     }
 
     private func configure() {
@@ -54,8 +51,8 @@ extension BrowseViewController {
     
     private func configureCollectionView() {
 
-        let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
-            return self?.createSectionLayout(for: sectionIndex)
+        let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
+            return self.createSectionLayout(for: sectionIndex)
         }
 
         let config = UICollectionViewCompositionalLayoutConfiguration()
@@ -71,24 +68,111 @@ extension BrowseViewController {
     }
 
     private func registerCells() {
-        //TODO: Register Collection View Cells
+        print("register cells")
+
+        collection.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseIdentifier)
+        
+        collection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "empty")
+
+        collection.register(CoverCollectionViewCell.self, forCellWithReuseIdentifier: CoverCollectionViewCell.reuseIdentifier)
+
+        collection.register(FeaturedCollectionViewCell.self, forCellWithReuseIdentifier: FeaturedCollectionViewCell.reuseIdentifier)
+
+        collection.register(PlaylistTrackCollectionViewCell.self, forCellWithReuseIdentifier: PlaylistTrackCollectionViewCell.reuseIdentifier)
+    }
+
+    private func configureCell<T: CellConfigurationProtocol>(
+        of cellType: T.Type,
+        for item: CellItemProtocol,
+        at indexPath: IndexPath
+    ) -> T {
+
+        guard let cell = collection.dequeueReusableCell(
+            withReuseIdentifier: cellType.reuseIdentifier,
+            for: indexPath
+        ) as? T else {
+            fatalError("unable to dequeue cell: \(cellType)")
+        }
+
+        cell.configure(with: item)
+
+        return cell
     }
 
     private func createSectionLayout(for sectionIndex: Int) -> NSCollectionLayoutSection? {
-        return nil
-    }
 
+        guard let snapshot = self.viewModel?.snapshot else { return nil }
+
+        switch snapshot.sectionIdentifiers[sectionIndex] {
+        case .newReleases:
+            print("new releases")
+            return CollectionUIHelper.createFeaturedHorizontalSection()
+        case .featured:
+            print("featured")
+            return CollectionUIHelper.createTwoRowHorizontalSection()
+        case .recommended:
+            print("recommended")
+            return CollectionUIHelper.createMultiRowHorizontalListSection()
+        }
+    }
 }
 
 //MARK: - Data Source Configuration
 extension BrowseViewController {
     
     private func configureDataSource() {
-        //TODO: Configure DataSource
+
+        dataSource = DataSource(collectionView: collection,
+                                cellProvider: {
+            collectionView,
+            indexPath,
+            item in
+            
+            guard let snapshot = self.viewModel?.snapshot else { return UICollectionViewCell() }
+            
+            switch snapshot.sectionIdentifiers[indexPath.section] {
+            case .newReleases:
+                return self.configureCell(
+                    of: FeaturedCollectionViewCell.self,
+                    for: item,
+                    at: indexPath
+                )
+            case .featured:
+                return self.configureCell(
+                    of: CoverCollectionViewCell.self,
+                    for: item,
+                    at: indexPath
+                )
+            case .recommended:
+                return self.configureCell(
+                    of: PlaylistTrackCollectionViewCell.self,
+                    for: item,
+                    at: indexPath
+                )
+            }
+        })
     }
 
     private func configureDataSourceSupplement() {
-        //TODO: Configure DataSource SupplementaryViewProvider
+
+        dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
+
+            guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeader.reuseIdentifier, for: indexPath) as? SectionHeader else {
+
+                return UICollectionViewCell()
+            }
+
+            guard let section = self?.dataSource?.snapshot().sectionIdentifiers[indexPath.section] else {
+
+                return UICollectionViewCell()
+            }
+
+            if section.title.isEmpty { return UICollectionViewCell() }
+
+            sectionHeader.title.text = section.title
+
+            return sectionHeader
+        }
     }
 }
 
@@ -107,6 +191,6 @@ extension BrowseViewController: BrowseViewModelDelegate {
 
         guard let snapshot = viewModel?.snapshot else { return }
 
-        dataSource?.apply(snapshot, animatingDifferences: true)
+        dataSource?.apply(snapshot)
     }
 }

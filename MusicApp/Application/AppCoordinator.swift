@@ -88,10 +88,13 @@ class AppCoordinator: Coordinator {
 
     private func showHomeView(serviceResolver: ServiceLocatorProtocol) {
 
-        let homeView = BrowseViewController()
-        homeView.coordinator = self
+        let coordinator = BrowseCoordinator(
+            navigationController: navigationController,
+            serviceResolver: serviceResolver
+        )
 
-        navigationController.pushViewController(homeView, animated: false)
+        childCoordinators.append(coordinator)
+        coordinator.start()
     }
 }
 

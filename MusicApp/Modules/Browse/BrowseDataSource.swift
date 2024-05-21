@@ -37,6 +37,7 @@ struct BrowseItem: CellItemProtocol, Hashable {
 protocol BrowseDataSourceDelegate: AnyObject {
 
     @MainActor func didLoadData(for section: BrowseSections, with data: Codable)
+    @MainActor func didFinishLoading()
 }
 
 class BrowseDataSource {
@@ -177,6 +178,7 @@ extension BrowseDataSource {
                     }
 
                     try await taskGroup.waitForAll()
+                    await self.delegate?.didFinishLoading()
                 }
             } catch {
                 #warning("add error handling")
