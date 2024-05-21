@@ -21,8 +21,7 @@ class BrowseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureViewController()
-
+        configure()
         viewModel?.createInitialSnapshot()
     }
 
@@ -33,10 +32,20 @@ class BrowseViewController: UIViewController {
     }
 
     private func configureViewController() {
-        
+
+        view.backgroundColor = .systemBackground
         navigationController?.title = "Browse"
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.prefersLargeTitles = true
+    }
+
+    private func configure() {
+
+        configureViewController()
+        configureCollectionView()
+        registerCells()
+        configureDataSource()
+        configureDataSourceSupplement()
     }
 }
 
@@ -44,12 +53,31 @@ class BrowseViewController: UIViewController {
 extension BrowseViewController {
     
     private func configureCollectionView() {
-        //TODO: Configure Collection View
+
+        let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
+            return self?.createSectionLayout(for: sectionIndex)
+        }
+
+        let config = UICollectionViewCompositionalLayoutConfiguration()
+        config.interSectionSpacing = 40
+        layout.configuration = config
+
+        collection = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
+        collection.delegate = self
+        collection.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        collection.backgroundColor = .systemBackground
+
+        view.addSubview(collection)
     }
 
     private func registerCells() {
         //TODO: Register Collection View Cells
     }
+
+    private func createSectionLayout(for sectionIndex: Int) -> NSCollectionLayoutSection? {
+        return nil
+    }
+
 }
 
 //MARK: - Data Source Configuration

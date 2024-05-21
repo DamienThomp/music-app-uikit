@@ -1,21 +1,19 @@
 //
-//  CategoryCardCollectionViewCell.swift
-//  SpotifyCloneUIkit
+//  CategoryCollectionViewCell.swift
+//  MusicApp
 //
 //  Created by Damien L Thompson on 2024-04-07.
 //
 
 import UIKit
 
-class CategoryCardCollectionViewCell: UICollectionViewCell {
+class CategoryCollectionViewCell: UICollectionViewCell, CellConfigurationProtocol {
 
-    static let reuseIdentifier = "CategoryCardCollectionViewCel"
+    static let reuseIdentifier = "CategoryCollectionViewCell"
 
-    let coverImage = UIImageView(frame: .zero)
+    let coverImage = AsyncImageView(frame: .zero)
     let titleLabel = UILabel()
     let container = UIView(frame: .zero)
-
-    private var task: Task<(), Never>?
 
     private let placeHolder = UIImage(systemName: "music.mic.circle")
 
@@ -35,26 +33,15 @@ class CategoryCardCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        task?.cancel()
+        coverImage.cancelImageLoad()
         coverImage.image = placeHolder
         titleLabel.text = nil
     }
 
-    func configureCell(with model: CellItemProtocol) {
+    func configure(with model: CellItemProtocol) {
+
         titleLabel.text = model.title
-        loadImage(from: model.image)
-    }
-
-    func loadImage(from url: URL?) {
-
-//        guard let url = url?.absoluteString else {
-//            print("can't get url")
-//            return
-//        }
-//
-//        task = Task {
-//            await coverImage.loadImage(from: url)
-//        }
+        coverImage.executeLoad(from: model.image)
     }
 
     func configureImage() {
@@ -117,8 +104,8 @@ class CategoryCardCollectionViewCell: UICollectionViewCell {
         string: "https://t.scdn.co/media/derived/pop-274x274_447148649685019f5e2a03a39e78ba52_0_0_274_274.jpg"
     ))
 
-    let vc = CategoryCardCollectionViewCell()
-    vc.configureCell(with: model)
+    let vc = CategoryCollectionViewCell()
+    vc.configure(with: model)
 
     return vc
 }

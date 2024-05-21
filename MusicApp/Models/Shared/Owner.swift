@@ -1,6 +1,6 @@
 //
 //  Owner.swift
-//  SpotifyCloneUIkit
+//  MusicApp
 //
 //  Created by Damien L Thompson on 2024-04-08.
 //

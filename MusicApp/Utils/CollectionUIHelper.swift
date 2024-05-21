@@ -1,6 +1,6 @@
 //
 //  CollectionUIHelper.swift
-//  SpotifyCloneUIkit
+//  MusicApp
 //
 //  Created by Damien L Thompson on 2024-04-07.
 //
@@ -136,6 +136,7 @@ struct CollectionUIHelper {
             let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionHeaderSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
             return layoutSectionHeader
         case .banner:
+            //TODO: Replace with banner header layout
             let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.93), heightDimension: .estimated(150))
             let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionHeaderSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
             return layoutSectionHeader
