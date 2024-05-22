@@ -38,4 +38,6 @@ class BrowseCoordinator: Coordinator {
         navigationController.navigationBar.prefersLargeTitles = true
         navigationController.pushViewController(viewController, animated: false)
     }
+
+    //TODO: - Add child routes
 }

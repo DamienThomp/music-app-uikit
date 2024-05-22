@@ -68,7 +68,6 @@ extension BrowseViewController {
     }
 
     private func registerCells() {
-        print("register cells")
 
         collection.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseIdentifier)
         
@@ -105,13 +104,10 @@ extension BrowseViewController {
 
         switch snapshot.sectionIdentifiers[sectionIndex] {
         case .newReleases:
-            print("new releases")
             return CollectionUIHelper.createFeaturedHorizontalSection()
         case .featured:
-            print("featured")
             return CollectionUIHelper.createTwoRowHorizontalSection()
         case .recommended:
-            print("recommended")
             return CollectionUIHelper.createMultiRowHorizontalListSection()
         }
     }
@@ -122,29 +118,28 @@ extension BrowseViewController {
     
     private func configureDataSource() {
 
-        dataSource = DataSource(collectionView: collection,
-                                cellProvider: {
-            collectionView,
+        dataSource = DataSource(collectionView: collection, cellProvider: {
+            [weak self] collectionView,
             indexPath,
             item in
-            
-            guard let snapshot = self.viewModel?.snapshot else { return UICollectionViewCell() }
-            
+
+            guard let snapshot = self?.viewModel?.snapshot else { return UICollectionViewCell() }
+
             switch snapshot.sectionIdentifiers[indexPath.section] {
             case .newReleases:
-                return self.configureCell(
+                return self?.configureCell(
                     of: FeaturedCollectionViewCell.self,
                     for: item,
                     at: indexPath
                 )
             case .featured:
-                return self.configureCell(
+                return self?.configureCell(
                     of: CoverCollectionViewCell.self,
                     for: item,
                     at: indexPath
                 )
             case .recommended:
-                return self.configureCell(
+                return self?.configureCell(
                     of: PlaylistTrackCollectionViewCell.self,
                     for: item,
                     at: indexPath
@@ -155,9 +150,16 @@ extension BrowseViewController {
 
     private func configureDataSourceSupplement() {
 
-        dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
+        dataSource?.supplementaryViewProvider = {
+            [weak self] collectionView,
+            kind,
+            indexPath in
 
-            guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeader.reuseIdentifier, for: indexPath) as? SectionHeader else {
+            guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: SectionHeader.reuseIdentifier,
+                for: indexPath
+            ) as? SectionHeader else {
 
                 return UICollectionViewCell()
             }

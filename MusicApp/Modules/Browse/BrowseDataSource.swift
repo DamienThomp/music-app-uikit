@@ -32,6 +32,7 @@ struct BrowseItem: CellItemProtocol, Hashable {
     let title: String
     let subTitle: String
     let image: URL?
+    let type: ItemType?
 }
 
 protocol BrowseDataSourceDelegate: AnyObject {

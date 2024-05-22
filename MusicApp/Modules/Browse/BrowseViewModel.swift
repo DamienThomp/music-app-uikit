@@ -53,7 +53,8 @@ class BrowseViewModel {
                     id: album.id,
                     title: album.name,
                     subTitle: album.artists.first?.name ?? "",
-                    image: album.images?.imageUrl
+                    image: album.images?.imageUrl,
+                    type: .album
                 )
             }
         case .featured:
@@ -65,7 +66,8 @@ class BrowseViewModel {
                     id: playlist.id,
                     title: playlist.name,
                     subTitle: playlist.owner.displayName ?? "",
-                    image: playlist.images?.imageUrl
+                    image: playlist.images?.imageUrl,
+                    type: .playlist
                 )
             }
         case .recommended:
@@ -77,7 +79,8 @@ class BrowseViewModel {
                     id: track.id,
                     title: track.name,
                     subTitle: track.artists.first?.name ?? "",
-                    image: track.album.images?.imageUrl
+                    image: track.album.images?.imageUrl,
+                    type: .track
                 )
             }
         }
