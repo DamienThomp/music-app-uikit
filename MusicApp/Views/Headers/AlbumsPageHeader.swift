@@ -15,6 +15,7 @@ protocol AlbumPageHeaderDelegate: AnyObject {
 }
 
 class AlbumsPageHeader: UICollectionReusableView {
+
     static let reuseIdentifier = "AlbumsPageHeader"
 
     weak var delegate: AlbumPageHeaderDelegate?
@@ -24,7 +25,6 @@ class AlbumsPageHeader: UICollectionReusableView {
     let coverImage = UIImageView()
     let titleLabel = UILabel()
     let artisNameButton = UIButton(type: .system)
-    let descriptionLabel = UILabel()
     let playButton = UIButton(type: .system)
     let shuffleButton = UIButton(type: .system)
 
@@ -50,29 +50,11 @@ class AlbumsPageHeader: UICollectionReusableView {
         titleLabel.text = model.title
         artisNameButton.setTitle(model.artisName, for: .normal)
 
-        if let labelText = formatDescriptionLabel(
-            with: model.genre,
-            releaseDate: model.releaseDate
-        ) {
-            descriptionLabel.text = labelText
-        }
-
         Task {
             await coverImage.loadImage(
                 from: model.coverImage?.absoluteString ?? ""
             )
         }
-    }
-
-    func formatDescriptionLabel(with genres: [String]?, releaseDate date: String?) -> String? {
-
-        guard let genres = genres,
-              let date = date else { return nil }
-
-        let genre = genres.joined(separator: " / ")
-        let values = [genre, date]
-
-        return values.joined(separator: " \u{2022} ")
     }
 }
 
@@ -95,10 +77,10 @@ extension AlbumsPageHeader {
 
         let gradient = CAGradientLayer()
         gradient.frame = coverImage.bounds
-        gradient.colors = [UIColor.systemBackground.cgColor, UIColor.clear.cgColor, UIColor.clear.cgColor]
-        gradient.locations = [0.0, 0.75, 1.0]
+        gradient.colors = [UIColor.black.cgColor, UIColor.black.cgColor, UIColor.clear.cgColor]
+        gradient.locations = [0.0, 0.65, 0.85]
+        
         maskLayer.addSublayer(gradient)
-
 
         coverImage.layer.mask = maskLayer
     }
@@ -110,12 +92,6 @@ extension AlbumsPageHeader {
         titleLabel.numberOfLines = 1
         titleLabel.textAlignment = .center
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        descriptionLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
-        descriptionLabel.textColor = .secondaryLabel
-        descriptionLabel.numberOfLines = 1
-        descriptionLabel.textAlignment = .center
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
     }
 
     func configureArtistButton() {
@@ -164,7 +140,6 @@ extension AlbumsPageHeader {
             coverImage,
             titleLabel,
             artisNameButton,
-            descriptionLabel,
             playButton,
             shuffleButton
         )
@@ -211,11 +186,7 @@ extension AlbumsPageHeader {
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
 
             artisNameButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            artisNameButton.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor),
-
-            descriptionLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            descriptionLabel.bottomAnchor.constraint(equalTo: playButton.topAnchor, constant: -8),
-
+            artisNameButton.bottomAnchor.constraint(equalTo: playButton.topAnchor, constant: -16),
 
             playButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
             playButton.widthAnchor.constraint(equalTo: shuffleButton.widthAnchor),

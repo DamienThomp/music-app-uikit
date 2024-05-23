@@ -7,16 +7,11 @@
 
 import UIKit
 
-class CoverCollectionViewCell: UICollectionViewCell, CellConfigurationProtocol {
+class CoverCollectionViewCell: ItemViewCell, CellConfigurationProtocol {
 
     static let reuseIdentifier = "CoverCollectionViewCell"
 
-    let coverImage = AsyncImageView(frame: .zero)
-    let titleLabel = UILabel()
-    let subtitleLabel = UILabel()
-
     let placeHolder = UIImage(systemName: "person.and.background.dotted")
-
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,22 +23,6 @@ class CoverCollectionViewCell: UICollectionViewCell, CellConfigurationProtocol {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        coverImage.cancelImageLoad()
-        titleLabel.text = nil
-        subtitleLabel.text = nil
-        coverImage.image = nil
-    }
-
-    func configure(with item: CellItemProtocol) {
-
-        titleLabel.text = item.title
-        subtitleLabel.text = item.subTitle
-        coverImage.executeLoad(from: item.image)
     }
 
     func configureImageView() {

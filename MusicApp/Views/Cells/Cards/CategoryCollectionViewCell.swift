@@ -7,12 +7,10 @@
 
 import UIKit
 
-class CategoryCollectionViewCell: UICollectionViewCell, CellConfigurationProtocol {
+class CategoryCollectionViewCell: ItemViewCell, CellConfigurationProtocol {
 
     static let reuseIdentifier = "CategoryCollectionViewCell"
 
-    let coverImage = AsyncImageView(frame: .zero)
-    let titleLabel = UILabel()
     let container = UIView(frame: .zero)
 
     private let placeHolder = UIImage(systemName: "music.mic.circle")
@@ -28,20 +26,6 @@ class CategoryCollectionViewCell: UICollectionViewCell, CellConfigurationProtoco
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
-
-        coverImage.cancelImageLoad()
-        coverImage.image = placeHolder
-        titleLabel.text = nil
-    }
-
-    func configure(with model: CellItemProtocol) {
-
-        titleLabel.text = model.title
-        coverImage.executeLoad(from: model.image)
     }
 
     func configureImage() {
