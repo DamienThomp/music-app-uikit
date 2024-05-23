@@ -80,6 +80,7 @@ extension BrowseViewController {
         collection.register(PlaylistTrackCollectionViewCell.self, forCellWithReuseIdentifier: PlaylistTrackCollectionViewCell.reuseIdentifier)
     }
 
+    #warning("refactor configureCell as util method")
     private func configureCell<T: CellConfigurationProtocol>(
         of cellType: T.Type,
         for item: CellItemProtocol,
@@ -182,7 +183,16 @@ extension BrowseViewController {
 extension BrowseViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //TODO: Handle calls to Coordinator for Routing
+
+        guard let snapshot = self.viewModel?.snapshot,
+              let item = self.dataSource?.itemIdentifier(for: indexPath) else { return }
+
+        switch snapshot.sectionIdentifiers[indexPath.section] {
+        case .newReleases, .featured:
+            coordinator?.showDetails(for: item)
+        case .recommended:
+            return
+        }
     }
 }
 

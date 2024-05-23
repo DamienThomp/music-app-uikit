@@ -103,7 +103,8 @@ class FeaturedCollectionViewCell: UICollectionViewCell, CellConfigurationProtoco
         subTitle: "Bob Seeger",
         image: URL(
             string: "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228"
-        )
+        ),
+        type: .album
     )
 
     let vc = FeaturedCollectionViewCell()

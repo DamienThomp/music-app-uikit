@@ -28,16 +28,16 @@ struct Tracks: Codable {
     let offset: Int
     let previous: URL?
     let total: Int
-    let items: [TrackItem]
+    let items: [PlaylistTrackItem]
 }
 
-struct TrackItem: Codable {
+struct PlaylistTrackItem: Codable {
 
     let addedAt: String?
     let addedBy: AddedByItem?
     let track: Track?
-
 }
+
 
 struct AddedByItem: Codable {
 

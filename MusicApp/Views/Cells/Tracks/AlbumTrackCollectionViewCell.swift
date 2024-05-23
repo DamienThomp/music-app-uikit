@@ -32,7 +32,6 @@ class AlbumTrackCollectionViewCell: UICollectionViewCell, CellConfigurationProto
     }
 
     func configure(with item: CellItemProtocol) {
-
         trackNumber.text = "\(item.subTitle)"
         titleLabel.text = item.title
     }
@@ -118,7 +117,8 @@ extension AlbumTrackCollectionViewCell {
         id: UUID().uuidString,
         title: "Steed Bonnet",
         subTitle: "1",
-        image: nil
+        image: nil,
+        type: .albumTrack
     )
 
     let vc = AlbumTrackCollectionViewCell()

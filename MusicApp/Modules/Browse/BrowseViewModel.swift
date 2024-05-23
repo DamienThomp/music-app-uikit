@@ -19,6 +19,7 @@ class BrowseViewModel {
     private(set) var snapshot = DataSourceSnapshot()
 
     weak var delegate: BrowseViewModelDelegate?
+
     var dataSource: BrowseDataSource?
 
     init(dataSource: BrowseDataSource) {
@@ -26,19 +27,15 @@ class BrowseViewModel {
     }
 
     func fetchData() {
-
         dataSource?.fetchDispayData()
     }
 
     func createInitialSnapshot() {
-
         snapshot.appendSections(BrowseSections.allCases)
     }
 
     private func updateSnapshot(for section: BrowseSections, with items: [BrowseItem]) {
-
         snapshot.appendItems(items, toSection: section)
-
     }
 
     private func configureViewModel(for section: BrowseSections, with data: Codable) -> [BrowseItem]? {
@@ -49,39 +46,21 @@ class BrowseViewModel {
             guard let data = data as? NewReleases else { return nil }
 
             return data.albums.items.compactMap { album in
-                BrowseItem(
-                    id: album.id,
-                    title: album.name,
-                    subTitle: album.artists.first?.name ?? "",
-                    image: album.images?.imageUrl,
-                    type: .album
-                )
+                BrowseItem(type: .album, data: album)
             }
         case .featured:
 
             guard let data = data as? FeaturedPlaylists else { return nil }
 
             return data.playlists.items.compactMap { playlist in
-                BrowseItem(
-                    id: playlist.id,
-                    title: playlist.name,
-                    subTitle: playlist.owner.displayName ?? "",
-                    image: playlist.images?.imageUrl,
-                    type: .playlist
-                )
+                BrowseItem(type: .playlist, data: playlist)
             }
         case .recommended:
 
             guard let data = data as? Recommendations else { return nil }
 
             return data.tracks.compactMap { track in
-                BrowseItem(
-                    id: track.id,
-                    title: track.name,
-                    subTitle: track.artists.first?.name ?? "",
-                    image: track.album.images?.imageUrl,
-                    type: .track
-                )
+                BrowseItem(type: .playlistTrack, data: track)
             }
         }
     }
@@ -90,10 +69,8 @@ class BrowseViewModel {
 extension BrowseViewModel: BrowseDataSourceDelegate {
     
     func didFinishLoading() {
-
         delegate?.reloadData()
     }
-    
 
     func didLoadData(for section: BrowseSections, with data: Codable) {
 

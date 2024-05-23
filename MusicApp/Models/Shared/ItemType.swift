@@ -13,5 +13,7 @@ enum ItemType: String, Codable {
     case artist
     case album
     case track
+    case playlistTrack
+    case albumTrack
     case category
 }

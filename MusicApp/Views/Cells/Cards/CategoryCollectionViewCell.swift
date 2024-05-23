@@ -100,9 +100,15 @@ class CategoryCollectionViewCell: UICollectionViewCell, CellConfigurationProtoco
 
 
 #Preview(traits: .fixedLayout(width: 360, height: 360)) {
-    let model = BrowseItem(id: "", title: "Some Category", subTitle: "", image: URL(
-        string: "https://t.scdn.co/media/derived/pop-274x274_447148649685019f5e2a03a39e78ba52_0_0_274_274.jpg"
-    ))
+    let model = BrowseItem(
+        id: "",
+        title: "Some Category",
+        subTitle: "",
+        image: URL(
+            string: "https://t.scdn.co/media/derived/pop-274x274_447148649685019f5e2a03a39e78ba52_0_0_274_274.jpg"
+        ),
+        type: .category
+    )
 
     let vc = CategoryCollectionViewCell()
     vc.configure(with: model)

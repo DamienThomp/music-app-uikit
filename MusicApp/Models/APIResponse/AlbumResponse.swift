@@ -37,11 +37,11 @@ struct AlbumResponse: Codable {
         let offset: Int
         let previous: URL?
         let total: Int
-        let items: [TrackItem]
+        let items: [AlbumTrackItem]
 
     }
 
-    struct TrackItem: Codable {
+    struct AlbumTrackItem: Codable {
 
         let artists: [Artist]
         let availableMarkets: [String]

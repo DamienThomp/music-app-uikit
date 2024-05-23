@@ -35,6 +35,34 @@ struct BrowseItem: CellItemProtocol, Hashable {
     let type: ItemType?
 }
 
+extension BrowseItem {
+
+    init(type: ItemType, data: PlaylistItems) {
+        self.id = data.id
+        self.title = data.name
+        self.subTitle = data.owner.displayName ?? ""
+        self.image = data.images?.imageUrl
+        self.type = type
+    }
+
+    init(type: ItemType, data: Album) {
+        self.id = data.id
+        self.title = data.name
+        self.subTitle = data.artists.first?.name ?? ""
+        self.image = data.images?.imageUrl
+        self.type = type
+    }
+
+    init(type: ItemType, data: Track) {
+        self.id = data.id
+        self.title = data.name
+        self.subTitle = type == .playlistTrack ? (data.artists.first?.name ?? "") : "\(data.trackNumber)"
+        self.image = data.album.images?.imageUrl
+        self.type = type
+    }
+
+}
+
 protocol BrowseDataSourceDelegate: AnyObject {
 
     @MainActor func didLoadData(for section: BrowseSections, with data: Codable)
@@ -87,6 +115,30 @@ extension BrowseDataSource {
         return seeds.isEmpty ? "" : seeds.joined(separator: ",")
     }
 
+    private func fetchRecommendationSeeds() async throws -> (String?, String?) {
+
+        var artistSeeds: String? = nil
+        var genreSeeds: String? = nil
+
+        let savedAlbumsData = try await self.executeRequest(
+            for: UsersSavedItems.albums(
+                limit: 5
+            )
+        )
+
+        let albums = try decoder.decode(SavedAlbumResponse.self, from: savedAlbumsData)
+
+        if !albums.items.isEmpty {
+            artistSeeds = getRandomArtistSeeds(from: albums.items)
+        } else {
+            let genreData = try await self.executeRequest(for: RecommendationsEndpoint.genre)
+            let genres = try decoder.decode(Genres.self, from: genreData)
+            genreSeeds = getRandomSeeds(seeds: genres.genres)
+        }
+
+        return (artistSeeds, genreSeeds)
+    }
+
     private func fetchNewReleases() async throws -> NewReleases? {
 
         let limit = 21
@@ -113,24 +165,7 @@ extension BrowseDataSource {
 
     private func fetchRecommendations() async throws -> Recommendations? {
 
-        var artistSeeds: String? = nil
-        var genreSeeds: String? = nil
-
-        let savedAlbumsData = try await self.executeRequest(
-            for: UsersSavedItems.albums(
-                limit: 5
-            )
-        )
-
-        let albums = try decoder.decode(SavedAlbumResponse.self, from: savedAlbumsData)
-
-        if !albums.items.isEmpty {
-            artistSeeds = getRandomArtistSeeds(from: albums.items)
-        } else {
-            let genreData = try await self.executeRequest(for: RecommendationsEndpoint.genre)
-            let genres = try decoder.decode(Genres.self, from: genreData)
-            genreSeeds = getRandomSeeds(seeds: genres.genres)
-        }
+        let (artistSeeds, genreSeeds) = try await fetchRecommendationSeeds()
 
         let recommendationsData = try await self.executeRequest(
             for: RecommendationsEndpoint.recommedations(

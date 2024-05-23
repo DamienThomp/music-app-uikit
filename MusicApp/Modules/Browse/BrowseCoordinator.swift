@@ -39,5 +39,17 @@ class BrowseCoordinator: Coordinator {
         navigationController.pushViewController(viewController, animated: false)
     }
 
+    func showDetails(for item: BrowseItem) {
+
+        let coordinator = ItemDetailsCoordinator(
+            navigationController: navigationController,
+            serviceResolver: serviceResolver
+        )
+
+        coordinator.details = item
+        childCoordinators.append(coordinator)
+        coordinator.start()
+    }
+
     //TODO: - Add child routes
 }
