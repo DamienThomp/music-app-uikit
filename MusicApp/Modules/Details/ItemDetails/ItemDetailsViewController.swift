@@ -167,7 +167,7 @@ extension ItemDetailsViewController {
                         artisName: header.subtitle ?? "",
                         coverImage: header.image,
                         genre: [],
-                        releaseDate: ""
+                        type: header.type ?? .album
                     )
                 )
 
@@ -179,17 +179,17 @@ extension ItemDetailsViewController {
                     return UICollectionViewCell()
                 }
 
-//                guard let section = self?.dataSource?.snapshot().sectionIdentifiers[indexPath.section] else {
-//
-//                    return UICollectionViewCell()
-//                }
-//
-//
-//                guard let header = section.sectionHeader else {
-//                    return UICollectionViewCell()
-//                }
-//
-//                sectionHeader.title.text = header.title
+                guard let section = self?.dataSource?.snapshot().sectionIdentifiers[indexPath.section] else {
+
+                    return UICollectionViewCell()
+                }
+
+
+                guard let header = section.sectionHeader else {
+                    return UICollectionViewCell()
+                }
+
+                sectionHeader.title.text = header.title
 
                 return sectionHeader
             default:
@@ -197,17 +197,17 @@ extension ItemDetailsViewController {
                     return UICollectionViewCell()
                 }
 
-//                guard let section = self?.dataSource?.snapshot().sectionIdentifiers[indexPath.section] else {
-//
-//                    return UICollectionViewCell()
-//                }
-//
-//
-//                guard let header = section.sectionHeader else {
-//                    return UICollectionViewCell()
-//                }
-//
-//                sectionHeader.title.text = header.title
+                guard let section = self?.dataSource?.snapshot().sectionIdentifiers[indexPath.section] else {
+
+                    return UICollectionViewCell()
+                }
+
+
+                guard let header = section.sectionHeader else {
+                    return UICollectionViewCell()
+                }
+
+                sectionHeader.title.text = header.title
 
                 return sectionHeader
             }

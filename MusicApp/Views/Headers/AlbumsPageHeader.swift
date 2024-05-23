@@ -20,8 +20,6 @@ class AlbumsPageHeader: UICollectionReusableView {
 
     weak var delegate: AlbumPageHeaderDelegate?
 
-    private let placeHolder = UIImage(systemName: "music.mic.circle")
-
     let coverImage = UIImageView()
     let titleLabel = UILabel()
     let artisNameButton = UIButton(type: .system)
@@ -29,7 +27,6 @@ class AlbumsPageHeader: UICollectionReusableView {
     let shuffleButton = UIButton(type: .system)
 
     override init(frame: CGRect) {
-
         super.init(frame: frame)
 
         backgroundColor = .systemBackground
@@ -49,6 +46,7 @@ class AlbumsPageHeader: UICollectionReusableView {
 
         titleLabel.text = model.title
         artisNameButton.setTitle(model.artisName, for: .normal)
+        configureImageLayout(for: model.type)
 
         Task {
             await coverImage.loadImage(
@@ -63,9 +61,6 @@ extension AlbumsPageHeader {
 
     func configureImage() {
 
-        coverImage.image = placeHolder
-        coverImage.backgroundColor = .systemPink
-        coverImage.tintColor = .systemGray2
         coverImage.clipsToBounds = true
         coverImage.frame = self.bounds
         coverImage.layer.cornerRadius = 8
@@ -144,41 +139,7 @@ extension AlbumsPageHeader {
             shuffleButton
         )
 
-//        NSLayoutConstraint.activate([
-
-//            coverImage.centerXAnchor.constraint(equalTo: centerXAnchor),
-//            coverImage.topAnchor.constraint(equalTo: topAnchor),
-//            coverImage.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.75),
-//            coverImage.heightAnchor.constraint(equalTo: coverImage.widthAnchor),
-
-//            titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-//            titleLabel.topAnchor.constraint(equalTo: coverImage.bottomAnchor, constant: 16),
-//            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-//            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-//
-//            artisNameButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-//            artisNameButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
-//
-//            descriptionLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-//            descriptionLabel.topAnchor.constraint(equalTo: artisNameButton.bottomAnchor),
-//
-//
-//            playButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
-//            playButton.widthAnchor.constraint(equalTo: shuffleButton.widthAnchor),
-//            playButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
-//
-//            shuffleButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
-//            shuffleButton.leadingAnchor.constraint(equalTo: playButton.trailingAnchor, constant: 8)
-
-//        ])
-
         NSLayoutConstraint.activate([
-
-            coverImage.leadingAnchor.constraint(equalTo: leadingAnchor),
-            coverImage.trailingAnchor.constraint(equalTo: trailingAnchor),
-            coverImage.widthAnchor.constraint(equalTo: widthAnchor),
-            coverImage.centerXAnchor.constraint(equalTo: centerXAnchor),
-            coverImage.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.80),
 
             titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: artisNameButton.topAnchor),
@@ -194,9 +155,31 @@ extension AlbumsPageHeader {
 
             shuffleButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
             shuffleButton.leadingAnchor.constraint(equalTo: playButton.trailingAnchor, constant: 8)
-
-
         ])
+    }
+
+    private func configureImageLayout(for type: ItemType) {
+
+        if type == .playlist {
+
+            NSLayoutConstraint.activate([
+                coverImage.centerXAnchor.constraint(equalTo: centerXAnchor),
+                coverImage.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -24),
+                coverImage.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.65),
+                coverImage.heightAnchor.constraint(equalTo: coverImage.widthAnchor)
+            ])
+        }
+
+        if type == .album {
+
+            NSLayoutConstraint.activate([
+                coverImage.leadingAnchor.constraint(equalTo: leadingAnchor),
+                coverImage.trailingAnchor.constraint(equalTo: trailingAnchor),
+                coverImage.widthAnchor.constraint(equalTo: widthAnchor),
+                coverImage.centerXAnchor.constraint(equalTo: centerXAnchor),
+                coverImage.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.80)
+            ])
+        }
     }
 }
 
@@ -223,7 +206,7 @@ struct AlbumsPageHeaderViewModel {
     let artisName: String
     let coverImage: URL?
     let genre: [String]?
-    let releaseDate: String?
+    let type: ItemType
 }
 
 #Preview(traits: .fixedLayout(width: 390, height: 390)) {
@@ -237,7 +220,7 @@ struct AlbumsPageHeaderViewModel {
             "Noise-Rock",
             "Instrumental"
         ],
-        releaseDate: "1999-1"
+        type: .album
     )
     let vc = AlbumsPageHeader()
     vc.configureView(with: model)

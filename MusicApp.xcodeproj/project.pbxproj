@@ -480,10 +480,10 @@
 		385A71222BFC4CD400659C2D /* Cards */ = {
 			isa = PBXGroup;
 			children = (
+				385A71352BFF017F00659C2D /* ItemViewCell.swift */,
 				385A71202BFC462D00659C2D /* CoverCollectionViewCell.swift */,
 				385A711E2BFC441E00659C2D /* FeaturedCollectionViewCell.swift */,
 				385A710C2BFAB1F400659C2D /* CategoryCollectionViewCell.swift */,
-				385A71352BFF017F00659C2D /* ItemViewCell.swift */,
 			);
 			path = Cards;
 			sourceTree = "<group>";
