@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BrowseCoordinator: Coordinator {
+class BrowseCoordinator: NSObject, Coordinator {
 
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
@@ -25,6 +25,7 @@ class BrowseCoordinator: Coordinator {
 
     func start() {
         showBrowseView()
+        navigationController.delegate = self
     }
 
     func showBrowseView() {
@@ -50,6 +51,25 @@ class BrowseCoordinator: Coordinator {
         childCoordinators.append(coordinator)
         coordinator.start()
     }
+}
 
-    //TODO: - Add child routes
+//MARK: - Navigation Controller Delegate
+extension BrowseCoordinator: UINavigationControllerDelegate {
+
+    func navigationController(
+        _ navigationController: UINavigationController,
+        didShow viewController: UIViewController,
+        animated: Bool
+    ) {
+
+        guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from),
+              !navigationController.viewControllers.contains(fromViewController) 
+        else {
+            return
+        }
+
+        if let ItemsDetailsController = fromViewController as? ItemDetailsViewController {
+            childDidFinish(ItemsDetailsController.coordinator)
+        }
+    }
 }

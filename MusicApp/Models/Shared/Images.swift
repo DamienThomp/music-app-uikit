@@ -27,5 +27,4 @@ extension Array: ImageUrls where Element == Images {
     var imageUrlWithDimensions: Images? {
         return self.first
     }
-
 }
