@@ -52,6 +52,11 @@ extension ItemDetailsViewController {
             return self.createSectionLayout(for: sectionIndex)
         }
 
+        layout.register(
+            SectionDecorator.self,
+            forDecorationViewOfKind: SectionDecorator.reuseIdentifier
+        )
+
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.interSectionSpacing = 20
         layout.configuration = config
@@ -251,7 +256,18 @@ extension ItemDetailsViewController {
 
 //MARK: - Collection View Delegate
 extension ItemDetailsViewController: UICollectionViewDelegate {
-    //TODO: - Add delegate methods
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+        guard let snapshot = self.viewModel?.snapshot,
+              let item = self.dataSource?.itemIdentifier(for: indexPath) else { return }
+
+        switch snapshot.sectionIdentifiers[indexPath.section].sectionType {
+        case .main:
+            print("item click: \(item.title)")
+        case .related:
+            coordinator?.showChildDetails(with: item)
+        }
+    }
 }
 
 //MARK: - ItemDetailViewModelDelegate

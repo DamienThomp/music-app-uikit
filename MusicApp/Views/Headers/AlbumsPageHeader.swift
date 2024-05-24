@@ -73,8 +73,8 @@ extension AlbumsPageHeader {
         let gradient = CAGradientLayer()
         gradient.frame = coverImage.bounds
         gradient.colors = [UIColor.black.cgColor, UIColor.black.cgColor, UIColor.clear.cgColor]
-        gradient.locations = [0.0, 0.65, 0.85]
-        
+        gradient.locations = [0.0, 0.55, 0.80]
+
         maskLayer.addSublayer(gradient)
 
         coverImage.layer.mask = maskLayer

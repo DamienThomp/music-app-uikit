@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ItemDetailsCoordinator: Coordinator {
+class ItemDetailsCoordinator: NSObject, Coordinator {
 
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
@@ -28,6 +28,7 @@ class ItemDetailsCoordinator: Coordinator {
         detailsAssembly.cellItem = details
 
         let viewController = detailsAssembly.assemble(serviceResolver, coordinator: self)
+        navigationController.delegate = self
         navigationController.pushViewController(viewController, animated: true)
     }
 
@@ -39,5 +40,26 @@ class ItemDetailsCoordinator: Coordinator {
         coordinator.details = details
         childCoordinators.append(coordinator)
         coordinator.start()
+    }
+}
+
+//MARK: - Navigation Controller Delegate
+extension ItemDetailsCoordinator: UINavigationControllerDelegate {
+
+    func navigationController(
+        _ navigationController: UINavigationController,
+        didShow viewController: UIViewController,
+        animated: Bool
+    ) {
+
+        guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from),
+              !navigationController.viewControllers.contains(fromViewController)
+        else {
+            return
+        }
+
+        if let ItemsDetailsController = fromViewController as? ItemDetailsViewController {
+            childDidFinish(ItemsDetailsController.coordinator)
+        }
     }
 }

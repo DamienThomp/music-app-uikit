@@ -84,27 +84,27 @@ extension AlbumTrackCollectionViewCell {
 
         NSLayoutConstraint.activate([
             topDivider.heightAnchor.constraint(equalToConstant: 1),
-            topDivider.topAnchor.constraint(equalTo: topAnchor),
-            topDivider.widthAnchor.constraint(equalTo: widthAnchor),
+            topDivider.topAnchor.constraint(equalTo: contentView.topAnchor),
+            topDivider.widthAnchor.constraint(equalTo: contentView.widthAnchor),
 
             bottomDivider.heightAnchor.constraint(equalToConstant: 1),
-            bottomDivider.bottomAnchor.constraint(equalTo: bottomAnchor),
-            bottomDivider.widthAnchor.constraint(equalTo: widthAnchor),
+            bottomDivider.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            bottomDivider.widthAnchor.constraint(equalTo: contentView.widthAnchor),
 
             innerCellDivider.heightAnchor.constraint(equalToConstant: 1),
-            innerCellDivider.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
+            innerCellDivider.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
             innerCellDivider.leadingAnchor.constraint(equalTo: trackNumber.trailingAnchor, constant: 16),
             innerCellDivider.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
 
-            trackNumber.centerYAnchor.constraint(equalTo: centerYAnchor),
+            trackNumber.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             trackNumber.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            trackNumber.widthAnchor.constraint(equalToConstant: 20),
+            trackNumber.widthAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.40),
 
-            titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: trackNumber.trailingAnchor, constant: 16),
             titleLabel.rightAnchor.constraint(equalTo: actionButton.leftAnchor),
 
-            actionButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+            actionButton.centerYAnchor.constraint(equalTo:contentView.centerYAnchor),
             actionButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
             actionButton.widthAnchor.constraint(equalToConstant: 40)
 

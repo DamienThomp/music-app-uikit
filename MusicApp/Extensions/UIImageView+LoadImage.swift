@@ -7,28 +7,25 @@
 
 import UIKit
 
-fileprivate let cache = NSCache<NSString, UIImage>()
-
 extension UIImageView {
 
     func loadImage(from urlString: String) async {
 
         guard let url = URL(string: urlString) else { return }
 
-        let cachKey = NSString(string: urlString)
+        let cacheKey = NSString(string: urlString)
 
-        if let image = cache.object(forKey: cachKey) {
+        if let image = ImageCache.getImage(for: cacheKey) {
             await self.assignImage(with: image)
             return
         }
 
         do {
-
             let (data, _) = try await URLSession.shared.data(from: url)
 
             guard let image = UIImage(data: data) else { return }
 
-            cache.setObject(image, forKey: cachKey)
+            ImageCache.setImage(with: image, for: cacheKey)
 
             await self.assignImage(with: image)
 

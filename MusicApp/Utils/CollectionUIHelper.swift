@@ -13,6 +13,7 @@ enum SectionHeaderType {
     case banner
 }
 
+#warning("TODO: Remove magic numbers from CollectionUIHelper")
 struct CollectionUIHelper {
 
     static func createTwoColumnFlowLayout(in view: UIView) -> UICollectionViewFlowLayout {
@@ -181,6 +182,11 @@ struct CollectionUIHelper {
 
         let layoutSectionHeader = createSectionHeader(for: .title)
         section.boundarySupplementaryItems = [layoutSectionHeader]
+
+        let decorator = NSCollectionLayoutDecorationItem.background(elementKind: SectionDecorator.reuseIdentifier)
+        section.decorationItems = [decorator]
+
+        section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 16, trailing: 0)
 
         return section
     }

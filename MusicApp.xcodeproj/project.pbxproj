@@ -73,6 +73,8 @@
 		385A71322BFE6C7000659C2D /* ItemDetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A71312BFE6C7000659C2D /* ItemDetailsCoordinator.swift */; };
 		385A71342BFEC1A900659C2D /* ItemDetailsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A71332BFEC1A900659C2D /* ItemDetailsAssembly.swift */; };
 		385A71362BFF017F00659C2D /* ItemViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A71352BFF017F00659C2D /* ItemViewCell.swift */; };
+		385A71392C0025E300659C2D /* SectionDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A71382C0025E300659C2D /* SectionDecorator.swift */; };
+		385A713B2C00334700659C2D /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A713A2C00334700659C2D /* ImageCache.swift */; };
 		385D0A482BF45AB80076A5F3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385D0A3A2BF45AB80076A5F3 /* NetworkManager.swift */; };
 		385D0A492BF45AB80076A5F3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385D0A3A2BF45AB80076A5F3 /* NetworkManager.swift */; };
 		385D0A4A2BF45AB80076A5F3 /* NetworkManagerErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385D0A3B2BF45AB80076A5F3 /* NetworkManagerErrors.swift */; };
@@ -199,6 +201,8 @@
 		385A71312BFE6C7000659C2D /* ItemDetailsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailsCoordinator.swift; sourceTree = "<group>"; };
 		385A71332BFEC1A900659C2D /* ItemDetailsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailsAssembly.swift; sourceTree = "<group>"; };
 		385A71352BFF017F00659C2D /* ItemViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewCell.swift; sourceTree = "<group>"; };
+		385A71382C0025E300659C2D /* SectionDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDecorator.swift; sourceTree = "<group>"; };
+		385A713A2C00334700659C2D /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		385D0A3A2BF45AB80076A5F3 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		385D0A3B2BF45AB80076A5F3 /* NetworkManagerErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManagerErrors.swift; sourceTree = "<group>"; };
 		385D0A3C2BF45AB80076A5F3 /* CachedResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedResponse.swift; sourceTree = "<group>"; };
@@ -419,6 +423,7 @@
 			isa = PBXGroup;
 			children = (
 				385A71102BFB275D00659C2D /* CollectionUIHelper.swift */,
+				385A713A2C00334700659C2D /* ImageCache.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -453,6 +458,7 @@
 		385A710B2BFAB18D00659C2D /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				385A71372C0025A900659C2D /* Decorator */,
 				385A71232BFC4CE600659C2D /* Tracks */,
 				385A71222BFC4CD400659C2D /* Cards */,
 				385A71132BFBC31D00659C2D /* CellConfigurationProtocol.swift */,
@@ -523,6 +529,14 @@
 			children = (
 			);
 			path = ArtistDetails;
+			sourceTree = "<group>";
+		};
+		385A71372C0025A900659C2D /* Decorator */ = {
+			isa = PBXGroup;
+			children = (
+				385A71382C0025E300659C2D /* SectionDecorator.swift */,
+			);
+			path = Decorator;
 			sourceTree = "<group>";
 		};
 		385D0A352BF4597B0076A5F3 /* Services */ = {
@@ -787,6 +801,7 @@
 				385A70E92BF9A75F00659C2D /* CategoriesResponse.swift in Sources */,
 				385A712C2BFE6BA900659C2D /* ItemDetailsViewController.swift in Sources */,
 				385A71272BFC4CFF00659C2D /* AlbumTrackCollectionViewCell.swift in Sources */,
+				385A713B2C00334700659C2D /* ImageCache.swift in Sources */,
 				385D0A5E2BF45AB80076A5F3 /* UsersSavedAlbums.swift in Sources */,
 				382020232BF3046900368FA7 /* AppDelegate.swift in Sources */,
 				3857EDCF2BF69CF800F2B8ED /* SignInDataSource.swift in Sources */,
@@ -821,6 +836,7 @@
 				3857EDD32BF69D3500F2B8ED /* SignInViewController.swift in Sources */,
 				385D0A632BF45AD20076A5F3 /* NetworkManagerProtocol.swift in Sources */,
 				385A70F52BF9A77300659C2D /* Images.swift in Sources */,
+				385A71392C0025E300659C2D /* SectionDecorator.swift in Sources */,
 				385D0A712BF465DE0076A5F3 /* AuthResponse.swift in Sources */,
 				385A71192BFC40B100659C2D /* AsyncImageView.swift in Sources */,
 				385D0A602BF45AB80076A5F3 /* UsersTopArtistEnpoint.swift in Sources */,
