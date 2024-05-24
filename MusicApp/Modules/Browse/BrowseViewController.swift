@@ -33,6 +33,16 @@ class BrowseViewController: UIViewController {
 
     private func configureViewController() {
 
+        let config = UIImage.SymbolConfiguration(scale: .large)
+        let barButtonImage = UIImage(systemName: "person.circle", withConfiguration: config)
+        let profileButton = UIBarButtonItem(
+            image: barButtonImage,
+            style: .plain,
+            target: self,
+            action: nil)
+
+        navigationItem.rightBarButtonItem = profileButton
+
         view.backgroundColor = .systemBackground
     }
 

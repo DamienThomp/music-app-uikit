@@ -75,6 +75,8 @@
 		385A71362BFF017F00659C2D /* ItemViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A71352BFF017F00659C2D /* ItemViewCell.swift */; };
 		385A71392C0025E300659C2D /* SectionDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A71382C0025E300659C2D /* SectionDecorator.swift */; };
 		385A713B2C00334700659C2D /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A713A2C00334700659C2D /* ImageCache.swift */; };
+		385A713E2C004DA500659C2D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A713D2C004DA500659C2D /* SearchViewController.swift */; };
+		385A71412C004E1C00659C2D /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A71402C004E1C00659C2D /* LibraryViewController.swift */; };
 		385D0A482BF45AB80076A5F3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385D0A3A2BF45AB80076A5F3 /* NetworkManager.swift */; };
 		385D0A492BF45AB80076A5F3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385D0A3A2BF45AB80076A5F3 /* NetworkManager.swift */; };
 		385D0A4A2BF45AB80076A5F3 /* NetworkManagerErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385D0A3B2BF45AB80076A5F3 /* NetworkManagerErrors.swift */; };
@@ -203,6 +205,8 @@
 		385A71352BFF017F00659C2D /* ItemViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewCell.swift; sourceTree = "<group>"; };
 		385A71382C0025E300659C2D /* SectionDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDecorator.swift; sourceTree = "<group>"; };
 		385A713A2C00334700659C2D /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		385A713D2C004DA500659C2D /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		385A71402C004E1C00659C2D /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		385D0A3A2BF45AB80076A5F3 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		385D0A3B2BF45AB80076A5F3 /* NetworkManagerErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManagerErrors.swift; sourceTree = "<group>"; };
 		385D0A3C2BF45AB80076A5F3 /* CachedResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedResponse.swift; sourceTree = "<group>"; };
@@ -335,6 +339,8 @@
 		382020572BF30FE300368FA7 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				385A713F2C004E0000659C2D /* Library */,
+				385A713C2C004D7C00659C2D /* Search */,
 				385A71282BFE6B3D00659C2D /* Details */,
 				385A70CC2BF8674100659C2D /* Main */,
 				385A70CB2BF85D3400659C2D /* Browse */,
@@ -537,6 +543,22 @@
 				385A71382C0025E300659C2D /* SectionDecorator.swift */,
 			);
 			path = Decorator;
+			sourceTree = "<group>";
+		};
+		385A713C2C004D7C00659C2D /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				385A713D2C004DA500659C2D /* SearchViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		385A713F2C004E0000659C2D /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				385A71402C004E1C00659C2D /* LibraryViewController.swift */,
+			);
+			path = Library;
 			sourceTree = "<group>";
 		};
 		385D0A352BF4597B0076A5F3 /* Services */ = {
@@ -763,6 +785,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				385A70E62BF9A75F00659C2D /* ProfileResponse.swift in Sources */,
+				385A71412C004E1C00659C2D /* LibraryViewController.swift in Sources */,
 				385A71012BF9A88000659C2D /* FeaturedPlaylists.swift in Sources */,
 				385A71362BFF017F00659C2D /* ItemViewCell.swift in Sources */,
 				385A70F42BF9A77300659C2D /* Followers.swift in Sources */,
@@ -832,6 +855,7 @@
 				385D0A562BF45AB80076A5F3 /* PlaylistsEndpoint.swift in Sources */,
 				385D0A4C2BF45AB80076A5F3 /* CachedResponse.swift in Sources */,
 				3857EDCD2BF69CE800F2B8ED /* SignInViewModel.swift in Sources */,
+				385A713E2C004DA500659C2D /* SearchViewController.swift in Sources */,
 				385D0A692BF45BE90076A5F3 /* AuthManager.swift in Sources */,
 				3857EDD32BF69D3500F2B8ED /* SignInViewController.swift in Sources */,
 				385D0A632BF45AD20076A5F3 /* NetworkManagerProtocol.swift in Sources */,
@@ -949,7 +973,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1006,7 +1030,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;

@@ -14,14 +14,15 @@ enum AppState {
 }
 
 class AppCoordinator: Coordinator {
-
+    
+    var window: UIWindow?
     var childCoordinators = [Coordinator]()
-    var navigationController: UINavigationController
+    var navigationController = UINavigationController()
 
     var serviceResolver: ServiceLocatorProtocol?
 
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
+    init(window: UIWindow) {
+        self.window = window
     }
 
     func start() {
@@ -59,9 +60,9 @@ class AppCoordinator: Coordinator {
 
         switch appState {
         case .signedIn:
-            showHomeView(serviceResolver: serviceResolver)
+            showHomeView(serviceResolver: serviceResolver, window: window)
         case .signedOut:
-            showWelcomeView(serviceResolver: serviceResolver)
+            showWelcomeView(serviceResolver: serviceResolver, window: window)
         }
     }
 
@@ -74,7 +75,9 @@ class AppCoordinator: Coordinator {
         return authManager.isSignedIn ? .signedIn : .signedOut
     }
 
-    private func showWelcomeView(serviceResolver: ServiceLocatorProtocol) {
+    private func showWelcomeView(serviceResolver: ServiceLocatorProtocol, window: UIWindow?) {
+
+        guard let window else { return }
 
         let coordinator = AuthCoordinator(
             navigationController: navigationController,
@@ -84,13 +87,18 @@ class AppCoordinator: Coordinator {
         childCoordinators.append(coordinator)
         coordinator.delegate = self
         coordinator.start()
+
+        window.rootViewController = navigationController
+        window.makeKeyAndVisible()
     }
 
-    private func showHomeView(serviceResolver: ServiceLocatorProtocol) {
+    private func showHomeView(serviceResolver: ServiceLocatorProtocol, window: UIWindow?) {
+        guard let window else { return }
 
-        let coordinator = BrowseCoordinator(
+        let coordinator = MainCoordinator(
+            serviceResolver: serviceResolver,
             navigationController: navigationController,
-            serviceResolver: serviceResolver
+            window: window
         )
 
         childCoordinators.append(coordinator)
@@ -104,6 +112,6 @@ extension AppCoordinator: AuthCoordinatorDelegate {
         
         childCoordinators.removeAll()
         navigationController.popToRootViewController(animated: false)
-        showHomeView(serviceResolver: serviceResolver)
+        showHomeView(serviceResolver: serviceResolver, window: window)
     }
 }

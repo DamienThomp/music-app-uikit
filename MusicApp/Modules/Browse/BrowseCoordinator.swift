@@ -34,10 +34,10 @@ class BrowseCoordinator: NSObject, Coordinator {
         let viewController = browseAssembly.assemble(serviceResolver, coordinator: self)
 
         viewController.title = "Browse"
+        viewController.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
         viewController.navigationItem.largeTitleDisplayMode = .always
-        navigationController.title = "Browse"
         navigationController.navigationBar.prefersLargeTitles = true
-        navigationController.pushViewController(viewController, animated: false)
+        navigationController.setViewControllers([viewController], animated: false)
     }
 
     func showDetails(for item: BrowseItem) {
