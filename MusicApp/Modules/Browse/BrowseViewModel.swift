@@ -51,8 +51,11 @@ class BrowseViewModel {
         case .featured:
 
             guard let data = data as? FeaturedPlaylists else { return nil }
+            
+            //API can return duplicate items: remove duplicates and sort result
+            let items = Array(Set(data.playlists.items)).sorted { $0.id < $1.id }
 
-            return data.playlists.items.compactMap { playlist in
+            return items.compactMap { playlist in
                 BrowseItem(type: .playlist, data: playlist)
             }
         case .recommended:
@@ -67,15 +70,15 @@ class BrowseViewModel {
 }
 
 extension BrowseViewModel: BrowseDataSourceDelegate {
-    
-    func didFinishLoading() {
-        delegate?.reloadData()
-    }
 
     func didLoadData(for section: BrowseSections, with data: Codable) {
 
         guard let items = configureViewModel(for: section, with: data) else { return }
 
         updateSnapshot(for: section, with: items)
+    }
+
+    func didFinishLoading() {
+        delegate?.reloadData()
     }
 }

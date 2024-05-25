@@ -7,10 +7,8 @@
 
 import Foundation
 
-struct Owner: Codable {
+struct Owner: Codable, Hashable {
 
-    let externalUrls: [String : String]
-    let followers: Followers?
     let href: String
     let id: String
     let type: String

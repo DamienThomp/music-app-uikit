@@ -77,6 +77,14 @@
 		385A713B2C00334700659C2D /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A713A2C00334700659C2D /* ImageCache.swift */; };
 		385A713E2C004DA500659C2D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A713D2C004DA500659C2D /* SearchViewController.swift */; };
 		385A71412C004E1C00659C2D /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A71402C004E1C00659C2D /* LibraryViewController.swift */; };
+		385A71432C011DAE00659C2D /* BrowseItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A71422C011DAE00659C2D /* BrowseItem.swift */; };
+		385A71452C01230200659C2D /* LibraryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A71442C01230200659C2D /* LibraryCoordinator.swift */; };
+		385A71472C01240000659C2D /* LibraryAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A71462C01240000659C2D /* LibraryAssembly.swift */; };
+		385A71492C01244C00659C2D /* LibraryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A71482C01244C00659C2D /* LibraryDataSource.swift */; };
+		385A714B2C01267500659C2D /* LibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A714A2C01267500659C2D /* LibraryViewModel.swift */; };
+		385A714D2C01438100659C2D /* AlbumsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A714C2C01438100659C2D /* AlbumsResponse.swift */; };
+		385A714F2C01469900659C2D /* SavedPlaylistsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A714E2C01469900659C2D /* SavedPlaylistsResponse.swift */; };
+		385A71512C01477B00659C2D /* ArtistsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A71502C01477B00659C2D /* ArtistsResponse.swift */; };
 		385D0A482BF45AB80076A5F3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385D0A3A2BF45AB80076A5F3 /* NetworkManager.swift */; };
 		385D0A492BF45AB80076A5F3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385D0A3A2BF45AB80076A5F3 /* NetworkManager.swift */; };
 		385D0A4A2BF45AB80076A5F3 /* NetworkManagerErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385D0A3B2BF45AB80076A5F3 /* NetworkManagerErrors.swift */; };
@@ -207,6 +215,14 @@
 		385A713A2C00334700659C2D /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		385A713D2C004DA500659C2D /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		385A71402C004E1C00659C2D /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
+		385A71422C011DAE00659C2D /* BrowseItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseItem.swift; sourceTree = "<group>"; };
+		385A71442C01230200659C2D /* LibraryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryCoordinator.swift; sourceTree = "<group>"; };
+		385A71462C01240000659C2D /* LibraryAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryAssembly.swift; sourceTree = "<group>"; };
+		385A71482C01244C00659C2D /* LibraryDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryDataSource.swift; sourceTree = "<group>"; };
+		385A714A2C01267500659C2D /* LibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewModel.swift; sourceTree = "<group>"; };
+		385A714C2C01438100659C2D /* AlbumsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsResponse.swift; sourceTree = "<group>"; };
+		385A714E2C01469900659C2D /* SavedPlaylistsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPlaylistsResponse.swift; sourceTree = "<group>"; };
+		385A71502C01477B00659C2D /* ArtistsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistsResponse.swift; sourceTree = "<group>"; };
 		385D0A3A2BF45AB80076A5F3 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		385D0A3B2BF45AB80076A5F3 /* NetworkManagerErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManagerErrors.swift; sourceTree = "<group>"; };
 		385D0A3C2BF45AB80076A5F3 /* CachedResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedResponse.swift; sourceTree = "<group>"; };
@@ -557,6 +573,10 @@
 			isa = PBXGroup;
 			children = (
 				385A71402C004E1C00659C2D /* LibraryViewController.swift */,
+				385A71442C01230200659C2D /* LibraryCoordinator.swift */,
+				385A71462C01240000659C2D /* LibraryAssembly.swift */,
+				385A71482C01244C00659C2D /* LibraryDataSource.swift */,
+				385A714A2C01267500659C2D /* LibraryViewModel.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -631,6 +651,7 @@
 			children = (
 				385A70F22BF9A77300659C2D /* Shared */,
 				385D0A6F2BF465BC0076A5F3 /* APIResponse */,
+				385A71422C011DAE00659C2D /* BrowseItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -650,6 +671,9 @@
 				385A70E02BF9A75F00659C2D /* ProfileResponse.swift */,
 				385A70E12BF9A75F00659C2D /* SavedAlbumResponse.swift */,
 				385A70E22BF9A75F00659C2D /* SearchResponse.swift */,
+				385A714C2C01438100659C2D /* AlbumsResponse.swift */,
+				385A714E2C01469900659C2D /* SavedPlaylistsResponse.swift */,
+				385A71502C01477B00659C2D /* ArtistsResponse.swift */,
 			);
 			path = APIResponse;
 			sourceTree = "<group>";
@@ -800,10 +824,12 @@
 				385A70E72BF9A75F00659C2D /* SavedAlbumResponse.swift in Sources */,
 				385A70D22BF8718900659C2D /* BrowseCoordinator.swift in Sources */,
 				385A711C2BFC42C700659C2D /* SectionHeader.swift in Sources */,
+				385A714F2C01469900659C2D /* SavedPlaylistsResponse.swift in Sources */,
 				385A71142BFBC31D00659C2D /* CellConfigurationProtocol.swift in Sources */,
 				385A70D42BF8721600659C2D /* BrowseDataSource.swift in Sources */,
 				385A70FD2BF9A83A00659C2D /* NewReleases.swift in Sources */,
 				3857EDC52BF540EF00F2B8ED /* ServiceLocator.swift in Sources */,
+				385A71452C01230200659C2D /* LibraryCoordinator.swift in Sources */,
 				385A71322BFE6C7000659C2D /* ItemDetailsCoordinator.swift in Sources */,
 				385A71162BFC404F00659C2D /* UIImageView+LoadImage.swift in Sources */,
 				385A711F2BFC441F00659C2D /* FeaturedCollectionViewCell.swift in Sources */,
@@ -813,17 +839,20 @@
 				3857EDD12BF69D1600F2B8ED /* SignInViewAssembly.swift in Sources */,
 				385D0A482BF45AB80076A5F3 /* NetworkManager.swift in Sources */,
 				385A70E52BF9A75F00659C2D /* PlaylistResponse.swift in Sources */,
+				385A71492C01244C00659C2D /* LibraryDataSource.swift in Sources */,
 				3857EDC72BF5692700F2B8ED /* UIView+AddSubviews.swift in Sources */,
 				385D0A6C2BF45D4D0076A5F3 /* AuthConstants.swift in Sources */,
 				385A70FB2BF9A79000659C2D /* Album.swift in Sources */,
 				385D0A5C2BF45AB80076A5F3 /* SearchEndpoint.swift in Sources */,
 				385A71302BFE6C5000659C2D /* ItemDetailsViewModel.swift in Sources */,
+				385A714D2C01438100659C2D /* AlbumsResponse.swift in Sources */,
 				385A70EA2BF9A75F00659C2D /* ArtistResponse.swift in Sources */,
 				385D0A4E2BF45AB80076A5F3 /* AlbumEndpoint.swift in Sources */,
 				385A70D82BF8737E00659C2D /* BrowseViewAssembly.swift in Sources */,
 				385A70E92BF9A75F00659C2D /* CategoriesResponse.swift in Sources */,
 				385A712C2BFE6BA900659C2D /* ItemDetailsViewController.swift in Sources */,
 				385A71272BFC4CFF00659C2D /* AlbumTrackCollectionViewCell.swift in Sources */,
+				385A714B2C01267500659C2D /* LibraryViewModel.swift in Sources */,
 				385A713B2C00334700659C2D /* ImageCache.swift in Sources */,
 				385D0A5E2BF45AB80076A5F3 /* UsersSavedAlbums.swift in Sources */,
 				382020232BF3046900368FA7 /* AppDelegate.swift in Sources */,
@@ -839,12 +868,15 @@
 				385D0A662BF45B900076A5F3 /* AuthManagerProtocol.swift in Sources */,
 				385A70F32BF9A77300659C2D /* Artist.swift in Sources */,
 				385A70DE2BF9A74C00659C2D /* AlbumResponse.swift in Sources */,
+				385A71512C01477B00659C2D /* ArtistsResponse.swift in Sources */,
 				382020542BF30B0200368FA7 /* CoordinatorProtocol.swift in Sources */,
 				3857EDCA2BF56A1100F2B8ED /* AuthCoordinator.swift in Sources */,
 				382020252BF3046900368FA7 /* SceneDelegate.swift in Sources */,
 				3857EDD92BF6B16600F2B8ED /* ServiceDataSourceProtocol.swift in Sources */,
 				385A71052BF9A89F00659C2D /* TopArtists.swift in Sources */,
+				385A71432C011DAE00659C2D /* BrowseItem.swift in Sources */,
 				385A712E2BFE6C3D00659C2D /* ItemDetailsDataSource.swift in Sources */,
+				385A71472C01240000659C2D /* LibraryAssembly.swift in Sources */,
 				385D0A582BF45AB80076A5F3 /* ProfileEndpoint.swift in Sources */,
 				385A70D02BF867FD00659C2D /* MainCoordinator.swift in Sources */,
 				385A70F92BF9A77300659C2D /* Track.swift in Sources */,

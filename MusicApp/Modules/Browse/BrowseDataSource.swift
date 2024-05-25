@@ -26,42 +26,6 @@ enum BrowseSections: Hashable, CaseIterable {
     }
 }
 
-struct BrowseItem: CellItemProtocol, Hashable {
-
-    let id: String
-    let title: String
-    let subTitle: String
-    let image: URL?
-    let type: ItemType?
-}
-
-extension BrowseItem {
-
-    init(type: ItemType, data: PlaylistItems) {
-        self.id = data.id
-        self.title = data.name
-        self.subTitle = data.owner.displayName ?? ""
-        self.image = data.images?.imageUrl
-        self.type = type
-    }
-
-    init(type: ItemType, data: Album) {
-        self.id = data.id
-        self.title = data.name
-        self.subTitle = data.artists.first?.name ?? ""
-        self.image = data.images?.imageUrl
-        self.type = type
-    }
-
-    init(type: ItemType, data: Track) {
-        self.id = data.id
-        self.title = data.name
-        self.subTitle = type == .playlistTrack ? (data.artists.first?.name ?? "") : "\(data.trackNumber)"
-        self.image = data.album.images?.imageUrl
-        self.type = type
-    }
-
-}
 
 protocol BrowseDataSourceDelegate: AnyObject {
 
@@ -178,7 +142,7 @@ extension BrowseDataSource {
         return try decoder.decode(Recommendations.self, from: recommendationsData)
     }
 
-    func executeRequest(for endPoint: EndpointProtocol) async throws -> Data {
+    private func executeRequest(for endPoint: EndpointProtocol) async throws -> Data {
 
         guard let networkManager else {
             throw ServiceResolverErrors.failedToResolveService
@@ -223,7 +187,6 @@ extension BrowseDataSource {
         }
     }
 }
-
 
 //MARK: - Service Resolver
 extension BrowseDataSource: ServiceDataSourceProtocol {

@@ -15,4 +15,5 @@ struct Artist: Codable {
     let name: String
     let type: ItemType
     let uri: String
+    let images: [Images]?
 }

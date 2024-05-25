@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Images: Codable {
+struct Images: Codable, Hashable {
 
     let url: URL
     let height: Int?

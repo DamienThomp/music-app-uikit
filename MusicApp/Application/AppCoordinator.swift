@@ -93,8 +93,9 @@ class AppCoordinator: Coordinator {
     }
 
     private func showHomeView(serviceResolver: ServiceLocatorProtocol, window: UIWindow?) {
-        guard let window else { return }
-
+        guard let window else {
+            return
+        }
         let coordinator = MainCoordinator(
             serviceResolver: serviceResolver,
             navigationController: navigationController,
@@ -109,9 +110,9 @@ class AppCoordinator: Coordinator {
 extension AppCoordinator: AuthCoordinatorDelegate {
 
     func didSignIn(with coordinator: Coordinator, serviceResolver: ServiceLocatorProtocol) {
-        
-        childCoordinators.removeAll()
+
         navigationController.popToRootViewController(animated: false)
+        childCoordinators.removeAll()
         showHomeView(serviceResolver: serviceResolver, window: window)
     }
 }

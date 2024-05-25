@@ -37,6 +37,7 @@ enum AuthConstants {
             "user-top-read",
             "user-library-read",
             "user-library-modify",
+            "user-follow-read",
             "playlist-read-private",
             "playlist-read-collaborative",
             "playlist-modify-private",

@@ -70,7 +70,7 @@ extension ItemDetailsViewModel {
                     items: data.tracks.items.compactMap({
                         item in
                         BrowseItem(
-                            id: item.track?.id ?? UUID().uuidString,
+                            id: UUID().uuidString,
                             title: item.track?.name ?? "",
                             subTitle: item.track?.album.name ?? "",
                             image: item.track?.album.images?.imageUrl,

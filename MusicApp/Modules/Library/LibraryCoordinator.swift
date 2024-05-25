@@ -1,47 +1,46 @@
 //
-//  BrowseCoordinator.swift
+//  LibraryCoordinator.swift
 //  MusicApp
 //
-//  Created by Damien L Thompson on 2024-05-18.
+//  Created by Damien L Thompson on 2024-05-24.
 //
 
 import UIKit
 
-class BrowseCoordinator: NSObject, Coordinator {
+class LibraryCoordinator: NSObject, Coordinator {
 
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
 
-    private var serviceResolver: ServiceLocatorProtocol
+    var serviceResolver: ServiceLocatorProtocol
 
     init(
         navigationController: UINavigationController,
         serviceResolver: ServiceLocatorProtocol
     ) {
-
         self.navigationController = navigationController
         self.serviceResolver = serviceResolver
     }
 
     func start() {
-        showBrowseView()
         navigationController.delegate = self
+        showLibrary()
     }
 
-    func showBrowseView() {
+    func showLibrary() {
 
-        let browseAssembly = BrowseViewAssembly()
-        let viewController = browseAssembly.assemble(serviceResolver, coordinator: self)
+        let libraryAssembly = LibraryAssembly()
+        let viewController = libraryAssembly.assemble(serviceResolver, coordinator: self)
 
-        viewController.title = "Browse"
-        viewController.tabBarItem = UITabBarItem(title: "Browse", image: UIImage(systemName: "house"), tag: 0)
+        viewController.title = "Library"
+        viewController.tabBarItem = UITabBarItem(title: "Library", image: UIImage(systemName: "music.note.list"), tag: 2)
         viewController.navigationItem.largeTitleDisplayMode = .always
         navigationController.navigationBar.prefersLargeTitles = true
         navigationController.setViewControllers([viewController], animated: false)
     }
 
     func showDetails(for item: BrowseItem) {
-
+        
         let coordinator = ItemDetailsCoordinator(
             navigationController: navigationController,
             serviceResolver: serviceResolver
@@ -53,8 +52,7 @@ class BrowseCoordinator: NSObject, Coordinator {
     }
 }
 
-//MARK: - Navigation Controller Delegate
-extension BrowseCoordinator: UINavigationControllerDelegate {
+extension LibraryCoordinator: UINavigationControllerDelegate {
 
     func navigationController(
         _ navigationController: UINavigationController,
@@ -63,7 +61,7 @@ extension BrowseCoordinator: UINavigationControllerDelegate {
     ) {
 
         guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from),
-              !navigationController.viewControllers.contains(fromViewController) 
+              !navigationController.viewControllers.contains(fromViewController)
         else {
             return
         }

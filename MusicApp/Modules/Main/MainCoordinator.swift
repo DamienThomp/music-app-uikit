@@ -34,8 +34,8 @@ class MainCoordinator: Coordinator {
 
         tabBar.viewControllers = [
             createBrowseViewController(),
-            createSearchViewController(),
-            createLibraryViewController()
+            createLibraryViewController(),
+            createSearchViewController()
         ]
 
         window?.rootViewController = tabBar
@@ -72,15 +72,17 @@ class MainCoordinator: Coordinator {
     }
 
     func createLibraryViewController() -> UINavigationController {
-        //TODO: - Create Library Coordinator
-        let libraryViewController = LibraryViewController()
-        libraryViewController.title = "Library"
-        libraryViewController.tabBarItem = UITabBarItem(title: "Library", image: UIImage(systemName: "music.note.list"), tag: 2)
-        libraryViewController.navigationItem.largeTitleDisplayMode = .always
+        
+        let libraryNavigationController = UINavigationController()
 
-        let navigationController = UINavigationController(rootViewController: libraryViewController)
-        navigationController.navigationBar.prefersLargeTitles = true
+        let libraryCoordinator = LibraryCoordinator(
+            navigationController: libraryNavigationController,
+            serviceResolver: serviceResolver
+        )
 
-        return navigationController
+        libraryCoordinator.start()
+        childCoordinators.append(libraryCoordinator)
+
+        return libraryCoordinator.navigationController
     }
 }

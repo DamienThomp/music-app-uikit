@@ -24,18 +24,18 @@ struct FeaturedPlaylists: Codable {
     }
 }
 
-struct PlaylistItems: Codable {
+struct PlaylistItems: Codable, Hashable {
 
-    let collaborative: Bool
     let description: String
-    let externalUrls: [String : String]
-    let href: String
     let id: String
-    let images: [Images]?
+    let images: [Images]
     let name: String
     let owner: Owner
     let type: ItemType
-    let uri: String
+
+    static func == (lhs: PlaylistItems, rhs: PlaylistItems) -> Bool {
+        return lhs.images == rhs.images
+    }
 }
 
 /*

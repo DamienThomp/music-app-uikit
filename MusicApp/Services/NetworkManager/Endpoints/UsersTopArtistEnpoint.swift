@@ -27,7 +27,8 @@ enum UsersTopItemsEnpoint: EndpointProtocol {
     var queryItems: [URLQueryItem]? {
 
         switch self {
-        case .artists(let limit, let offset), .tracks(let limit, let offset):
+        case .artists(let limit, let offset), 
+             .tracks(let limit, let offset):
             return [
                 URLQueryItem(name: "time_range", value: "long_term"),
                 URLQueryItem(name: "limit", value: "\(limit)"),
