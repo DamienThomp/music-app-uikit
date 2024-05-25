@@ -13,8 +13,6 @@ class AlbumTrackCollectionViewCell: UICollectionViewCell, CellConfigurationProto
 
     let trackNumber = UILabel()
     let titleLabel = UILabel()
-    let topDivider = UIView(frame: .zero)
-    let bottomDivider = UIView(frame: .zero)
     let innerCellDivider = UIView(frame: .zero)
     let actionButton = UIButton(frame: .zero)
 
@@ -56,16 +54,8 @@ extension AlbumTrackCollectionViewCell {
 
     func configureCellDivider() {
 
-        topDivider.translatesAutoresizingMaskIntoConstraints = false
         innerCellDivider.translatesAutoresizingMaskIntoConstraints = false
-        bottomDivider.translatesAutoresizingMaskIntoConstraints = false
-
-        topDivider.backgroundColor = .systemGray4
         innerCellDivider.backgroundColor = .systemGray4
-        bottomDivider.backgroundColor = .systemGray4
-
-        bottomDivider.isHidden = true
-        topDivider.isHidden = true
     }
 
     func configureActionButton() {
@@ -80,16 +70,14 @@ extension AlbumTrackCollectionViewCell {
 
     func configureCellLayout() {
 
-        contentView.addSubViews(topDivider, innerCellDivider, trackNumber, titleLabel, bottomDivider, actionButton)
+        contentView.addSubViews(
+            innerCellDivider,
+            trackNumber,
+            titleLabel,
+            actionButton
+        )
 
         NSLayoutConstraint.activate([
-            topDivider.heightAnchor.constraint(equalToConstant: 1),
-            topDivider.topAnchor.constraint(equalTo: contentView.topAnchor),
-            topDivider.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-
-            bottomDivider.heightAnchor.constraint(equalToConstant: 1),
-            bottomDivider.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            bottomDivider.widthAnchor.constraint(equalTo: contentView.widthAnchor),
 
             innerCellDivider.heightAnchor.constraint(equalToConstant: 1),
             innerCellDivider.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
