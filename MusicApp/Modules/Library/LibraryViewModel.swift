@@ -14,7 +14,7 @@ protocol LibraryViewModelDelegate: AnyObject {
 
 class LibraryViewModel {
 
-    typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<LibrarSections, BrowseItem>
+    typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<LibrarySections, BrowseItem>
 
     private(set) var snapshot = DataSourceSnapshot()
 
@@ -31,14 +31,14 @@ class LibraryViewModel {
     }
 
     func createInitialSnapshot() {
-        snapshot.appendSections(LibrarSections.allCases)
+        snapshot.appendSections(LibrarySections.allCases)
     }
 
-    private func updateSnapshot(for section: LibrarSections, with items: [BrowseItem]) {
+    private func updateSnapshot(for section: LibrarySections, with items: [BrowseItem]) {
         snapshot.appendItems(items, toSection: section)
     }
 
-    private func configureViewModel(for section: LibrarSections, with data: Codable) -> [BrowseItem]? {
+    private func configureViewModel(for section: LibrarySections, with data: Codable) -> [BrowseItem]? {
         
         switch section {
         case .albums:
@@ -72,7 +72,7 @@ class LibraryViewModel {
 //MARK: - Data Source Delegate
 extension LibraryViewModel: LibraryDataSourceDelegate {
 
-    func didLoadData(for section: LibrarSections, with data: Codable) {
+    func didLoadData(for section: LibrarySections, with data: Codable) {
 
         guard let items = configureViewModel(for: section, with: data) else { return }
 
