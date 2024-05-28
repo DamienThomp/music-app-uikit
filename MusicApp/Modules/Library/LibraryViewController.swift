@@ -12,7 +12,7 @@ class LibraryViewController: UIViewController {
     weak var coordinator: LibraryCoordinator?
     var viewModel: LibraryViewModel?
 
-    typealias DataSource = UICollectionViewDiffableDataSource<LibrarSections, BrowseItem>
+    typealias DataSource = UICollectionViewDiffableDataSource<LibrarySections, BrowseItem>
 
     private var collection: UICollectionView!
 

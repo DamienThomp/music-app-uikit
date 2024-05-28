@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum LibrarSections: Hashable, CaseIterable {
+enum LibrarySections: Hashable, CaseIterable {
 
     case albums
     case playlists
@@ -28,7 +28,7 @@ enum LibrarSections: Hashable, CaseIterable {
 
 protocol LibraryDataSourceDelegate: AnyObject {
 
-    @MainActor func didLoadData(for section: LibrarSections, with data: Codable)
+    @MainActor func didLoadData(for section: LibrarySections, with data: Codable)
     @MainActor func didFinishLoading()
 }
 
