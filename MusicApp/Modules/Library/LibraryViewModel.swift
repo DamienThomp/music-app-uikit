@@ -7,6 +7,25 @@
 
 import UIKit
 
+enum LibrarySections: Hashable, CaseIterable {
+
+    case albums
+    case playlists
+    case artists
+
+    var title: String {
+
+        switch self {
+        case .albums:
+            "Albums"
+        case .playlists:
+            "Playlists"
+        case .artists:
+            "Followed Artists"
+        }
+    }
+}
+
 protocol LibraryViewModelDelegate: AnyObject {
 
     @MainActor func reloadData()
@@ -42,18 +61,21 @@ class LibraryViewModel {
         
         switch section {
         case .albums:
+
             guard let data = data as? AlbumsResponse else { return nil }
 
             return data.items?.compactMap { item in
                return BrowseItem(type: .album, data: item.album)
             }
         case .playlists:
+
             guard let data = data as? SavedPlaylistsResponse else { return nil }
 
             return data.items.compactMap { item in
                 BrowseItem(type: .playlist, data: item)
             }
         case .artists:
+            
             guard let data = data as? SavedArtistsResponse else { return nil }
 
             return data.artists.items.compactMap { item in
