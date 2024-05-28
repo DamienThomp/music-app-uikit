@@ -7,25 +7,6 @@
 
 import Foundation
 
-enum LibrarySections: Hashable, CaseIterable {
-
-    case albums
-    case playlists
-    case artists
-
-    var title: String {
-
-        switch self {
-        case .albums:
-            "Albums"
-        case .playlists:
-            "Playlists"
-        case .artists:
-            "Followed Artists"
-        }
-    }
-}
-
 protocol LibraryDataSourceDelegate: AnyObject {
 
     @MainActor func didLoadData(for section: LibrarySections, with data: Codable)
@@ -46,52 +27,25 @@ class LibraryDataSource {
     private var networkManager: NetworkManager?
 
     weak var delegate: LibraryDataSourceDelegate?
+
+    private let fetchLimit = 30
 }
 
 //MARK: - Data Fetching
 extension LibraryDataSource {
 
-    private func fetchSavedAlbums() async throws -> AlbumsResponse {
-
-        let data = try await executeRequest(
-            for: UsersSavedItems.albums(
-                limit: 25
-            )
-        )
-
-        return try decoder.decode(AlbumsResponse.self, from: data)
-    }
-
-    private func fetchSavedPLaylists() async throws -> SavedPlaylistsResponse {
-
-        let data = try await executeRequest(
-            for: UsersSavedItems.playlists(
-                limit: 25
-            )
-        )
-
-        return try decoder.decode(SavedPlaylistsResponse.self, from: data)
-    }
-
-    private func fetchSavedArtists() async throws -> SavedArtistsResponse {
-
-        let data = try await executeRequest(
-            for: UsersSavedItems.following(
-                limit: 25,
-                type: .artist
-            )
-        )
-
-        return try decoder.decode(SavedArtistsResponse.self, from: data)
-    }
-
-    private func executeRequest(for endPoint: EndpointProtocol) async throws -> Data {
+    private func executeRequest<T: Codable>(
+        for endPoint: EndpointProtocol,
+        of type: T.Type
+    ) async throws -> T {
 
         guard let networkManager else {
             throw ServiceResolverErrors.failedToResolveService
         }
 
-        return try await networkManager.request(for: endPoint)
+        let data = try await networkManager.request(for: endPoint)
+
+        return try decoder.decode(T.self, from: data)
     }
 
     func fetchDispayData() {
@@ -99,6 +53,7 @@ extension LibraryDataSource {
         Task {
 
             do {
+
                 if let authManager, authManager.shouldRefreshToken {
                     try await authManager.refresshAccessToken()
                 }
@@ -106,17 +61,32 @@ extension LibraryDataSource {
                 try await withThrowingTaskGroup(of: Void.self) { taskGroup in
 
                     taskGroup.addTask {
-                        let savedAlbums = try await self.fetchSavedAlbums()
+
+                        let endPoint = UsersSavedItems.albums(limit: self.fetchLimit)
+                        let savedAlbums = try await self.executeRequest(
+                            for: endPoint,
+                            of: AlbumsResponse.self
+                        )
                         await self.delegate?.didLoadData(for: .albums, with: savedAlbums)
                     }
 
                     taskGroup.addTask {
-                        let savedPlaylists = try await self.fetchSavedPLaylists()
+
+                        let endPoint = UsersSavedItems.playlists(limit: self.fetchLimit)
+                        let savedPlaylists = try await self.executeRequest(
+                            for: endPoint,
+                            of: SavedPlaylistsResponse.self
+                        )
                         await self.delegate?.didLoadData(for: .playlists, with: savedPlaylists)
                     }
 
                     taskGroup.addTask {
-                        let savedArtists = try await self.fetchSavedArtists()
+
+                        let endPoint = UsersSavedItems.following(limit: self.fetchLimit, type: .artist)
+                        let savedArtists = try await self.executeRequest(
+                            for: endPoint,
+                            of: SavedArtistsResponse.self
+                        )
                         await self.delegate?.didLoadData(for: .artists, with: savedArtists)
                     }
 
@@ -124,7 +94,6 @@ extension LibraryDataSource {
                     
                     await self.delegate?.didFinishLoading()
                 }
-
             } catch {
                 #warning("add error handling")
                 print(error)
