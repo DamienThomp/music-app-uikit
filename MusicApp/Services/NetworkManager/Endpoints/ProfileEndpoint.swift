@@ -9,7 +9,7 @@ import Foundation
 
 enum ProfileEndpoint: EndpointProtocol {
 
-    case me
+    case user
 
     var path: String {
         return "/me"

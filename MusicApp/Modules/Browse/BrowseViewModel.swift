@@ -52,7 +52,7 @@ class BrowseViewModel {
 
             guard let data = data as? FeaturedPlaylists else { return nil }
             
-            //API can return duplicate items: remove duplicates and sort result
+            // API can return duplicate items: remove duplicates and sort result
             let items = Array(Set(data.playlists.items)).sorted { $0.id < $1.id }
 
             return items.compactMap { playlist in

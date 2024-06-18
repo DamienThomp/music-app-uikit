@@ -40,8 +40,7 @@ protocol EndpointProtocol {
 
     var queryItems: [URLQueryItem]? { get }
 
-    var cachePolicy: URLRequest.CachePolicy  { get }
-
+    var cachePolicy: URLRequest.CachePolicy { get }
 }
 
 // MARK: - Default Values

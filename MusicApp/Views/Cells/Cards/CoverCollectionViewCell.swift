@@ -46,7 +46,6 @@ class CoverCollectionViewCell: ItemViewCell, CellConfigurationProtocol {
         subtitleLabel.textColor = .secondaryLabel
         subtitleLabel.numberOfLines = 1
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
-
     }
 
     func configureViews() {
@@ -70,7 +69,6 @@ class CoverCollectionViewCell: ItemViewCell, CellConfigurationProtocol {
             subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
             subtitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
             subtitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding)
-
         ])
     }
 }
@@ -87,8 +85,8 @@ class CoverCollectionViewCell: ItemViewCell, CellConfigurationProtocol {
         type: .playlist
     )
 
-    let vc = CoverCollectionViewCell()
-    vc.configure(with: cellModel)
+    let viewController = CoverCollectionViewCell()
+    viewController.configure(with: cellModel)
 
-    return vc
+    return viewController
 }

@@ -43,7 +43,7 @@ class ItemDetailsCoordinator: NSObject, Coordinator {
     }
 }
 
-//MARK: - Navigation Controller Delegate
+// MARK: - Navigation Controller Delegate
 extension ItemDetailsCoordinator: UINavigationControllerDelegate {
 
     func navigationController(
@@ -58,8 +58,8 @@ extension ItemDetailsCoordinator: UINavigationControllerDelegate {
             return
         }
 
-        if let ItemsDetailsController = fromViewController as? ItemDetailsViewController {
-            childDidFinish(ItemsDetailsController.coordinator)
+        if let itemsDetailsController = fromViewController as? ItemDetailsViewController {
+            childDidFinish(itemsDetailsController.coordinator)
         }
     }
 }

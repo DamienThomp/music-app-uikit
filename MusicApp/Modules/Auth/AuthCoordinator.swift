@@ -24,7 +24,7 @@ class AuthCoordinator: Coordinator {
 
     init(
         navigationController: UINavigationController,
-        serviceResolver:  ServiceLocatorProtocol
+        serviceResolver: ServiceLocatorProtocol
     ) {
 
         self.navigationController = navigationController

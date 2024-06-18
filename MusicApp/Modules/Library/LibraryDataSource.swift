@@ -31,7 +31,7 @@ class LibraryDataSource {
     private let fetchLimit = 30
 }
 
-//MARK: - Data Fetching
+// MARK: - Data Fetching
 extension LibraryDataSource {
 
     private func executeRequest<T: Codable>(
@@ -102,7 +102,7 @@ extension LibraryDataSource {
     }
 }
 
-//MARK: - Service Resolver
+// MARK: - Service Resolver
 extension LibraryDataSource: ServiceDataSourceProtocol {
 
     func resolveServices(with serviceResolver: ServiceLocatorProtocol) {

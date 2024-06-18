@@ -46,7 +46,6 @@ class CategoryCollectionViewCell: ItemViewCell, CellConfigurationProtocol {
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.minimumScaleFactor = 0.2
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-
     }
 
     func configureContainer() {
@@ -82,7 +81,6 @@ class CategoryCollectionViewCell: ItemViewCell, CellConfigurationProtocol {
     }
 }
 
-
 #Preview(traits: .fixedLayout(width: 360, height: 360)) {
     let model = BrowseItem(
         id: "",
@@ -94,8 +92,8 @@ class CategoryCollectionViewCell: ItemViewCell, CellConfigurationProtocol {
         type: .category
     )
 
-    let vc = CategoryCollectionViewCell()
-    vc.configure(with: model)
+    let viewController = CategoryCollectionViewCell()
+    viewController.configure(with: model)
 
-    return vc
+    return viewController
 }

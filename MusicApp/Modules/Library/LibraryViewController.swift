@@ -41,7 +41,7 @@ class LibraryViewController: UIViewController {
     }
 }
 
-//MARK: - Collection View Configuration
+// MARK: - Collection View Configuration
 extension LibraryViewController {
 
     private func configureCollectionView() {
@@ -64,11 +64,21 @@ extension LibraryViewController {
 
     private func registerCells() {
 
-        collection.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseIdentifier)
+        collection.register(
+            SectionHeader.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: SectionHeader.reuseIdentifier
+        )
 
-        collection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "empty")
+        collection.register(
+            UICollectionViewCell.self,
+            forCellWithReuseIdentifier: "empty"
+        )
 
-        collection.register(CoverCollectionViewCell.self, forCellWithReuseIdentifier: CoverCollectionViewCell.reuseIdentifier)
+        collection.register(
+            CoverCollectionViewCell.self,
+            forCellWithReuseIdentifier: CoverCollectionViewCell.reuseIdentifier
+        )
     }
 
     private func createSectionLayout(for sectionIndex: Int) -> NSCollectionLayoutSection? {
@@ -101,15 +111,12 @@ extension LibraryViewController {
     }
 }
 
-//MARK: - Data Source Configuration
+// MARK: - Data Source Configuration
 extension LibraryViewController {
 
     private func configureDataSource() {
 
-        dataSource = DataSource(collectionView: collection, cellProvider: {
-            [weak self] collectionView,
-            indexPath,
-            item in
+        dataSource = DataSource(collectionView: collection, cellProvider: { [weak self] _, indexPath, item in
 
             guard let snapshot = self?.viewModel?.snapshot else { return UICollectionViewCell() }
 
@@ -126,10 +133,7 @@ extension LibraryViewController {
 
     private func configureDataSourceSupplement() {
 
-        dataSource?.supplementaryViewProvider = {
-            [weak self] collectionView,
-            kind,
-            indexPath in
+        dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
 
             guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
@@ -154,7 +158,7 @@ extension LibraryViewController {
     }
 }
 
-//MARK: - UICollectionViewDelegate
+// MARK: - UICollectionViewDelegate
 extension LibraryViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -167,14 +171,15 @@ extension LibraryViewController: UICollectionViewDelegate {
         case .albums, .playlists:
             coordinator?.showDetails(for: item)
         case .artists:
-            //TODO: - Handle artist redirect
+            // TODO: - Handle artist redirect
             print("artists item: \(item.title)")
         }
     }
 }
 
-//MARK: - LibraryViewModelDelegate
+// MARK: - LibraryViewModelDelegate
 extension LibraryViewController: LibraryViewModelDelegate {
+    
     func reloadData() {
 
         guard let snapshot = viewModel?.snapshot else { return }

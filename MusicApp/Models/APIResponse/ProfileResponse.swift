@@ -23,20 +23,24 @@ struct ProfileResponse: Codable, Identifiable {
     let uri: String?
 
     struct ExplicitContent: Codable {
+
         let filterEnabled: Bool?
         let filterLocked: Bool?
     }
 
     struct ExternalUrls: Codable {
+
         let spotify: String?
     }
 
     struct Followers: Codable {
+
         let href: String?
         let total: Int?
     }
 
     struct Images: Codable {
+        
         let url: String?
         let height: Int?
         let width: Int?

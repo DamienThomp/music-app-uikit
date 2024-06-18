@@ -8,7 +8,7 @@
 import Foundation
 
 enum FollowingType: String {
-    case artist = "artist"
+    case artist
 }
 
 enum UsersSavedItems: EndpointProtocol {

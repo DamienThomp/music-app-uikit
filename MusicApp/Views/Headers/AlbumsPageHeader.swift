@@ -56,7 +56,7 @@ class AlbumsPageHeader: UICollectionReusableView {
     }
 }
 
-//MARK: - Configure View Layout
+// MARK: - Configure View Layout
 extension AlbumsPageHeader {
 
     func configureImage() {
@@ -183,7 +183,7 @@ extension AlbumsPageHeader {
     }
 }
 
-//MARK: - Button Actions
+// MARK: - Button Actions
 extension AlbumsPageHeader {
 
     @objc func artistButtonTapped() {
@@ -222,8 +222,7 @@ struct AlbumsPageHeaderViewModel {
         ],
         type: .album
     )
-    let vc = AlbumsPageHeader()
-    vc.configureView(with: model)
-    return vc
+    let viewController = AlbumsPageHeader()
+    viewController.configureView(with: model)
+    return viewController
 }
-

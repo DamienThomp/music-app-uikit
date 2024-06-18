@@ -53,7 +53,7 @@ class BrowseCoordinator: NSObject, Coordinator {
     }
 }
 
-//MARK: - Navigation Controller Delegate
+// MARK: - Navigation Controller Delegate
 extension BrowseCoordinator: UINavigationControllerDelegate {
 
     func navigationController(
@@ -68,8 +68,8 @@ extension BrowseCoordinator: UINavigationControllerDelegate {
             return
         }
 
-        if let ItemsDetailsController = fromViewController as? ItemDetailsViewController {
-            childDidFinish(ItemsDetailsController.coordinator)
+        if let itemsDetailsController = fromViewController as? ItemDetailsViewController {
+            childDidFinish(itemsDetailsController.coordinator)
         }
     }
 }

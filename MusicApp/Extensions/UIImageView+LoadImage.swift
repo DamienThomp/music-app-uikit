@@ -28,7 +28,6 @@ extension UIImageView {
             ImageCache.setImage(with: image, for: cacheKey)
 
             await self.assignImage(with: image)
-
         } catch {
 
             #if DEBUG

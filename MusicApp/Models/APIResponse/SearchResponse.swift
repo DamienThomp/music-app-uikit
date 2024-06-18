@@ -33,7 +33,6 @@ struct SearchResponse: Codable {
         let previous: URL?
         let total: Int
         let items: [Artist]
-
     }
 
     struct Albums: Codable {

@@ -62,7 +62,7 @@ class SignInViewController: UIViewController {
     }
 }
 
-//MARK: - WebView Navigation Delegate
+// MARK: - WebView Navigation Delegate
 extension SignInViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
@@ -89,7 +89,7 @@ extension SignInViewController: WKNavigationDelegate {
     }
 }
 
-//MARK: - SignInViewModel Delegate
+// MARK: - SignInViewModel Delegate
 extension SignInViewController: SignInViewModelDelegate {
 
     func didSignIn() {

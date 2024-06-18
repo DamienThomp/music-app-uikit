@@ -46,7 +46,6 @@ class FeaturedCollectionViewCell: ItemViewCell, CellConfigurationProtocol {
         subtitleLabel.textColor = .secondaryLabel
         subtitleLabel.numberOfLines = 1
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
-
     }
 
     func configureViews() {
@@ -70,7 +69,6 @@ class FeaturedCollectionViewCell: ItemViewCell, CellConfigurationProtocol {
             coverImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             coverImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             coverImage.heightAnchor.constraint(equalTo: coverImage.widthAnchor)
-
         ])
     }
 }
@@ -87,9 +85,8 @@ class FeaturedCollectionViewCell: ItemViewCell, CellConfigurationProtocol {
         type: .album
     )
 
-    let vc = FeaturedCollectionViewCell()
-    vc.configure(with: cellModel)
+    let viewController = FeaturedCollectionViewCell()
+    viewController.configure(with: cellModel)
 
-    return vc
+    return viewController
 }
-

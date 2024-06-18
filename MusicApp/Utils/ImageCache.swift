@@ -19,7 +19,7 @@ class ImageCache {
         return cache.object(forKey: key)
     }
 
-    static func setImage(with image: UIImage,for key: NSString) {
+    static func setImage(with image: UIImage, for key: NSString) {
         cache.setObject(image, forKey: key)
     }
 }

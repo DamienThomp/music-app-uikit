@@ -30,7 +30,6 @@ struct PlaylistResponse: Codable {
         let previous: URL?
         let total: Int
         let items: [PlaylistTrackItem]
-
     }
 
     struct Track: Codable {

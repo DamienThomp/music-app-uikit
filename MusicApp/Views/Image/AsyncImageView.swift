@@ -26,5 +26,4 @@ class AsyncImageView: UIImageView {
     func cancelImageLoad() {
         task?.cancel()
     }
-
 }

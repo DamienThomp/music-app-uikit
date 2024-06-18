@@ -7,7 +7,7 @@
 
 import Foundation
 
-fileprivate let defaultLimit: Int = 50
+private let defaultLimit: Int = 50
 
 enum BrowseEndpoint: EndpointProtocol {
 

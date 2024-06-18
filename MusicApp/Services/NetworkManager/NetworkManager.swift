@@ -81,4 +81,3 @@ final class NetworkManager: NetworkManagerProtocol {
         return urlComponents?.url
     }
 }
-

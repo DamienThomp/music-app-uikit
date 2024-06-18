@@ -29,5 +29,4 @@ struct ArtistResponse: Codable {
 
         let artist: [Artist]
     }
-
 }

@@ -18,8 +18,7 @@ struct AlbumsResponse: Codable {
     let items: [AlbumItem]?
 
     struct AlbumItem: Codable {
+        
         let album: AlbumResponse
     }
 }
-
-

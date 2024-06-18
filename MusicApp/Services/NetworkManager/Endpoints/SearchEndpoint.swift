@@ -9,12 +9,12 @@ import Foundation
 
 enum SearchType: String {
     
-    case album = "album"
-    case artist = "artist"
-    case track = "track"
-    case show = "show"
-    case episode = "episode"
-    case audiobook = "audiobook"
+    case album
+    case artist
+    case track
+    case show
+    case episode
+    case audiobook
 
     var type: String {
         self.rawValue
@@ -41,7 +41,7 @@ enum SearchEndpoint: EndpointProtocol {
                 URLQueryItem(
                     name: "q",
                     value: query
-                ),
+                )
             ]
         }
     }
