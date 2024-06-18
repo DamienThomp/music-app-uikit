@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct BrowseItem: CellItemProtocol, Hashable {
 
     let id: String

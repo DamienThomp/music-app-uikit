@@ -21,5 +21,4 @@ struct SavedAlbumResponse: Codable {
 
         let album: Album
     }
-
 }

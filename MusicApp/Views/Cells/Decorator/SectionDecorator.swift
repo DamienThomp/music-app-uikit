@@ -29,6 +29,5 @@ class SectionDecorator: UICollectionReusableView {
         gradient.colors = [UIColor.systemBackground.cgColor, UIColor.systemGray6.cgColor]
 
         self.layer.insertSublayer(gradient, at: 0)
-
     }
 }

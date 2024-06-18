@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 protocol ServiceDataSourceProtocol {
 
     func resolveServices(with serviceResolver: ServiceLocatorProtocol)

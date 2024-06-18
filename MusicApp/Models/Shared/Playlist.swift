@@ -38,7 +38,6 @@ struct PlaylistTrackItem: Codable {
     let track: Track?
 }
 
-
 struct AddedByItem: Codable {
 
     let externalUrls: [String: String]?
@@ -48,7 +47,6 @@ struct AddedByItem: Codable {
     let type: String
     let uri: String
 }
-
 
 /*
 

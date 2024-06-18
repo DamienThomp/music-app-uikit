@@ -28,7 +28,7 @@ class WelcomeViewController: UIViewController {
     }
 }
 
-//MARK: - Layout
+// MARK: - Layout
 extension WelcomeViewController {
 
     func configureLogo() {
@@ -81,7 +81,7 @@ extension WelcomeViewController {
     }
 }
 
-//MARK: - Actions
+// MARK: - Actions
 extension WelcomeViewController {
 
     func configureButtonAction() {

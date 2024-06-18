@@ -35,7 +35,7 @@ class AlbumTrackCollectionViewCell: UICollectionViewCell, CellConfigurationProto
     }
 }
 
-//MARK: - Configure View Layout
+// MARK: - Configure View Layout
 extension AlbumTrackCollectionViewCell {
 
     func configureLabels() {
@@ -92,10 +92,9 @@ extension AlbumTrackCollectionViewCell {
             titleLabel.leadingAnchor.constraint(equalTo: trackNumber.trailingAnchor, constant: 16),
             titleLabel.rightAnchor.constraint(equalTo: actionButton.leftAnchor),
 
-            actionButton.centerYAnchor.constraint(equalTo:contentView.centerYAnchor),
+            actionButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             actionButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
             actionButton.widthAnchor.constraint(equalToConstant: 40)
-
         ])
     }
 }
@@ -109,8 +108,8 @@ extension AlbumTrackCollectionViewCell {
         type: .albumTrack
     )
 
-    let vc = AlbumTrackCollectionViewCell()
-    vc.configure(with: model)
+    let viewController = AlbumTrackCollectionViewCell()
+    viewController.configure(with: model)
 
-    return vc
+    return viewController
 }

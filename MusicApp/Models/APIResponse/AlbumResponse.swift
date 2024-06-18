@@ -12,7 +12,7 @@ struct AlbumResponse: Codable {
     let albumType: String
     let totalTracks: Int
     let availableMarkets: [String]
-    let externalUrls: [String : String]
+    let externalUrls: [String: String]
     let href: String
     let id: String
     let images: [Images]?
@@ -38,7 +38,6 @@ struct AlbumResponse: Codable {
         let previous: URL?
         let total: Int
         let items: [AlbumTrackItem]
-
     }
 
     struct AlbumTrackItem: Codable {

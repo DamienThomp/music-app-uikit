@@ -139,7 +139,7 @@ struct CollectionUIHelper {
 
         item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 0, bottom: 2, trailing: 0)
 
-        //group
+        // group
 
         let vGroup = NSCollectionLayoutGroup.vertical(
             layoutSize: NSCollectionLayoutSize(
@@ -150,7 +150,7 @@ struct CollectionUIHelper {
             count: 1
         )
 
-        //section
+        // section
         let section = NSCollectionLayoutSection(group: vGroup)
 
         let layoutSectionHeader = createSectionHeader(for: .banner)
@@ -160,7 +160,7 @@ struct CollectionUIHelper {
     }
 
     static func createItemViewLayout() -> NSCollectionLayoutSection {
-        //item
+        // item
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
             heightDimension: .fractionalHeight(1)
@@ -176,7 +176,7 @@ struct CollectionUIHelper {
             repeatingSubitem: item,
             count: 1
         )
-        //section
+        // section
         let section = NSCollectionLayoutSection(group: hGroup)
         section.orthogonalScrollingBehavior = .continuous
 
@@ -196,14 +196,28 @@ struct CollectionUIHelper {
         switch sectionHeaderType {
         case .title:
 
-            let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.93), heightDimension: .estimated(150))
-            let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionHeaderSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
+            let layoutSectionHeaderSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(0.93),
+                heightDimension: .estimated(150)
+            )
+            let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: layoutSectionHeaderSize,
+                elementKind: UICollectionView.elementKindSectionHeader,
+                alignment: .topLeading
+            )
 
             return layoutSectionHeader
         case .banner:
 
-            let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.65))
-            let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionHeaderSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+            let layoutSectionHeaderSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1),
+                heightDimension: .fractionalHeight(0.65)
+            )
+            let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: layoutSectionHeaderSize,
+                elementKind: UICollectionView.elementKindSectionHeader,
+                alignment: .top
+            )
 
             return layoutSectionHeader
         }

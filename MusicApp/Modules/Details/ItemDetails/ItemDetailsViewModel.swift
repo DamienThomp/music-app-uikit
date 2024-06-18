@@ -51,7 +51,6 @@ extension ItemDetailsViewModel {
        
         switch section {
         case .main:
-
             if type == .playlist {
                 guard let data = data as? PlaylistResponse else { return }
 
@@ -61,14 +60,12 @@ extension ItemDetailsViewModel {
                     subtitle: data.owner.displayName,
                     image: data.images?.imageUrl,
                     type: type
-
                 )
 
                 let sectionData = ItemDetailsSection(
                     sectionType: section,
                     sectionHeader: sectionHeader,
-                    items: data.tracks.items.compactMap({
-                        item in
+                    items: data.tracks.items.compactMap({ item in
                         BrowseItem(
                             id: UUID().uuidString,
                             title: item.track?.name ?? "",
@@ -91,7 +88,6 @@ extension ItemDetailsViewModel {
                     subtitle: data.artists.first?.name ?? "",
                     image: data.images?.imageUrl,
                     type: type
-
                 )
 
                 let items = data.tracks.items.compactMap { album in
@@ -122,8 +118,7 @@ extension ItemDetailsViewModel {
                     id: UUID().uuidString,
                     title: "More by \(data.items.first?.artists.first?.name ?? "")"
                 ),
-                items: data.items.compactMap({
-                    album in
+                items: data.items.compactMap({ album in
                     BrowseItem(
                         type: .album,
                         data: album
@@ -148,6 +143,3 @@ extension ItemDetailsViewModel: ItemDetailsDataSourceDelegate {
         delegate?.reloadData()
     }
 }
-
-
-

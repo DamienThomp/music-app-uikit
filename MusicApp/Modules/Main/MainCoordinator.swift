@@ -58,7 +58,7 @@ class MainCoordinator: Coordinator {
     }
 
     func createSearchViewController() -> UINavigationController {
-        //TODO: - Create SearchCoordinator
+        // TODO: - Create SearchCoordinator
         let searchViewController = SearchViewController()
 
         searchViewController.title = "Search"

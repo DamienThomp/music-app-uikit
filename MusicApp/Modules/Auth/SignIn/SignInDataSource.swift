@@ -37,7 +37,7 @@ class SignInDataSource {
     }
 }
 
-//MARK: - Service Resolver
+// MARK: - Service Resolver
 extension SignInDataSource: ServiceDataSourceProtocol {
 
     func resolveServices(with serviceResolver: ServiceLocatorProtocol) {

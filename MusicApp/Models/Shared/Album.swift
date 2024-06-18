@@ -12,7 +12,7 @@ struct Album: Codable {
     let albumType: String
     let totalTracks: Int
     let availableMarkets: [String]
-    let externalUrls: [String : String]
+    let externalUrls: [String: String]
     let href: String
     let id: String
     let images: [Images]?

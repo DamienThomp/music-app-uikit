@@ -43,7 +43,7 @@ class ItemDetailsViewController: UIViewController {
     }
 }
 
-//MARK: - Collection View Configuration
+// MARK: - Collection View Configuration
 extension ItemDetailsViewController {
     
     private func configureCollectionView() {
@@ -118,16 +118,13 @@ extension ItemDetailsViewController {
     }
 }
 
-//MARK: - Data Source Configuration
+// MARK: - Data Source Configuration
 extension ItemDetailsViewController {
 
     private func configureDataSource() {
 
         dataSource = UICollectionViewDiffableDataSource(collectionView: collection,
-                                                        cellProvider: {
-            [weak self] collectionView,
-            indexPath,
-            item in
+                                                        cellProvider: { [weak self] _, indexPath, item in
 
             if item.type == .playlist || item.type == .playlistTrack {
                 return self?.dequeCellForPlaylistView(with: item, at: indexPath)
@@ -143,29 +140,26 @@ extension ItemDetailsViewController {
 
     private func configureDataSourceSupplement() {
 
-        dataSource?.supplementaryViewProvider = {
-            [weak self] collectionView,
-            kind,
-            indexPath in
-
+        dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
+            
             switch indexPath.section {
             case 0:
-                guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: AlbumsPageHeader.reuseIdentifier, for: indexPath) as? AlbumsPageHeader else {
-
+                guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: AlbumsPageHeader.reuseIdentifier,
+                    for: indexPath
+                ) as? AlbumsPageHeader else {
                     return UICollectionViewCell()
                 }
-
+                
                 guard let section = self?.dataSource?.snapshot().sectionIdentifiers[indexPath.section] else {
-
                     return UICollectionViewCell()
                 }
-
-
+                
                 guard let header = section.sectionHeader else {
-
                     return UICollectionViewCell()
                 }
-
+                
                 sectionHeader.configureView(
                     with: AlbumsPageHeaderViewModel(
                         title: header.title,
@@ -175,20 +169,21 @@ extension ItemDetailsViewController {
                         type: header.type ?? .album
                     )
                 )
-
+                
                 return sectionHeader
-
+                
             case 1:
-                guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeader.reuseIdentifier, for: indexPath) as? SectionHeader else {
-
+                guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: SectionHeader.reuseIdentifier,
+                    for: indexPath
+                ) as? SectionHeader else {
                     return UICollectionViewCell()
                 }
 
                 guard let section = self?.dataSource?.snapshot().sectionIdentifiers[indexPath.section] else {
-
                     return UICollectionViewCell()
                 }
-
 
                 guard let header = section.sectionHeader else {
                     return UICollectionViewCell()
@@ -198,15 +193,17 @@ extension ItemDetailsViewController {
 
                 return sectionHeader
             default:
-                guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeader.reuseIdentifier, for: indexPath) as? SectionHeader else {
+                guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: SectionHeader.reuseIdentifier,
+                    for: indexPath
+                ) as? SectionHeader else {
                     return UICollectionViewCell()
                 }
 
                 guard let section = self?.dataSource?.snapshot().sectionIdentifiers[indexPath.section] else {
-
                     return UICollectionViewCell()
                 }
-
 
                 guard let header = section.sectionHeader else {
                     return UICollectionViewCell()
@@ -254,8 +251,9 @@ extension ItemDetailsViewController {
     }
 }
 
-//MARK: - Collection View Delegate
+// MARK: - Collection View Delegate
 extension ItemDetailsViewController: UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         guard let snapshot = self.viewModel?.snapshot,
@@ -270,7 +268,7 @@ extension ItemDetailsViewController: UICollectionViewDelegate {
     }
 }
 
-//MARK: - ItemDetailViewModelDelegate
+// MARK: - ItemDetailViewModelDelegate
 extension ItemDetailsViewController: ItemDetailViewModelDelegate {
     
     func reloadData() {

@@ -30,7 +30,7 @@ class SignInViewModel {
     }
 }
 
-//MARK: - DataSource Delegate
+// MARK: - DataSource Delegate
 extension SignInViewModel: SignInDataSourceDelegate {
 
     func didRecieveAccessToken() {

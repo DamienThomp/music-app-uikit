@@ -56,7 +56,7 @@ class BrowseViewController: UIViewController {
     }
 }
 
-//MARK: - Collection View Configuration
+// MARK: - Collection View Configuration
 extension BrowseViewController {
     
     private func configureCollectionView() {
@@ -79,15 +79,31 @@ extension BrowseViewController {
 
     private func registerCells() {
 
-        collection.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseIdentifier)
+        collection.register(
+            SectionHeader.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: SectionHeader.reuseIdentifier
+        )
         
-        collection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "empty")
+        collection.register(
+            UICollectionViewCell.self,
+            forCellWithReuseIdentifier: "empty"
+        )
 
-        collection.register(CoverCollectionViewCell.self, forCellWithReuseIdentifier: CoverCollectionViewCell.reuseIdentifier)
+        collection.register(
+            CoverCollectionViewCell.self,
+            forCellWithReuseIdentifier: CoverCollectionViewCell.reuseIdentifier
+        )
 
-        collection.register(FeaturedCollectionViewCell.self, forCellWithReuseIdentifier: FeaturedCollectionViewCell.reuseIdentifier)
+        collection.register(
+            FeaturedCollectionViewCell.self,
+            forCellWithReuseIdentifier: FeaturedCollectionViewCell.reuseIdentifier
+        )
 
-        collection.register(PlaylistTrackCollectionViewCell.self, forCellWithReuseIdentifier: PlaylistTrackCollectionViewCell.reuseIdentifier)
+        collection.register(
+            PlaylistTrackCollectionViewCell.self,
+            forCellWithReuseIdentifier: PlaylistTrackCollectionViewCell.reuseIdentifier
+        )
     }
 
     #warning("refactor configureCell as util method")
@@ -124,15 +140,12 @@ extension BrowseViewController {
     }
 }
 
-//MARK: - Data Source Configuration
+// MARK: - Data Source Configuration
 extension BrowseViewController {
     
     private func configureDataSource() {
 
-        dataSource = DataSource(collectionView: collection, cellProvider: {
-            [weak self] collectionView,
-            indexPath,
-            item in
+        dataSource = DataSource(collectionView: collection, cellProvider: { [weak self] _, indexPath, item in
 
             guard let snapshot = self?.viewModel?.snapshot else { return UICollectionViewCell() }
 
@@ -161,10 +174,7 @@ extension BrowseViewController {
 
     private func configureDataSourceSupplement() {
 
-        dataSource?.supplementaryViewProvider = {
-            [weak self] collectionView,
-            kind,
-            indexPath in
+        dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
 
             guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
@@ -189,7 +199,7 @@ extension BrowseViewController {
     }
 }
 
-//MARK: - UICollectionViewDelegate {
+// MARK: - UICollectionViewDelegate {
 extension BrowseViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -206,7 +216,7 @@ extension BrowseViewController: UICollectionViewDelegate {
     }
 }
 
-//MARK: - BrowseViewModelDelegate
+// MARK: - BrowseViewModelDelegate
 extension BrowseViewController: BrowseViewModelDelegate {
 
     func reloadData() {

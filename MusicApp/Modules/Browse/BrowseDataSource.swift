@@ -26,7 +26,6 @@ enum BrowseSections: Hashable, CaseIterable {
     }
 }
 
-
 protocol BrowseDataSourceDelegate: AnyObject {
 
     @MainActor func didLoadData(for section: BrowseSections, with data: Codable)
@@ -49,7 +48,7 @@ class BrowseDataSource {
     weak var delegate: BrowseDataSourceDelegate?
 }
 
-//MARK: - Data Fetching
+// MARK: - Data Fetching
 extension BrowseDataSource {
 
     private func getRandomSeeds(seeds: [String]) -> String {
@@ -81,8 +80,8 @@ extension BrowseDataSource {
 
     private func fetchRecommendationSeeds() async throws -> (String?, String?) {
 
-        var artistSeeds: String? = nil
-        var genreSeeds: String? = nil
+        var artistSeeds: String?
+        var genreSeeds: String?
 
         let savedAlbumsData = try await self.executeRequest(
             for: UsersSavedItems.albums(
@@ -188,7 +187,7 @@ extension BrowseDataSource {
     }
 }
 
-//MARK: - Service Resolver
+// MARK: - Service Resolver
 extension BrowseDataSource: ServiceDataSourceProtocol {
 
     func resolveServices(with serviceResolver: ServiceLocatorProtocol) {

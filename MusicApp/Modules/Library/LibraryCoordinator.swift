@@ -66,8 +66,8 @@ extension LibraryCoordinator: UINavigationControllerDelegate {
             return
         }
 
-        if let ItemsDetailsController = fromViewController as? ItemDetailsViewController {
-            childDidFinish(ItemsDetailsController.coordinator)
+        if let itemsDetailsController = fromViewController as? ItemDetailsViewController {
+            childDidFinish(itemsDetailsController.coordinator)
         }
     }
 }

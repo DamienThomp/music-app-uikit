@@ -102,10 +102,8 @@ class PlaylistTrackCollectionViewCell: UICollectionViewCell, CellConfigurationPr
             actionButton.centerYAnchor.constraint(equalTo: centerYAnchor),
             actionButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
             actionButton.widthAnchor.constraint(equalToConstant: 40)
-
         ])
     }
-
 }
 
 #Preview(traits: .fixedLayout(width: 300, height: 50)) {
@@ -120,8 +118,8 @@ class PlaylistTrackCollectionViewCell: UICollectionViewCell, CellConfigurationPr
         type: .playlistTrack
     )
 
-    let vc = PlaylistTrackCollectionViewCell()
-    vc.configure(with: model)
+    let viewController = PlaylistTrackCollectionViewCell()
+    viewController.configure(with: model)
 
-    return vc
+    return viewController
 }

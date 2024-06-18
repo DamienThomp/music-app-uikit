@@ -8,10 +8,12 @@
 import Foundation
 
 struct CategoriesResponse: Codable {
+
     let categories: CategoryItems
 }
 
 struct CategoryItems: Codable {
+
     let href: URL?
     let limit: Int
     let next: URL?

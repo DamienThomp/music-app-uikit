@@ -43,8 +43,6 @@ struct ItemDetailSectionHeader: Hashable {
     }
 }
 
-
-
 protocol ItemDetailsDataSourceDelegate: AnyObject {
 
     @MainActor func didLoadData(for sectionType: ItemDetailsSectionType, with data: Codable, of type: ItemType)
@@ -67,7 +65,7 @@ class ItemDetailsDataSource {
     weak var delegate: ItemDetailsDataSourceDelegate?
 }
 
-//MARK: - Data Fetching
+// MARK: - Data Fetching
 extension ItemDetailsDataSource {
 
     func getPlaylist(for id: String) async throws -> PlaylistResponse {
@@ -83,7 +81,6 @@ extension ItemDetailsDataSource {
         let endpoint = ArtistEndpoint.albums(id: id, includeGroup: [.album, .single], limit: 10)
         let responseData = try await executeRequest(for: endpoint)
         return try decoder.decode(ArtistResponse.Albums.self, from: responseData)
-
     }
 
     func getAlbum(for id: String) async throws -> AlbumResponse {
@@ -132,13 +129,11 @@ extension ItemDetailsDataSource {
                             let related = try await self.getRelatedAlbums(for: artistId)
                             await self.delegate?.didLoadData(for: .related, with: related, of: .album)
                         }
-
                     }
 
                     try await taskGroup.waitForAll()
                     await self.delegate?.didFinishLoading()
                 }
-
             } catch {
                 #warning("add error handling")
                 print(error)
@@ -147,7 +142,7 @@ extension ItemDetailsDataSource {
     }
 }
 
-//MARK: - Service Resolver
+// MARK: - Service Resolver
 extension ItemDetailsDataSource: ServiceDataSourceProtocol {
 
     func resolveServices(with serviceResolver: ServiceLocatorProtocol) {

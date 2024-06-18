@@ -8,6 +8,7 @@
 import UIKit
 
 class SectionHeader: UICollectionReusableView {
+
     static let reuseIdentifier = "SectionHeader"
 
     let title = UILabel()
@@ -29,14 +30,12 @@ class SectionHeader: UICollectionReusableView {
         subtitle.textColor = .secondaryLabel
     }
 
-
     func configureStackView() {
 
         stackView = UIStackView(arrangedSubviews: [title, subtitle])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
     }
-
 
     func configureView() {
 
@@ -52,7 +51,6 @@ class SectionHeader: UICollectionReusableView {
             title.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 8),
             subtitle.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 8)
         ])
-
     }
 
     required init?(coder: NSCoder) {
@@ -61,9 +59,9 @@ class SectionHeader: UICollectionReusableView {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    let vc = SectionHeader()
-    vc.title.text = "New Release"
-    vc.subtitle.text = "Todays top albums"
+    let viewController = SectionHeader()
+    viewController.title.text = "New Release"
+    viewController.subtitle.text = "Todays top albums"
 
-    return vc
+    return viewController
 }

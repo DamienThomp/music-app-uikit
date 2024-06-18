@@ -75,7 +75,7 @@ final class AuthManager: AuthManagerProtocol {
         guard var url = accessTokenUrl else { return nil }
 
         url.append(queryItems: [
-            URLQueryItem(name: AuthConstants.queryItemCodeKey, value: code),
+            URLQueryItem(name: AuthConstants.queryItemCodeKey, value: code)
         ])
 
         return url
@@ -87,7 +87,7 @@ final class AuthManager: AuthManagerProtocol {
               var url = refreshTokenUrl else { return nil }
 
         url.append(queryItems: [
-            URLQueryItem(name: AuthConstants.queryItemRefreshTokenKey, value: token),
+            URLQueryItem(name: AuthConstants.queryItemRefreshTokenKey, value: token)
         ])
 
         return url
@@ -95,10 +95,9 @@ final class AuthManager: AuthManagerProtocol {
 
     public func exchangeForToken(with code: String) async throws {
 
-        guard let tokenUrl = buildTokenRequest(for: code) else  {
+        guard let tokenUrl = buildTokenRequest(for: code) else {
             throw AuthErrors.invalidTokenUrl
         }
-
 
         try await getAccessToken(with: tokenUrl)
     }
