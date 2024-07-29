@@ -13,8 +13,6 @@
 		382020272BF3046900368FA7 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382020262BF3046900368FA7 /* WelcomeViewController.swift */; };
 		3820202C2BF3046B00368FA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3820202B2BF3046B00368FA7 /* Assets.xcassets */; };
 		3820203A2BF3046B00368FA7 /* MusicAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382020392BF3046B00368FA7 /* MusicAppTests.swift */; };
-		382020442BF3046B00368FA7 /* MusicAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382020432BF3046B00368FA7 /* MusicAppUITests.swift */; };
-		382020462BF3046B00368FA7 /* MusicAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382020452BF3046B00368FA7 /* MusicAppUITestsLaunchTests.swift */; };
 		382020542BF30B0200368FA7 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382020532BF30B0200368FA7 /* CoordinatorProtocol.swift */; };
 		382020592BF3100F00368FA7 /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382020582BF3100F00368FA7 /* BrowseViewController.swift */; };
 		3823FFFF2C5729B90079B746 /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3823FFFE2C5729B90079B746 /* UICollectionView+Extensions.swift */; };
@@ -152,8 +150,6 @@
 		382020352BF3046B00368FA7 /* MusicAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MusicAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		382020392BF3046B00368FA7 /* MusicAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicAppTests.swift; sourceTree = "<group>"; };
 		3820203F2BF3046B00368FA7 /* MusicAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MusicAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		382020432BF3046B00368FA7 /* MusicAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicAppUITests.swift; sourceTree = "<group>"; };
-		382020452BF3046B00368FA7 /* MusicAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		382020532BF30B0200368FA7 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		382020582BF3100F00368FA7 /* BrowseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
 		3823FFFE2C5729B90079B746 /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
@@ -275,7 +271,6 @@
 			children = (
 				382020212BF3046800368FA7 /* MusicApp */,
 				382020382BF3046B00368FA7 /* MusicAppTests */,
-				382020422BF3046B00368FA7 /* MusicAppUITests */,
 				382020202BF3046800368FA7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -313,15 +308,6 @@
 				382020392BF3046B00368FA7 /* MusicAppTests.swift */,
 			);
 			path = MusicAppTests;
-			sourceTree = "<group>";
-		};
-		382020422BF3046B00368FA7 /* MusicAppUITests */ = {
-			isa = PBXGroup;
-			children = (
-				382020432BF3046B00368FA7 /* MusicAppUITests.swift */,
-				382020452BF3046B00368FA7 /* MusicAppUITestsLaunchTests.swift */,
-			);
-			path = MusicAppUITests;
 			sourceTree = "<group>";
 		};
 		382020522BF30AE600368FA7 /* Protocols */ = {
@@ -957,8 +943,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				382020462BF3046B00368FA7 /* MusicAppUITestsLaunchTests.swift in Sources */,
-				382020442BF3046B00368FA7 /* MusicAppUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
