@@ -28,8 +28,7 @@ class AppCoordinator: Coordinator {
     func start() {
 
         guard let serviceResolver = setupServices() else {
-            #warning("handle service resolver error for appstart")
-            return
+            fatalError("Could not resolve services for app start.")
         }
 
         resolveViewForAppstate(with: serviceResolver)

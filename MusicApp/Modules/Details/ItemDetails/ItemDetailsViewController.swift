@@ -217,37 +217,18 @@ extension ItemDetailsViewController {
     }
 
     private func dequeCellForPlaylistView(with item: BrowseItem, at indexPath: IndexPath) -> UICollectionViewCell {
-        return configureCell(of: PlaylistTrackCollectionViewCell.self, for: item, at: indexPath)
+        return collection.configureCell(of: PlaylistTrackCollectionViewCell.self, for: item, at: indexPath)
     }
 
     private func dequeCellForAlbumView(with item: BrowseItem, at indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0:
-            return configureCell(of: AlbumTrackCollectionViewCell.self, for: item, at: indexPath)
+            return collection.configureCell(of: AlbumTrackCollectionViewCell.self, for: item, at: indexPath)
         case 1:
-            return configureCell(of: CoverCollectionViewCell.self, for: item, at: indexPath)
+            return collection.configureCell(of: CoverCollectionViewCell.self, for: item, at: indexPath)
         default:
-            return configureCell(of: CoverCollectionViewCell.self, for: item, at: indexPath)
+            return collection.configureCell(of: CoverCollectionViewCell.self, for: item, at: indexPath)
         }
-    }
-
-    #warning("refactor configureCell as util method")
-    private func configureCell<T: CellConfigurationProtocol>(
-        of cellType: T.Type,
-        for item: CellItemProtocol,
-        at indexPath: IndexPath
-    ) -> T {
-
-        guard let cell = collection.dequeueReusableCell(
-            withReuseIdentifier: cellType.reuseIdentifier,
-            for: indexPath
-        ) as? T else {
-            fatalError("unable to dequeue cell: \(cellType)")
-        }
-
-        cell.configure(with: item)
-
-        return cell
     }
 }
 
