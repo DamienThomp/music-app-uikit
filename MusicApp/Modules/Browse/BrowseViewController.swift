@@ -106,25 +106,6 @@ extension BrowseViewController {
         )
     }
 
-    #warning("refactor configureCell as util method")
-    private func configureCell<T: CellConfigurationProtocol>(
-        of cellType: T.Type,
-        for item: CellItemProtocol,
-        at indexPath: IndexPath
-    ) -> T {
-
-        guard let cell = collection.dequeueReusableCell(
-            withReuseIdentifier: cellType.reuseIdentifier,
-            for: indexPath
-        ) as? T else {
-            fatalError("unable to dequeue cell: \(cellType)")
-        }
-
-        cell.configure(with: item)
-
-        return cell
-    }
-
     private func createSectionLayout(for sectionIndex: Int) -> NSCollectionLayoutSection? {
 
         guard let snapshot = self.viewModel?.snapshot else { return nil }
@@ -151,19 +132,19 @@ extension BrowseViewController {
 
             switch snapshot.sectionIdentifiers[indexPath.section] {
             case .newReleases:
-                return self?.configureCell(
+                return self?.collection.configureCell(
                     of: FeaturedCollectionViewCell.self,
                     for: item,
                     at: indexPath
                 )
             case .featured:
-                return self?.configureCell(
+                return self?.collection.configureCell(
                     of: CoverCollectionViewCell.self,
                     for: item,
                     at: indexPath
                 )
             case .recommended:
-                return self?.configureCell(
+                return self?.collection.configureCell(
                     of: PlaylistTrackCollectionViewCell.self,
                     for: item,
                     at: indexPath

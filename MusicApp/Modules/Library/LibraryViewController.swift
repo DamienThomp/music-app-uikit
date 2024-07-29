@@ -90,25 +90,6 @@ extension LibraryViewController {
             return CollectionUIHelper.createTwoRowHorizontalSection()
         }
     }
-
-    #warning("refactor configureCell as util method")
-    private func configureCell<T: CellConfigurationProtocol>(
-        of cellType: T.Type,
-        for item: CellItemProtocol,
-        at indexPath: IndexPath
-    ) -> T {
-
-        guard let cell = collection.dequeueReusableCell(
-            withReuseIdentifier: cellType.reuseIdentifier,
-            for: indexPath
-        ) as? T else {
-            fatalError("unable to dequeue cell: \(cellType)")
-        }
-
-        cell.configure(with: item)
-
-        return cell
-    }
 }
 
 // MARK: - Data Source Configuration
@@ -122,7 +103,7 @@ extension LibraryViewController {
 
             switch snapshot.sectionIdentifiers[indexPath.section] {
             case .albums, .playlists, .artists:
-                return self?.configureCell(
+                return self?.collection.configureCell(
                     of: CoverCollectionViewCell.self,
                     for: item,
                     at: indexPath
@@ -171,7 +152,6 @@ extension LibraryViewController: UICollectionViewDelegate {
         case .albums, .playlists:
             coordinator?.showDetails(for: item)
         case .artists:
-            // TODO: - Handle artist redirect
             print("artists item: \(item.title)")
         }
     }

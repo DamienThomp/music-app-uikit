@@ -17,6 +17,7 @@
 		382020462BF3046B00368FA7 /* MusicAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382020452BF3046B00368FA7 /* MusicAppUITestsLaunchTests.swift */; };
 		382020542BF30B0200368FA7 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382020532BF30B0200368FA7 /* CoordinatorProtocol.swift */; };
 		382020592BF3100F00368FA7 /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382020582BF3100F00368FA7 /* BrowseViewController.swift */; };
+		3823FFFF2C5729B90079B746 /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3823FFFE2C5729B90079B746 /* UICollectionView+Extensions.swift */; };
 		3857EDC32BF53EE900F2B8ED /* ServiceLocatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDC22BF53EE900F2B8ED /* ServiceLocatorProtocol.swift */; };
 		3857EDC52BF540EF00F2B8ED /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDC42BF540EF00F2B8ED /* ServiceLocator.swift */; };
 		3857EDC72BF5692700F2B8ED /* UIView+AddSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDC62BF5692700F2B8ED /* UIView+AddSubviews.swift */; };
@@ -155,6 +156,7 @@
 		382020452BF3046B00368FA7 /* MusicAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		382020532BF30B0200368FA7 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		382020582BF3100F00368FA7 /* BrowseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
+		3823FFFE2C5729B90079B746 /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
 		3857EDC22BF53EE900F2B8ED /* ServiceLocatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocatorProtocol.swift; sourceTree = "<group>"; };
 		3857EDC42BF540EF00F2B8ED /* ServiceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
 		3857EDC62BF5692700F2B8ED /* UIView+AddSubviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AddSubviews.swift"; sourceTree = "<group>"; };
@@ -387,6 +389,7 @@
 			children = (
 				385A71152BFC404F00659C2D /* UIImageView+LoadImage.swift */,
 				3857EDC62BF5692700F2B8ED /* UIView+AddSubviews.swift */,
+				3823FFFE2C5729B90079B746 /* UICollectionView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -909,6 +912,7 @@
 				385D0A4C2BF45AB80076A5F3 /* CachedResponse.swift in Sources */,
 				3857EDCD2BF69CE800F2B8ED /* SignInViewModel.swift in Sources */,
 				385A713E2C004DA500659C2D /* SearchViewController.swift in Sources */,
+				3823FFFF2C5729B90079B746 /* UICollectionView+Extensions.swift in Sources */,
 				385D0A692BF45BE90076A5F3 /* AuthManager.swift in Sources */,
 				3857EDD32BF69D3500F2B8ED /* SignInViewController.swift in Sources */,
 				385D0A632BF45AD20076A5F3 /* NetworkManagerProtocol.swift in Sources */,
