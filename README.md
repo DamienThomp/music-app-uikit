@@ -17,6 +17,7 @@ This is a work in progress and new things will be added overtime.
 - Album save/unsave 
 - Artist follow/unfollow 
 - Player (which will only play previews if available, Spotify ain't free)
+- Errors handled with alerts or content unavailable type views
 
 ## Screenshots
 
