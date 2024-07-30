@@ -16,7 +16,6 @@ struct BrowseItem: CellItemProtocol, Hashable {
     let type: ItemType?
 }
 
-
 extension BrowseItem {
 
     init(type: ItemType, data: PlaylistItems) {
