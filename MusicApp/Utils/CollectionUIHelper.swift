@@ -13,7 +13,6 @@ enum SectionHeaderType {
     case banner
 }
 
-#warning("TODO: Remove magic numbers from CollectionUIHelper")
 struct CollectionUIHelper {
 
     static func createTwoColumnFlowLayout(in view: UIView) -> UICollectionViewFlowLayout {
@@ -139,8 +138,6 @@ struct CollectionUIHelper {
 
         item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 0, bottom: 2, trailing: 0)
 
-        // group
-
         let vGroup = NSCollectionLayoutGroup.vertical(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
@@ -150,7 +147,6 @@ struct CollectionUIHelper {
             count: 1
         )
 
-        // section
         let section = NSCollectionLayoutSection(group: vGroup)
 
         let layoutSectionHeader = createSectionHeader(for: .banner)
@@ -160,7 +156,7 @@ struct CollectionUIHelper {
     }
 
     static func createItemViewLayout() -> NSCollectionLayoutSection {
-        // item
+
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
             heightDimension: .fractionalHeight(1)
@@ -176,7 +172,7 @@ struct CollectionUIHelper {
             repeatingSubitem: item,
             count: 1
         )
-        // section
+
         let section = NSCollectionLayoutSection(group: hGroup)
         section.orthogonalScrollingBehavior = .continuous
 

@@ -16,7 +16,6 @@ struct BrowseItem: CellItemProtocol, Hashable {
     let type: ItemType?
 }
 
-#warning("Cleanup DTO Models to remove duplicates")
 extension BrowseItem {
 
     init(type: ItemType, data: PlaylistItems) {
