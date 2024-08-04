@@ -26,6 +26,8 @@ class AlbumsPageHeader: UICollectionReusableView {
     let playButton = UIButton(type: .system)
     let shuffleButton = UIButton(type: .system)
 
+    var itemType: ItemType = .album
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -43,7 +45,8 @@ class AlbumsPageHeader: UICollectionReusableView {
     }
 
     func configureView(with model: AlbumsPageHeaderViewModel) {
-
+        itemType = model.type
+        
         titleLabel.text = model.title
         artisNameButton.setTitle(model.artisName, for: .normal)
         configureImageLayout(for: model.type)
@@ -52,6 +55,14 @@ class AlbumsPageHeader: UICollectionReusableView {
             await coverImage.loadImage(
                 from: model.coverImage?.absoluteString ?? ""
             )
+        }
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        if itemType == .album {
+            configureImageMask()
         }
     }
 }
@@ -75,8 +86,16 @@ extension AlbumsPageHeader {
 
         let gradient = CAGradientLayer()
         gradient.frame = coverImage.bounds
-        gradient.colors = [UIColor.black.withAlphaComponent(0.1).cgColor, UIColor.black.cgColor, UIColor.clear.cgColor]
-        gradient.locations = [0.05, 0.55, 0.80]
+
+        let color = UIColor.black
+
+        gradient.colors = [
+            color.withAlphaComponent(0.1).cgColor,
+            color.cgColor,
+            color.withAlphaComponent(0.2).cgColor,
+            color.withAlphaComponent(0.0).cgColor
+        ]
+        gradient.locations = [0.05, 0.50, 0.85, 0.95]
 
         maskLayer.addSublayer(gradient)
 
@@ -175,9 +194,8 @@ extension AlbumsPageHeader {
 
         if type == .album {
 
-            configureImageMask()
-
             NSLayoutConstraint.activate([
+                coverImage.topAnchor.constraint(equalTo: topAnchor),
                 coverImage.leadingAnchor.constraint(equalTo: leadingAnchor),
                 coverImage.trailingAnchor.constraint(equalTo: trailingAnchor),
                 coverImage.widthAnchor.constraint(equalTo: widthAnchor),
