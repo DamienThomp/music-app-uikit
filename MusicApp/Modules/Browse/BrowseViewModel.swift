@@ -46,9 +46,7 @@ class BrowseViewModel {
 
             guard let data = data as? NewReleases else { return nil }
 
-            return data.albums.items.compactMap { album in
-                BrowseItem(type: .album, data: album)
-            }
+            return data.albums.items.compactMap(BrowseItem.init)
         case .featured:
 
             guard let data = data as? FeaturedPlaylists else { return nil }
@@ -56,16 +54,12 @@ class BrowseViewModel {
             // API can return duplicate items: remove duplicates and sort result
             let items = Array(Set(data.playlists.items)).sorted { $0.id < $1.id }
 
-            return items.compactMap { playlist in
-                BrowseItem(type: .playlist, data: playlist)
-            }
+            return items.compactMap(BrowseItem.init)
         case .recommended:
 
             guard let data = data as? Recommendations else { return nil }
 
-            return data.tracks.compactMap { track in
-                BrowseItem(type: .playlistTrack, data: track)
-            }
+            return data.tracks.compactMap(BrowseItem.init)
         }
     }
 }

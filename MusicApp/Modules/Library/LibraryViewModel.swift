@@ -66,15 +66,13 @@ class LibraryViewModel {
             guard let data = data as? AlbumsResponse else { return nil }
 
             return data.items?.compactMap { item in
-               return BrowseItem(type: .album, data: item.album)
+               return BrowseItem(item.album)
             }
         case .playlists:
 
             guard let data = data as? SavedPlaylistsResponse else { return nil }
 
-            return data.items.compactMap { item in
-                BrowseItem(type: .playlist, data: item)
-            }
+            return data.items.compactMap(BrowseItem.init)
         case .artists:
             
             guard let data = data as? SavedArtistsResponse else { return nil }

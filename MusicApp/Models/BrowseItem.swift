@@ -18,35 +18,35 @@ struct BrowseItem: CellItemProtocol, Hashable {
 
 extension BrowseItem {
 
-    init(type: ItemType, data: PlaylistItems) {
+    init(_ data: PlaylistItems) {
         self.id = data.id
         self.title = data.name
         self.subTitle = data.owner.displayName ?? ""
         self.image = data.images.imageUrl
-        self.type = type
+        self.type = data.type
     }
 
-    init(type: ItemType, data: Album) {
+    init(_ data: Album) {
         self.id = data.id
         self.title = data.name
         self.subTitle = data.artists.first?.name ?? ""
         self.image = data.images?.imageUrl
-        self.type = type
+        self.type = data.type
     }
 
-    init(type: ItemType, data: AlbumResponse) {
+    init(_ data: AlbumResponse) {
         self.id = data.id
         self.title = data.name
         self.subTitle = data.artists.first?.name ?? ""
         self.image = data.images?.imageUrl
-        self.type = type
+        self.type = data.type
     }
 
-    init(type: ItemType, data: Track) {
+    init(_ data: Track) {
         self.id = data.id
         self.title = data.name
-        self.subTitle = type == .playlistTrack ? (data.artists.first?.name ?? "") : "\(data.trackNumber)"
+        self.subTitle = data.type == .playlistTrack ? (data.artists.first?.name ?? "") : "\(data.trackNumber)"
         self.image = data.album.images?.imageUrl
-        self.type = type
+        self.type = data.type
     }
 }

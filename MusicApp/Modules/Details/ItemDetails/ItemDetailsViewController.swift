@@ -39,7 +39,8 @@ class ItemDetailsViewController: UIViewController {
     }
 
     func configure() {
-
+        
+        configureBackButton()
         configureCollectionView()
         registerCells()
         configureDataSource()
@@ -49,7 +50,21 @@ class ItemDetailsViewController: UIViewController {
 
 // MARK: - Collection View Configuration
 extension ItemDetailsViewController {
-    
+
+    private func configureBackButton() {
+
+        let imageConfig = UIImage.SymbolConfiguration(paletteColors: [.systemGray5, .systemGreen])
+        let backImage = UIImage(systemName: "chevron.backward.circle.fill", withConfiguration: imageConfig)
+
+        navigationController?.navigationBar.backIndicatorImage = backImage
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
+
+        let backButton = UIBarButtonItem()
+        backButton.title = ""
+
+        navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+    }
+
     private func configureCollectionView() {
 
         let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
