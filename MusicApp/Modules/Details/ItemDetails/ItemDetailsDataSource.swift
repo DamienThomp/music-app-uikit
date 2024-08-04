@@ -47,6 +47,7 @@ protocol ItemDetailsDataSourceDelegate: AnyObject {
 
     @MainActor func didLoadData(for sectionType: ItemDetailsSectionType, with data: Codable, of type: ItemType)
     @MainActor func didFinishLoading()
+    @MainActor func didFailLoading(with error: Error)
 }
 
 class ItemDetailsDataSource {
@@ -135,8 +136,7 @@ extension ItemDetailsDataSource {
                     await self.delegate?.didFinishLoading()
                 }
             } catch {
-                #warning("add error handling")
-                print(error)
+                await delegate?.didFailLoading(with: error)
             }
         }
     }

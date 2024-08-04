@@ -30,6 +30,7 @@ protocol BrowseDataSourceDelegate: AnyObject {
 
     @MainActor func didLoadData(for section: BrowseSections, with data: Codable)
     @MainActor func didFinishLoading()
+    @MainActor func didFailLoading(with error: Error)
 }
 
 class BrowseDataSource {
@@ -180,8 +181,7 @@ extension BrowseDataSource {
                     await self.delegate?.didFinishLoading()
                 }
             } catch {
-                #warning("add error handling")
-                print(error)
+                await delegate?.didFailLoading(with: error)
             }
         }
     }

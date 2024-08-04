@@ -28,7 +28,11 @@ class BrowseViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        showLoadingState()
+
         viewModel?.fetchData()
+
+        setNeedsUpdateContentUnavailableConfiguration()
     }
 
     private func configureViewController() {
@@ -199,10 +203,17 @@ extension BrowseViewController: UICollectionViewDelegate {
 
 // MARK: - BrowseViewModelDelegate
 extension BrowseViewController: BrowseViewModelDelegate {
+    
+    func didFailLoading(with error: Error) {
+
+        showErrorState(for: error)
+    }
 
     func reloadData() {
 
         guard let snapshot = viewModel?.snapshot else { return }
+
+        clearContentUnavailableState()
 
         dataSource?.apply(snapshot)
     }

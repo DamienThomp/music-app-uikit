@@ -25,7 +25,11 @@ class ItemDetailsViewController: UIViewController {
 
         configure()
 
+        showLoadingState()
+
         viewModel?.fetchData(with: cellItemData)
+
+        setNeedsUpdateContentUnavailableConfiguration()
     }
 
     override func viewDidLayoutSubviews() {
@@ -251,11 +255,18 @@ extension ItemDetailsViewController: UICollectionViewDelegate {
 
 // MARK: - ItemDetailViewModelDelegate
 extension ItemDetailsViewController: ItemDetailViewModelDelegate {
+
+    func didFailLoading(with error: Error) {
+
+        showErrorState(for: error)
+    }
     
     func reloadData() {
 
         guard let snapshot = viewModel?.snapshot else { return }
 
+        clearContentUnavailableState()
+        
         dataSource?.apply(snapshot)
     }
 }

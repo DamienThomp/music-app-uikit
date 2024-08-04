@@ -30,7 +30,11 @@ class LibraryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        showLoadingState()
+
         viewModel?.fetchData()
+
+        setNeedsUpdateContentUnavailableConfiguration()
     }
 
     private func configure() {
@@ -159,10 +163,17 @@ extension LibraryViewController: UICollectionViewDelegate {
 
 // MARK: - LibraryViewModelDelegate
 extension LibraryViewController: LibraryViewModelDelegate {
-    
+
+    func didFailLoading(with error: any Error) {
+
+        showErrorState(for: error)
+    }
+
     func reloadData() {
 
         guard let snapshot = viewModel?.snapshot else { return }
+
+        clearContentUnavailableState()
 
         dataSource?.apply(snapshot)
     }
