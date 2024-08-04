@@ -121,6 +121,7 @@
 		385D0A712BF465DE0076A5F3 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385D0A702BF465DE0076A5F3 /* AuthResponse.swift */; };
 		385D0A722BF465DE0076A5F3 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385D0A702BF465DE0076A5F3 /* AuthResponse.swift */; };
 		389805312C5EFE6F001E02D7 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389805302C5EFE6E001E02D7 /* UIViewController+Extensions.swift */; };
+		389805332C5F2C2D001E02D7 /* ItemDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389805322C5F2C2D001E02D7 /* ItemDetailsModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -241,6 +242,7 @@
 		385D0A6B2BF45D4D0076A5F3 /* AuthConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthConstants.swift; sourceTree = "<group>"; };
 		385D0A702BF465DE0076A5F3 /* AuthResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		389805302C5EFE6E001E02D7 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		389805322C5F2C2D001E02D7 /* ItemDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailsModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -644,6 +646,7 @@
 				385A70F22BF9A77300659C2D /* Shared */,
 				385D0A6F2BF465BC0076A5F3 /* APIResponse */,
 				385A71422C011DAE00659C2D /* BrowseItem.swift */,
+				389805322C5F2C2D001E02D7 /* ItemDetailsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -910,6 +913,7 @@
 				385A71392C0025E300659C2D /* SectionDecorator.swift in Sources */,
 				385D0A712BF465DE0076A5F3 /* AuthResponse.swift in Sources */,
 				385A71192BFC40B100659C2D /* AsyncImageView.swift in Sources */,
+				389805332C5F2C2D001E02D7 /* ItemDetailsModel.swift in Sources */,
 				385D0A602BF45AB80076A5F3 /* UsersTopArtistEnpoint.swift in Sources */,
 				385A71342BFEC1A900659C2D /* ItemDetailsAssembly.swift in Sources */,
 				385A71262BFC4CFF00659C2D /* PlaylistTrackCollectionViewCell.swift in Sources */,

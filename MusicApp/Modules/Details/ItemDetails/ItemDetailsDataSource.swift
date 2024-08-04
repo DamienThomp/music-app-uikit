@@ -7,42 +7,6 @@
 
 import Foundation
 
-enum ItemDetailsSectionType: Hashable {
-
-    case main
-    case related
-}
-
-struct ItemDetailsSection: Hashable {
-
-    let sectionType: ItemDetailsSectionType
-    let sectionHeader: ItemDetailSectionHeader?
-    let items: [BrowseItem]
-}
-
-struct ItemDetailSectionHeader: Hashable {
-
-    let id: String
-    let title: String
-    let subtitle: String?
-    let image: URL?
-    let type: ItemType?
-
-    init(
-        id: String,
-        title: String,
-        subtitle: String? = nil,
-        image: URL? = nil,
-        type: ItemType? = nil
-    ) {
-        self.id = id
-        self.title = title
-        self.subtitle = subtitle
-        self.image = image
-        self.type = type
-    }
-}
-
 protocol ItemDetailsDataSourceDelegate: AnyObject {
 
     @MainActor func didLoadData(for sectionType: ItemDetailsSectionType, with data: Codable, of type: ItemType)

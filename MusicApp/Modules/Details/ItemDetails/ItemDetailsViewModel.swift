@@ -55,13 +55,7 @@ extension ItemDetailsViewModel {
             if type == .playlist {
                 guard let data = data as? PlaylistResponse else { return }
 
-                let sectionHeader = ItemDetailSectionHeader(
-                    id: data.id,
-                    title: data.name,
-                    subtitle: data.owner.displayName,
-                    image: data.images?.imageUrl,
-                    type: type
-                )
+                let sectionHeader = ItemDetailSectionHeader(data)
 
                 let sectionData = ItemDetailsSection(
                     sectionType: section,
@@ -83,13 +77,7 @@ extension ItemDetailsViewModel {
             if type == .album {
                 guard let data = data as? AlbumResponse else { return }
 
-                let sectionHeader = ItemDetailSectionHeader(
-                    id: data.id,
-                    title: data.name,
-                    subtitle: data.artists.first?.name ?? "",
-                    image: data.images?.imageUrl,
-                    type: type
-                )
+                let sectionHeader = ItemDetailSectionHeader(data)
 
                 let items = data.tracks.items.compactMap { album in
                     BrowseItem(
@@ -119,12 +107,7 @@ extension ItemDetailsViewModel {
                     id: UUID().uuidString,
                     title: "More by \(data.items.first?.artists.first?.name ?? "")"
                 ),
-                items: data.items.compactMap({ album in
-                    BrowseItem(
-                        type: .album,
-                        data: album
-                    )
-                })
+                items: data.items.compactMap(BrowseItem.init)
             )
             sections.append(section)
         }

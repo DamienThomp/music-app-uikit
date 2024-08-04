@@ -66,20 +66,23 @@ extension AlbumsPageHeader {
         coverImage.layer.cornerRadius = 8
         coverImage.contentMode = .scaleAspectFill
         coverImage.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    func configureImageMask() {
 
         let maskLayer = CALayer()
         maskLayer.frame = coverImage.bounds
 
         let gradient = CAGradientLayer()
         gradient.frame = coverImage.bounds
-        gradient.colors = [UIColor.black.cgColor, UIColor.black.cgColor, UIColor.clear.cgColor]
-        gradient.locations = [0.0, 0.55, 0.80]
+        gradient.colors = [UIColor.black.withAlphaComponent(0.1).cgColor, UIColor.black.cgColor, UIColor.clear.cgColor]
+        gradient.locations = [0.05, 0.55, 0.80]
 
         maskLayer.addSublayer(gradient)
 
         coverImage.layer.mask = maskLayer
     }
-    
+
     func configureLabels() {
 
         titleLabel.font = UIFont.preferredFont(forTextStyle: .title2)
@@ -171,6 +174,8 @@ extension AlbumsPageHeader {
         }
 
         if type == .album {
+
+            configureImageMask()
 
             NSLayoutConstraint.activate([
                 coverImage.leadingAnchor.constraint(equalTo: leadingAnchor),
