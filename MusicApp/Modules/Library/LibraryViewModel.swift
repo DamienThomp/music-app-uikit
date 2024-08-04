@@ -29,6 +29,7 @@ enum LibrarySections: Hashable, CaseIterable {
 protocol LibraryViewModelDelegate: AnyObject {
 
     @MainActor func reloadData()
+    @MainActor func didFailLoading(with error: Error)
 }
 
 class LibraryViewModel {
@@ -93,7 +94,12 @@ class LibraryViewModel {
 
 // MARK: - Data Source Delegate
 extension LibraryViewModel: LibraryDataSourceDelegate {
+    
+    func didFailLoading(with error: any Error) {
 
+        delegate?.didFailLoading(with: error)
+    }
+    
     func didLoadData(for section: LibrarySections, with data: Codable) {
 
         guard let items = configureViewModel(for: section, with: data) else { return }

@@ -120,6 +120,7 @@
 		385D0A6D2BF45D4D0076A5F3 /* AuthConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385D0A6B2BF45D4D0076A5F3 /* AuthConstants.swift */; };
 		385D0A712BF465DE0076A5F3 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385D0A702BF465DE0076A5F3 /* AuthResponse.swift */; };
 		385D0A722BF465DE0076A5F3 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385D0A702BF465DE0076A5F3 /* AuthResponse.swift */; };
+		389805312C5EFE6F001E02D7 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389805302C5EFE6E001E02D7 /* UIViewController+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -239,6 +240,7 @@
 		385D0A682BF45BE90076A5F3 /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		385D0A6B2BF45D4D0076A5F3 /* AuthConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthConstants.swift; sourceTree = "<group>"; };
 		385D0A702BF465DE0076A5F3 /* AuthResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
+		389805302C5EFE6E001E02D7 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -376,6 +378,7 @@
 				385A71152BFC404F00659C2D /* UIImageView+LoadImage.swift */,
 				3857EDC62BF5692700F2B8ED /* UIView+AddSubviews.swift */,
 				3823FFFE2C5729B90079B746 /* UICollectionView+Extensions.swift */,
+				389805302C5EFE6E001E02D7 /* UIViewController+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -822,6 +825,7 @@
 				385A71412C004E1C00659C2D /* LibraryViewController.swift in Sources */,
 				385A71012BF9A88000659C2D /* FeaturedPlaylists.swift in Sources */,
 				385A71362BFF017F00659C2D /* ItemViewCell.swift in Sources */,
+				389805312C5EFE6F001E02D7 /* UIViewController+Extensions.swift in Sources */,
 				385A70F42BF9A77300659C2D /* Followers.swift in Sources */,
 				3857EDC32BF53EE900F2B8ED /* ServiceLocatorProtocol.swift in Sources */,
 				3801A7E32BF3132500AD60DE /* AppCoordinator.swift in Sources */,

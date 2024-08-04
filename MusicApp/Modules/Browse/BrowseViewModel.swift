@@ -10,6 +10,7 @@ import UIKit
 protocol BrowseViewModelDelegate: AnyObject {
     
     @MainActor func reloadData()
+    @MainActor func didFailLoading(with error: Error)
 }
 
 class BrowseViewModel {
@@ -79,6 +80,12 @@ extension BrowseViewModel: BrowseDataSourceDelegate {
     }
 
     func didFinishLoading() {
+        
         delegate?.reloadData()
+    }
+
+    func didFailLoading(with error: Error) {
+        
+        delegate?.didFailLoading(with: error)
     }
 }

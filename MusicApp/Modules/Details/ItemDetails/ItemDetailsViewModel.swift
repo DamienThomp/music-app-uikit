@@ -10,6 +10,7 @@ import UIKit
 protocol ItemDetailViewModelDelegate: AnyObject {
 
     @MainActor func reloadData()
+    @MainActor func didFailLoading(with error: Error)
 }
 
 class ItemDetailsViewModel {
@@ -131,8 +132,17 @@ extension ItemDetailsViewModel {
 }
 
 extension ItemDetailsViewModel: ItemDetailsDataSourceDelegate {
-    
-    func didLoadData(for sectionType: ItemDetailsSectionType, with data: Codable, of type: ItemType) {
+
+    func didFailLoading(with error: Error) {
+
+        delegate?.didFailLoading(with: error)
+    }
+
+    func didLoadData(
+        for sectionType: ItemDetailsSectionType,
+        with data: Codable,
+        of type: ItemType
+    ) {
         
         configureSection(for: sectionType, with: data, of: type)
     }
