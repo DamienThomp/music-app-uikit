@@ -23,12 +23,13 @@ class BrowseViewController: UIViewController {
 
         configure()
         viewModel?.createInitialSnapshot()
+        showLoadingState()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        showLoadingState()
+
 
         viewModel?.fetchData()
 
