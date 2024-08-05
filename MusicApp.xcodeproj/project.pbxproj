@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		3801A7E32BF3132500AD60DE /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3801A7E22BF3132500AD60DE /* AppCoordinator.swift */; };
+		38081D112C607E8900D8E6E2 /* ProfileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38081D102C607E8900D8E6E2 /* ProfileDataSource.swift */; };
+		38081D132C607EA200D8E6E2 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38081D122C607EA200D8E6E2 /* ProfileViewModel.swift */; };
+		38081D152C607ECB00D8E6E2 /* ProfileAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38081D142C607ECB00D8E6E2 /* ProfileAssembly.swift */; };
+		38081D172C607F9D00D8E6E2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38081D162C607F9D00D8E6E2 /* ProfileViewController.swift */; };
 		382020232BF3046900368FA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382020222BF3046900368FA7 /* AppDelegate.swift */; };
 		382020252BF3046900368FA7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382020242BF3046900368FA7 /* SceneDelegate.swift */; };
 		382020272BF3046900368FA7 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382020262BF3046900368FA7 /* WelcomeViewController.swift */; };
@@ -143,6 +147,10 @@
 
 /* Begin PBXFileReference section */
 		3801A7E22BF3132500AD60DE /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		38081D102C607E8900D8E6E2 /* ProfileDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataSource.swift; sourceTree = "<group>"; };
+		38081D122C607EA200D8E6E2 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		38081D142C607ECB00D8E6E2 /* ProfileAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAssembly.swift; sourceTree = "<group>"; };
+		38081D162C607F9D00D8E6E2 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		3820201F2BF3046800368FA7 /* MusicApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		382020222BF3046900368FA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		382020242BF3046900368FA7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -270,6 +278,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		38081D0F2C607E4F00D8E6E2 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				38081D102C607E8900D8E6E2 /* ProfileDataSource.swift */,
+				38081D122C607EA200D8E6E2 /* ProfileViewModel.swift */,
+				38081D142C607ECB00D8E6E2 /* ProfileAssembly.swift */,
+				38081D162C607F9D00D8E6E2 /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		382020162BF3046800368FA7 = {
 			isa = PBXGroup;
 			children = (
@@ -347,6 +366,7 @@
 		382020572BF30FE300368FA7 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				38081D0F2C607E4F00D8E6E2 /* Profile */,
 				385A713F2C004E0000659C2D /* Library */,
 				385A713C2C004D7C00659C2D /* Search */,
 				385A71282BFE6B3D00659C2D /* Details */,
@@ -846,6 +866,7 @@
 				385A70D42BF8721600659C2D /* BrowseDataSource.swift in Sources */,
 				385A70FD2BF9A83A00659C2D /* NewReleases.swift in Sources */,
 				3857EDC52BF540EF00F2B8ED /* ServiceLocator.swift in Sources */,
+				38081D112C607E8900D8E6E2 /* ProfileDataSource.swift in Sources */,
 				385A71452C01230200659C2D /* LibraryCoordinator.swift in Sources */,
 				385A71322BFE6C7000659C2D /* ItemDetailsCoordinator.swift in Sources */,
 				385A71162BFC404F00659C2D /* UIImageView+LoadImage.swift in Sources */,
@@ -855,6 +876,7 @@
 				385A70F72BF9A77300659C2D /* Owner.swift in Sources */,
 				3857EDD12BF69D1600F2B8ED /* SignInViewAssembly.swift in Sources */,
 				385D0A482BF45AB80076A5F3 /* NetworkManager.swift in Sources */,
+				38081D172C607F9D00D8E6E2 /* ProfileViewController.swift in Sources */,
 				385A70E52BF9A75F00659C2D /* PlaylistResponse.swift in Sources */,
 				385A71492C01244C00659C2D /* LibraryDataSource.swift in Sources */,
 				3857EDC72BF5692700F2B8ED /* UIView+AddSubviews.swift in Sources */,
@@ -889,6 +911,7 @@
 				382020542BF30B0200368FA7 /* CoordinatorProtocol.swift in Sources */,
 				3857EDCA2BF56A1100F2B8ED /* AuthCoordinator.swift in Sources */,
 				382020252BF3046900368FA7 /* SceneDelegate.swift in Sources */,
+				38081D152C607ECB00D8E6E2 /* ProfileAssembly.swift in Sources */,
 				3857EDD92BF6B16600F2B8ED /* ServiceDataSourceProtocol.swift in Sources */,
 				385A71052BF9A89F00659C2D /* TopArtists.swift in Sources */,
 				385A71432C011DAE00659C2D /* BrowseItem.swift in Sources */,
@@ -901,6 +924,7 @@
 				385A71092BFA8ED800659C2D /* CellItemProtocol.swift in Sources */,
 				385D0A4A2BF45AB80076A5F3 /* NetworkManagerErrors.swift in Sources */,
 				385A711D2BFC42C700659C2D /* AlbumsPageHeader.swift in Sources */,
+				38081D132C607EA200D8E6E2 /* ProfileViewModel.swift in Sources */,
 				385D0A562BF45AB80076A5F3 /* PlaylistsEndpoint.swift in Sources */,
 				385D0A4C2BF45AB80076A5F3 /* CachedResponse.swift in Sources */,
 				3857EDCD2BF69CE800F2B8ED /* SignInViewModel.swift in Sources */,

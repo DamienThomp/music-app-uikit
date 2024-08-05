@@ -11,16 +11,19 @@ class BrowseCoordinator: NSObject, Coordinator {
 
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
+    var parentCoordinator: Coordinator?
 
     private var serviceResolver: ServiceLocatorProtocol
 
     init(
         navigationController: UINavigationController,
-        serviceResolver: ServiceLocatorProtocol
+        serviceResolver: ServiceLocatorProtocol,
+        parentCoordinator: Coordinator?
     ) {
 
         self.navigationController = navigationController
         self.serviceResolver = serviceResolver
+        self.parentCoordinator = parentCoordinator
     }
 
     func start() {
@@ -50,6 +53,23 @@ class BrowseCoordinator: NSObject, Coordinator {
         coordinator.details = item
         childCoordinators.append(coordinator)
         coordinator.start()
+    }
+
+    func presentProfile() {
+
+        let profileAssembly = ProfileAssembly()
+        let viewController = profileAssembly.assemble(serviceResolver, coordinator: self)
+        
+        let nav = UINavigationController(rootViewController: viewController)
+        nav.modalPresentationStyle = .pageSheet
+        nav.sheetPresentationController?.detents = [.medium()]
+        navigationController.present(nav, animated: true)
+    }
+
+    func signOut() {
+        print("browse coordinator signout")
+        print("\(parentCoordinator.debugDescription)")
+        parentCoordinator?.signOut()
     }
 }
 
