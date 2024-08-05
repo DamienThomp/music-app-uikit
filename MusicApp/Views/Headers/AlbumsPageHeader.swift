@@ -7,6 +7,16 @@
 
 import UIKit
 
+#warning("Move AlbumsPageHeaderViewModel out of view controller file")
+struct AlbumsPageHeaderViewModel {
+
+    let title: String
+    let artisName: String
+    let coverImage: URL?
+    let genre: [String]?
+    let type: ItemType
+}
+
 protocol AlbumPageHeaderDelegate: AnyObject {
 
     func didTapArtistNameButton()
@@ -222,19 +232,9 @@ extension AlbumsPageHeader {
     }
 }
 
-#warning("Move AlbumsPageHeaderViewModel out of view controller file")
-struct AlbumsPageHeaderViewModel {
-
-    let title: String
-    let artisName: String
-    let coverImage: URL?
-    let genre: [String]?
-    let type: ItemType
-}
-
 #Preview(traits: .fixedLayout(width: 390, height: 390)) {
     let model = AlbumsPageHeaderViewModel(
-        title: "From Bone to Satellite From Bone to Satellite From Bone to Satellite From Bone to Satellite",
+        title: "From Bone to Satellite",
         artisName: "Tarentel",
         coverImage: URL(
             string: "https://i.scdn.co/image/ab67616d0000b273133bfea3a205d035cee306ad"

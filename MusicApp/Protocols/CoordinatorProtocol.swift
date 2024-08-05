@@ -11,8 +11,10 @@ protocol Coordinator: AnyObject {
 
     var childCoordinators: [Coordinator] { get set }
     var navigationController: UINavigationController { get set }
+    var parentCoordinator: Coordinator? { get set }
 
     func start()
+    func signOut()
 }
 
 extension Coordinator {
@@ -23,4 +25,6 @@ extension Coordinator {
             break
         }
     }
+
+    func signOut() {}
 }

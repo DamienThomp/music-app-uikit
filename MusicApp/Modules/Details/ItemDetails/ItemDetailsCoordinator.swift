@@ -11,6 +11,7 @@ class ItemDetailsCoordinator: NSObject, Coordinator {
 
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
+    var parentCoordinator: Coordinator?
 
     var serviceResolver: ServiceLocatorProtocol
     var details: BrowseItem?

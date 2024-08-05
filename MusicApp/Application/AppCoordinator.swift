@@ -18,6 +18,7 @@ class AppCoordinator: Coordinator {
     var window: UIWindow?
     var childCoordinators = [Coordinator]()
     var navigationController = UINavigationController()
+    var parentCoordinator: Coordinator?
 
     var serviceResolver: ServiceLocatorProtocol?
 
@@ -31,6 +32,17 @@ class AppCoordinator: Coordinator {
             fatalError("Could not resolve services for app start.")
         }
 
+        resolveViewForAppstate(with: serviceResolver)
+    }
+
+    func signOut() {
+
+        guard let serviceResolver else {
+            return
+        }
+
+        navigationController.dismiss(animated: true)
+        childCoordinators.removeAll()
         resolveViewForAppstate(with: serviceResolver)
     }
 
@@ -98,7 +110,8 @@ class AppCoordinator: Coordinator {
         let coordinator = MainCoordinator(
             serviceResolver: serviceResolver,
             navigationController: navigationController,
-            window: window
+            window: window,
+            parentCoordinator: self
         )
 
         childCoordinators.append(coordinator)

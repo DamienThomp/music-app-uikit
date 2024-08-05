@@ -19,6 +19,7 @@ class AuthCoordinator: Coordinator {
 
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
+    var parentCoordinator: Coordinator?
 
     var serviceResolver: ServiceLocatorProtocol
 

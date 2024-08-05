@@ -12,17 +12,20 @@ class MainCoordinator: Coordinator {
     var window: UIWindow?
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
+    var parentCoordinator: Coordinator?
 
     private var serviceResolver: ServiceLocatorProtocol
 
     init(
         serviceResolver: ServiceLocatorProtocol,
         navigationController: UINavigationController,
-        window: UIWindow
+        window: UIWindow,
+        parentCoordinator: Coordinator
     ) {
         self.serviceResolver = serviceResolver
         self.navigationController = navigationController
         self.window = window
+        self.parentCoordinator = parentCoordinator
     }
 
     func start() {
@@ -48,7 +51,8 @@ class MainCoordinator: Coordinator {
 
         let browseCoordinator = BrowseCoordinator(
             navigationController: browseNavigationController,
-            serviceResolver: serviceResolver
+            serviceResolver: serviceResolver,
+            parentCoordinator: parentCoordinator
         )
 
         browseCoordinator.start()

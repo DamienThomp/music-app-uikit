@@ -18,6 +18,8 @@ class BrowseViewController: UIViewController {
 
     private var dataSource: DataSource?
 
+    let profileButton = UIButton(frame: .zero)
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,29 +31,47 @@ class BrowseViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        configureViewController()
+
         viewModel?.fetchData()
 
         setNeedsUpdateContentUnavailableConfiguration()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        profileButton.removeFromSuperview()
+    }
+
     private func configureViewController() {
 
-        let config = UIImage.SymbolConfiguration(scale: .large)
+        let config = UIImage.SymbolConfiguration(pointSize: 22)
         let barButtonImage = UIImage(systemName: "person.circle", withConfiguration: config)
-        let profileButton = UIBarButtonItem(
-            image: barButtonImage,
-            style: .plain,
-            target: self,
-            action: nil)
 
-        navigationItem.rightBarButtonItem = profileButton
+        let profileButtonAction = UIAction { [weak self] _ in
+            self?.coordinator?.presentProfile()
+        }
+        var buttonConfig = UIButton.Configuration.plain()
+        buttonConfig.image = barButtonImage
+
+        profileButton.configuration = buttonConfig
+        profileButton.addAction(profileButtonAction, for: .touchUpInside)
+        profileButton.translatesAutoresizingMaskIntoConstraints = false
+
+        if let navBar = navigationController?.navigationBar {
+            navBar.subviews.first(where: \.clipsToBounds)?.addSubview(profileButton)
+            NSLayoutConstraint.activate([
+                profileButton.trailingAnchor.constraint(equalTo: navBar.trailingAnchor),
+                profileButton.bottomAnchor.constraint(equalTo: navBar.bottomAnchor, constant: -10)
+            ])
+        }
 
         view.backgroundColor = .systemBackground
     }
 
     private func configure() {
 
-        configureViewController()
         configureCollectionView()
         registerCells()
         configureDataSource()
