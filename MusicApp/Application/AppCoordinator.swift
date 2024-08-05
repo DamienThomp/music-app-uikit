@@ -37,12 +37,10 @@ class AppCoordinator: Coordinator {
 
     func signOut() {
 
-        guard let serviceResolver else {
-            return
-        }
+        guard let serviceResolver else { return }
 
-        navigationController.dismiss(animated: true)
         childCoordinators.removeAll()
+        navigationController.dismiss(animated: true)
         resolveViewForAppstate(with: serviceResolver)
     }
 
@@ -104,9 +102,9 @@ class AppCoordinator: Coordinator {
     }
 
     private func showHomeView(serviceResolver: ServiceLocatorProtocol, window: UIWindow?) {
-        guard let window else {
-            return
-        }
+
+        guard let window else { return }
+
         let coordinator = MainCoordinator(
             serviceResolver: serviceResolver,
             navigationController: navigationController,

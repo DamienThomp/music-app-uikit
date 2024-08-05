@@ -19,7 +19,8 @@ class WelcomeViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .systemBackground
-
+        navigationItem.setHidesBackButton(true, animated: false)
+        
         configurelabel()
         configureLogo()
         configureButton()
