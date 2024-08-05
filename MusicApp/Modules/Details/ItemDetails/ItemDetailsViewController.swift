@@ -19,6 +19,7 @@ class ItemDetailsViewController: UIViewController {
     private var dataSource: DataSource?
 
     var cellItemData: BrowseItem?
+    var saveButton = UIBarButtonItem()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,7 @@ class ItemDetailsViewController: UIViewController {
     func configure() {
         
         configureBackButton()
+        configureNavBarButtons()
         configureCollectionView()
         registerCells()
         configureDataSource()
@@ -63,6 +65,21 @@ extension ItemDetailsViewController {
         backButton.title = ""
 
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+    }
+
+    private func configureNavBarButtons() {
+
+        let imageConfig = UIImage.SymbolConfiguration(paletteColors: [.systemGreen])
+
+        let buttonImage = UIImage(systemName: "plus.circle", withConfiguration: imageConfig)
+        saveButton = UIBarButtonItem(image: buttonImage, primaryAction: UIAction(handler: { _ in
+            print("save or remove album")
+        }))
+
+        let menuButtonImage = UIImage(systemName: "ellipsis", withConfiguration: imageConfig)
+        let menuButton = UIBarButtonItem(image: menuButtonImage)
+
+        navigationItem.rightBarButtonItems = [menuButton, saveButton]
     }
 
     private func configureCollectionView() {
@@ -134,6 +151,13 @@ extension ItemDetailsViewController {
         default:
             return CollectionUIHelper.createItemViewLayout()
         }
+    }
+
+    func updateSaveButton() {
+
+        guard let viewModel else { return }
+
+        saveButton.image = UIImage(systemName: viewModel.isSavedAlbum ? "checkmark.circle.fill" : "plus.circle" )
     }
 }
 
@@ -281,7 +305,9 @@ extension ItemDetailsViewController: ItemDetailViewModelDelegate {
         guard let snapshot = viewModel?.snapshot else { return }
 
         clearContentUnavailableState()
-        
+
+        updateSaveButton()
+
         dataSource?.apply(snapshot)
     }
 }
