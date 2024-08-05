@@ -26,7 +26,5 @@ extension Coordinator {
         }
     }
 
-    func signOut() {
-        print("signout!!")
-    }
+    func signOut() {}
 }

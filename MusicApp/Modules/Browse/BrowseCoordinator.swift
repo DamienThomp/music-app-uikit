@@ -67,8 +67,6 @@ class BrowseCoordinator: NSObject, Coordinator {
     }
 
     func signOut() {
-        print("browse coordinator signout")
-        print("\(parentCoordinator.debugDescription)")
         parentCoordinator?.signOut()
     }
 }
