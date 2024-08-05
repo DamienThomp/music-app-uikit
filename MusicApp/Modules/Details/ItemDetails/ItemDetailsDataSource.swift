@@ -28,10 +28,20 @@ class ItemDetailsDataSource {
     private var networkManager: NetworkManager?
 
     weak var delegate: ItemDetailsDataSourceDelegate?
+
+    var isSavedAlbum: Bool = false
 }
 
 // MARK: - Data Fetching
 extension ItemDetailsDataSource {
+
+    func getIsSavedAlbumStatus(for albumId: String) async throws -> [Bool] {
+
+        let endPoint = AlbumsEndpoint.contains(ids: [albumId])
+        let responseData = try await executeRequest(for: endPoint)
+
+        return try decoder.decode([Bool].self, from: responseData)
+    }
 
     func getPlaylist(for id: String) async throws -> PlaylistResponse {
 
@@ -93,6 +103,15 @@ extension ItemDetailsDataSource {
 
                             let related = try await self.getRelatedAlbums(for: artistId)
                             await self.delegate?.didLoadData(for: .related, with: related, of: .album)
+                        }
+
+                        taskGroup.addTask {
+
+                            let response = try await self.getIsSavedAlbumStatus(for: id)
+
+                            if let responseValue = response.first {
+                                self.isSavedAlbum = responseValue
+                            }
                         }
                     }
 

@@ -11,6 +11,7 @@ enum AlbumsEndpoint: EndpointProtocol {
 
     case album(id: String)
     case albums(ids: [String])
+    case contains(ids: [String])
 
     var httpMethod: HTTPMethod { .get }
 
@@ -21,6 +22,22 @@ enum AlbumsEndpoint: EndpointProtocol {
             "/albums/\(id)"
         case .albums(let ids):
             "/albums/\(ids.joined(separator: " "))"
+        case .contains:
+            "/me/albums/contains"
+        }
+    }
+
+    var queryItems: [URLQueryItem]? {
+        switch self {
+        case .album, .albums:
+            return nil
+        case .contains(let ids):
+            return [
+                URLQueryItem(
+                    name: "ids",
+                    value: ids.map { $0 }.joined(separator: ",")
+                )
+            ]
         }
     }
 }

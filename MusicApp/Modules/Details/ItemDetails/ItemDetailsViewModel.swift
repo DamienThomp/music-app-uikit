@@ -24,6 +24,10 @@ class ItemDetailsViewModel {
 
     var sections = [ItemDetailsSection]()
 
+    var isSavedAlbum: Bool {
+        dataSource?.isSavedAlbum ?? false
+    }
+
     init(dataSource: ItemDetailsDataSource) {
         self.dataSource = dataSource
     }
