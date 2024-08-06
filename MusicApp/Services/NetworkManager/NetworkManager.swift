@@ -56,6 +56,7 @@ final class NetworkManager: NetworkManagerProtocol {
         var request = URLRequest(url: url)
 
         request.httpMethod = endPoint.httpMethod.rawValue
+        request.httpBody = endPoint.body
         request.cachePolicy = endPoint.cachePolicy
 
         endPoint.headers?.forEach { request.setValue($0.value, forHTTPHeaderField: $0.key) }
