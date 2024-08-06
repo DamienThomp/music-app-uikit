@@ -11,12 +11,12 @@ Content provided by calling [Spotify Web Api](https://developer.spotify.com/docu
 - Album and Playlist Page
 - User Library Page
 - Errors handled with content unavailable views
+- Album save/unsave 
 
 ## Future Improvements
 - Search Page
 - Artist Page
 - Playlist add/remove
-- Album save/unsave 
 - Artist follow/unfollow 
 - Player (which will only play previews if available, Spotify ain't free)
 
