@@ -72,12 +72,12 @@ extension ItemDetailsViewController {
         let imageConfig = UIImage.SymbolConfiguration(paletteColors: [.systemGreen])
 
         let buttonImage = UIImage(systemName: "plus.circle", withConfiguration: imageConfig)
-        saveButton = UIBarButtonItem(image: buttonImage, primaryAction: UIAction(handler: { [weak self] _ in
+        saveButton = UIBarButtonItem(image: buttonImage, primaryAction: UIAction { [weak self] _ in
 
             guard let id = self?.cellItemData?.id else { return }
 
             self?.viewModel?.updateSavedAlbumStatus(for: id)
-        }))
+        })
 
         let menuButtonImage = UIImage(systemName: "ellipsis", withConfiguration: imageConfig)
         let menuButton = UIBarButtonItem(image: menuButtonImage)
@@ -315,6 +315,7 @@ extension ItemDetailsViewController: ItemDetailViewModelDelegate {
     }
 
     func updateSavedStatus() {
+        
         updateSaveButton()
     }
 }

@@ -63,6 +63,8 @@ class BrowseCoordinator: NSObject, Coordinator {
         let nav = UINavigationController(rootViewController: viewController)
         nav.modalPresentationStyle = .pageSheet
         nav.sheetPresentationController?.detents = [.medium()]
+        nav.sheetPresentationController?.prefersGrabberVisible = true
+        
         navigationController.present(nav, animated: true)
     }
 
