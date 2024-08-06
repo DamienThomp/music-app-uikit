@@ -105,7 +105,13 @@ extension AlbumsPageHeader {
             color.withAlphaComponent(0.2).cgColor,
             color.withAlphaComponent(0.0).cgColor
         ]
-        gradient.locations = [0.05, 0.50, 0.85, 0.95]
+
+        gradient.locations = [
+            0.05,
+            0.50,
+            0.85,
+            0.95
+        ]
 
         maskLayer.addSublayer(gradient)
 
@@ -116,7 +122,7 @@ extension AlbumsPageHeader {
 
         titleLabel.font = UIFont.preferredFont(forTextStyle: .title2)
         titleLabel.textColor = .label
-        titleLabel.numberOfLines = 1
+        titleLabel.numberOfLines = 2
         titleLabel.textAlignment = .center
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
     }
