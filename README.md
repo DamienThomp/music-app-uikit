@@ -22,10 +22,8 @@ Content provided by calling [Spotify Web Api](https://developer.spotify.com/docu
 
 ## Screenshots
 
-<img width="250" alt="Screenshot 2024-07-29 at 8 21 45 PM" src="https://github.com/user-attachments/assets/b62d7ffe-1708-4546-82f6-32898ea13f60">
+<img width="250" alt="Screenshot 2024-08-05 at 9 46 56 PM" src="https://github.com/user-attachments/assets/b763e123-6c69-49a7-8f1c-67f14f3e4f74">
 
 <img width="250" alt="Screenshot 2024-07-29 at 8 23 25 PM" src="https://github.com/user-attachments/assets/f072a1fa-b3ae-4c60-bff2-1ad526051053">
 
-<img width="250" alt="Screenshot 2024-07-29 at 8 24 23 PM" src="https://github.com/user-attachments/assets/cbf5a95b-f4f2-469f-b183-5379ca7690ed">
-
-
+<img width="250" alt="Screenshot 2024-08-05 at 9 45 17 PM" src="https://github.com/user-attachments/assets/685b4a16-4cf5-4883-ac25-a0fdd92a9639">
