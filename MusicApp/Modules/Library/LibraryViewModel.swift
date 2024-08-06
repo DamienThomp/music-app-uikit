@@ -51,10 +51,15 @@ class LibraryViewModel {
     }
 
     func createInitialSnapshot() {
+
         snapshot.appendSections(LibrarySections.allCases)
     }
 
     private func updateSnapshot(for section: LibrarySections, with items: [BrowseItem]) {
+
+        let previousItems = snapshot.itemIdentifiers(inSection: section)
+        snapshot.deleteItems(previousItems)
+
         snapshot.appendItems(items, toSection: section)
     }
 
@@ -65,9 +70,7 @@ class LibraryViewModel {
 
             guard let data = data as? AlbumsResponse else { return nil }
 
-            return data.items?.compactMap { item in
-               return BrowseItem(item.album)
-            }
+            return data.items?.compactMap { BrowseItem($0.album) }
         case .playlists:
 
             guard let data = data as? SavedPlaylistsResponse else { return nil }
