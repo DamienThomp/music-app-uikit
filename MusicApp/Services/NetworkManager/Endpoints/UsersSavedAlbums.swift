@@ -16,11 +16,13 @@ enum UsersSavedItems: EndpointProtocol {
     case albums(limit: Int = 5, offset: Int = 0)
     case playlists(limit: Int = 5, offset: Int = 0)
     case following(limit: Int = 5, type: FollowingType)
+    case saveAlbums(ids: [String])
+    case removeAlbums(ids: [String])
 
     var path: String {
 
         switch self {
-        case .albums:
+        case .albums, .saveAlbums, .removeAlbums:
             return "/me/albums"
         case .playlists:
             return "/me/playlists"
@@ -29,7 +31,16 @@ enum UsersSavedItems: EndpointProtocol {
         }
     }
 
-    var httpMethod: HTTPMethod { .get }
+    var httpMethod: HTTPMethod {
+        switch self {
+        case .saveAlbums:
+            .put
+        case .removeAlbums:
+            .delete
+        case .albums, .playlists, .following:
+            .get
+        }
+    }
 
     var queryItems: [URLQueryItem]? {
 
@@ -57,6 +68,18 @@ enum UsersSavedItems: EndpointProtocol {
                     value: type.rawValue
                 )
             ]
+        case .saveAlbums, .removeAlbums:
+            return nil
+        }
+    }
+
+    var parameters: [String: Any?]? {
+
+        switch self {
+        case .albums, .following, .playlists:
+            return nil
+        case .saveAlbums(let ids), .removeAlbums(let ids):
+            return ["ids": ids ]
         }
     }
 }

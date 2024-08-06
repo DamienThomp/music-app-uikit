@@ -12,6 +12,7 @@ protocol ItemDetailsDataSourceDelegate: AnyObject {
     @MainActor func didLoadData(for sectionType: ItemDetailsSectionType, with data: Codable, of type: ItemType)
     @MainActor func didFinishLoading()
     @MainActor func didFailLoading(with error: Error)
+    @MainActor func updateSavedStatus()
 }
 
 class ItemDetailsDataSource {
@@ -34,6 +35,18 @@ class ItemDetailsDataSource {
 
 // MARK: - Data Fetching
 extension ItemDetailsDataSource {
+
+    func saveAlbum(with albumId: String) async throws {
+
+        let endPoint = UsersSavedItems.saveAlbums(ids: [albumId])
+        _ = try await executeRequest(for: endPoint)
+    }
+
+    func removeAlbum(with albumId: String) async throws {
+
+        let endPoint = UsersSavedItems.removeAlbums(ids: [albumId])
+        _ = try await executeRequest(for: endPoint)
+    }
 
     func getIsSavedAlbumStatus(for albumId: String) async throws -> [Bool] {
 
@@ -72,6 +85,28 @@ extension ItemDetailsDataSource {
         }
 
         return try await networkManager.request(for: endPoint)
+    }
+
+    func updateSavedAlbumStatus(with albumId: String) {
+
+        Task { @MainActor in
+            do {
+                if let authManager, authManager.shouldRefreshToken {
+                    try await authManager.refresshAccessToken()
+                }
+
+                if isSavedAlbum {
+                    try await removeAlbum(with: albumId)
+                    isSavedAlbum = false
+                } else {
+                    try await saveAlbum(with: albumId)
+                    isSavedAlbum = true
+                }
+                self.delegate?.updateSavedStatus()
+            } catch {
+                print(error)
+            }
+        }
     }
 
     func fetchDispayData(with id: String, for type: ItemType) {

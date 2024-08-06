@@ -74,3 +74,33 @@ extension EndpointProtocol {
         return .useProtocolCachePolicy
     }
 }
+
+// MARK: - Serialize parameter values
+extension EndpointProtocol {
+
+    var body: Data? {
+
+        switch contentType {
+        case .applicationJson:
+            return serializedParameters
+        default:
+            return nil
+        }
+    }
+
+    private var serializedParameters: Data? {
+
+        guard let parameters else { return nil }
+
+        do {
+            return try JSONSerialization.data(
+                withJSONObject: parameters as Any,
+                options: JSONSerialization.WritingOptions()
+            )
+        } catch {
+            print(error)
+        }
+        
+        return nil
+    }
+}

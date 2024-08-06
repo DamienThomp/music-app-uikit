@@ -11,6 +11,7 @@ protocol ItemDetailViewModelDelegate: AnyObject {
 
     @MainActor func reloadData()
     @MainActor func didFailLoading(with error: Error)
+    @MainActor func updateSavedStatus()
 }
 
 class ItemDetailsViewModel {
@@ -38,6 +39,10 @@ class ItemDetailsViewModel {
               let type = data.type else { return }
 
         dataSource?.fetchDispayData(with: data.id, for: type)
+    }
+
+    func updateSavedAlbumStatus(for albumId: String) {
+        dataSource?.updateSavedAlbumStatus(with: albumId)
     }
 }
 
@@ -138,5 +143,9 @@ extension ItemDetailsViewModel: ItemDetailsDataSourceDelegate {
 
         updateSnapShot()
         delegate?.reloadData()
+    }
+
+    func updateSavedStatus() {
+        delegate?.updateSavedStatus()
     }
 }
