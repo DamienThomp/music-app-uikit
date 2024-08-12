@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import KeychainSwift
 
 enum AuthErrors: Error {
+    
     case invalidToken
     case invalidRefreshTokenUrl
     case invalidTokenUrl
@@ -15,6 +17,8 @@ enum AuthErrors: Error {
 }
 
 final class AuthManager: AuthManagerProtocol {
+
+    private let keyChain = KeychainSwift()
 
     private let validResponseCodes = 200...299
     private let decoder: JSONDecoder = {
@@ -49,11 +53,11 @@ final class AuthManager: AuthManagerProtocol {
     }
 
     public var accessToken: String? {
-        UserDefaults.standard.string(forKey: AuthConstants.accessTokenKey)
+        keyChain.get(AuthConstants.accessTokenKey)
     }
 
     private var refreshToken: String? {
-        UserDefaults.standard.string(forKey: AuthConstants.refreshTokenKey)
+        keyChain.get(AuthConstants.refreshTokenKey)
     }
 
     private var tokenExpiredOn: Date? {
@@ -68,6 +72,10 @@ final class AuthManager: AuthManagerProtocol {
         let timeInterval: TimeInterval = 300
 
         return currentDate.addingTimeInterval(timeInterval) >= tokenExpiredOn
+    }
+
+    private func getTokenExpiresIn(for value: Int) -> Date {
+        return Date().addingTimeInterval(TimeInterval(value))
     }
 
     private func buildTokenRequest(for code: String) -> URL? {
@@ -133,18 +141,19 @@ final class AuthManager: AuthManagerProtocol {
 
     private func cacheAccessToken(with response: AuthResponse) {
 
-        UserDefaults.standard.setValue(response.accessToken, forKey: AuthConstants.accessTokenKey)
+        keyChain.set(response.accessToken, forKey: AuthConstants.accessTokenKey)
 
         if let refreshToken = response.refreshToken {
-            UserDefaults.standard.setValue(refreshToken, forKey: AuthConstants.refreshTokenKey)
+            keyChain.set(refreshToken, forKey: AuthConstants.refreshTokenKey)
         }
 
-        UserDefaults.standard.setValue(Date().addingTimeInterval(TimeInterval(response.expiresIn)), forKey: AuthConstants.expiresDateKey)
+        UserDefaults.standard.setValue(getTokenExpiresIn(for: response.expiresIn), forKey: AuthConstants.expiresDateKey)
     }
 
     public func signout() {
-        UserDefaults.standard.removeObject(forKey: AuthConstants.accessTokenKey)
-        UserDefaults.standard.removeObject(forKey: AuthConstants.refreshTokenKey)
+
+        keyChain.delete(AuthConstants.accessTokenKey)
+        keyChain.delete(AuthConstants.refreshTokenKey)
         UserDefaults.standard.removeObject(forKey: AuthConstants.expiresDateKey)
     }
 }

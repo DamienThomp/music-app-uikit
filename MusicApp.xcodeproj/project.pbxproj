@@ -20,6 +20,7 @@
 		382020542BF30B0200368FA7 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382020532BF30B0200368FA7 /* CoordinatorProtocol.swift */; };
 		382020592BF3100F00368FA7 /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382020582BF3100F00368FA7 /* BrowseViewController.swift */; };
 		3823FFFF2C5729B90079B746 /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3823FFFE2C5729B90079B746 /* UICollectionView+Extensions.swift */; };
+		3845A0182C69DE3D00898F4E /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3845A0172C69DE3D00898F4E /* KeychainSwift */; };
 		3857EDC32BF53EE900F2B8ED /* ServiceLocatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDC22BF53EE900F2B8ED /* ServiceLocatorProtocol.swift */; };
 		3857EDC52BF540EF00F2B8ED /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDC42BF540EF00F2B8ED /* ServiceLocator.swift */; };
 		3857EDC72BF5692700F2B8ED /* UIView+AddSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDC62BF5692700F2B8ED /* UIView+AddSubviews.swift */; };
@@ -258,6 +259,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3845A0182C69DE3D00898F4E /* KeychainSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +297,7 @@
 				382020212BF3046800368FA7 /* MusicApp */,
 				382020382BF3046B00368FA7 /* MusicAppTests */,
 				382020202BF3046800368FA7 /* Products */,
+				3845A0162C69DE3D00898F4E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -375,6 +378,13 @@
 				3857EDC82BF569FA00F2B8ED /* Auth */,
 			);
 			path = Modules;
+			sourceTree = "<group>";
+		};
+		3845A0162C69DE3D00898F4E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		3857EDBF2BF528D800F2B8ED /* ServiceLocator */ = {
@@ -710,6 +720,9 @@
 			dependencies = (
 			);
 			name = MusicApp;
+			packageProductDependencies = (
+				3845A0172C69DE3D00898F4E /* KeychainSwift */,
+			);
 			productName = MusicApp;
 			productReference = 3820201F2BF3046800368FA7 /* MusicApp.app */;
 			productType = "com.apple.product-type.application";
@@ -782,6 +795,9 @@
 				Base,
 			);
 			mainGroup = 382020162BF3046800368FA7;
+			packageReferences = (
+				3845A0152C69DB8E00898F4E /* XCRemoteSwiftPackageReference "keychain-swift" */,
+			);
 			productRefGroup = 382020202BF3046800368FA7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1287,6 +1303,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3845A0152C69DB8E00898F4E /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift";
+			requirement = {
+				kind = exactVersion;
+				version = 24.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3845A0172C69DE3D00898F4E /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3845A0152C69DB8E00898F4E /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 382020172BF3046800368FA7 /* Project object */;
 }
