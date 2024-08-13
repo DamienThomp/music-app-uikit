@@ -164,6 +164,11 @@ extension LibraryViewController: UICollectionViewDelegate {
 extension LibraryViewController: LibraryViewModelDelegate {
 
     func didFailLoading(with error: any Error) {
+        print("error: \(error)")
+        guard let data = dataSource?.snapshot(),
+              data.numberOfItems == 0 else {
+            return
+        }
 
         showErrorState(for: error)
     }

@@ -32,6 +32,7 @@ enum UsersSavedItems: EndpointProtocol {
     }
 
     var httpMethod: HTTPMethod {
+        
         switch self {
         case .saveAlbums:
             .put
@@ -80,6 +81,16 @@ enum UsersSavedItems: EndpointProtocol {
             return nil
         case .saveAlbums(let ids), .removeAlbums(let ids):
             return ["ids": ids ]
+        }
+    }
+
+    var cachePolicy: URLRequest.CachePolicy {
+
+        switch self {
+        case .albums, .playlists, .saveAlbums, .removeAlbums:
+            .useProtocolCachePolicy
+        case .following:
+            .returnCacheDataElseLoad
         }
     }
 }

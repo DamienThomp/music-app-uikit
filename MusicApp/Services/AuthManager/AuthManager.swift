@@ -49,7 +49,7 @@ final class AuthManager: AuthManagerProtocol {
     }
 
     public var isSignedIn: Bool {
-        accessToken != nil
+        return accessToken != nil
     }
 
     public var accessToken: String? {
