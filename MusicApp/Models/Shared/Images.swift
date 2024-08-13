@@ -17,14 +17,27 @@ struct Images: Codable, Hashable {
 protocol ImageUrls {
 
     var imageUrl: URL? { get }
+    var smallImageUrl: URL? { get }
     var imageUrlWithDimensions: Images? { get }
 }
 
 extension Array: ImageUrls where Element == Images {
 
+    var imageUrlWithDimensions: Images? { self.first }
+
     var imageUrl: URL? { self.first?.url }
 
-    var imageUrlWithDimensions: Images? {
-        return self.first
+    var smallImageUrl: URL? {
+
+        if let image = self.first(where: {
+
+            guard let width = $0.width else { return false }
+
+            return width < 160
+        }) {
+            return image.url
+        }
+
+        return self.imageUrl
     }
 }

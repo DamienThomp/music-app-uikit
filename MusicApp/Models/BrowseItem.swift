@@ -45,8 +45,8 @@ extension BrowseItem {
     init(_ data: Track) {
         self.id = data.id
         self.title = data.name
-        self.subTitle = data.type == .playlistTrack ? (data.artists.first?.name ?? "") : "\(data.trackNumber)"
-        self.image = data.album.images?.imageUrl
+        self.subTitle = data.type == .playlistTrack || data.type == .track ? (data.artists.first?.name ?? "") : "\(data.trackNumber)"
+        self.image = data.album.images?.smallImageUrl
         self.type = data.type
     }
 }
