@@ -9,7 +9,7 @@ import Foundation
 
 enum AuthRoutes {
 
-    static let baseAuthUrlProd = "https://auth-server-express.onrender.com/api/auth"
+    static let baseAuthUrlProd = Environment.getValue(for: .authBaseUrl) ?? ""
     static let baseAuthUrlDev = "http://localhost:3000/api/auth"
     static let accessToken = "/accessToken"
     static let refreshAccess = "/refreshAccess"

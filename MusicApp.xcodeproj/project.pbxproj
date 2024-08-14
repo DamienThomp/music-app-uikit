@@ -21,6 +21,7 @@
 		382020592BF3100F00368FA7 /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382020582BF3100F00368FA7 /* BrowseViewController.swift */; };
 		3823FFFF2C5729B90079B746 /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3823FFFE2C5729B90079B746 /* UICollectionView+Extensions.swift */; };
 		3845A0182C69DE3D00898F4E /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3845A0172C69DE3D00898F4E /* KeychainSwift */; };
+		3845A01F2C6D37C400898F4E /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3845A01E2C6D37C400898F4E /* Environment.swift */; };
 		3857EDC32BF53EE900F2B8ED /* ServiceLocatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDC22BF53EE900F2B8ED /* ServiceLocatorProtocol.swift */; };
 		3857EDC52BF540EF00F2B8ED /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDC42BF540EF00F2B8ED /* ServiceLocator.swift */; };
 		3857EDC72BF5692700F2B8ED /* UIView+AddSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3857EDC62BF5692700F2B8ED /* UIView+AddSubviews.swift */; };
@@ -164,6 +165,8 @@
 		382020532BF30B0200368FA7 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		382020582BF3100F00368FA7 /* BrowseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
 		3823FFFE2C5729B90079B746 /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
+		3845A0192C6D356F00898F4E /* AuthConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AuthConfig.xcconfig; sourceTree = "<group>"; };
+		3845A01E2C6D37C400898F4E /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		3857EDC22BF53EE900F2B8ED /* ServiceLocatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocatorProtocol.swift; sourceTree = "<group>"; };
 		3857EDC42BF540EF00F2B8ED /* ServiceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
 		3857EDC62BF5692700F2B8ED /* UIView+AddSubviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AddSubviews.swift"; sourceTree = "<group>"; };
@@ -324,6 +327,7 @@
 				382020562BF30FC500368FA7 /* Resources */,
 				382020552BF30FAF00368FA7 /* Application */,
 				382020522BF30AE600368FA7 /* Protocols */,
+				3845A0192C6D356F00898F4E /* AuthConfig.xcconfig */,
 			);
 			path = MusicApp;
 			sourceTree = "<group>";
@@ -470,6 +474,7 @@
 			children = (
 				385A71102BFB275D00659C2D /* CollectionUIHelper.swift */,
 				385A713A2C00334700659C2D /* ImageCache.swift */,
+				3845A01E2C6D37C400898F4E /* Environment.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -900,6 +905,7 @@
 				385A70FB2BF9A79000659C2D /* Album.swift in Sources */,
 				385D0A5C2BF45AB80076A5F3 /* SearchEndpoint.swift in Sources */,
 				385A71302BFE6C5000659C2D /* ItemDetailsViewModel.swift in Sources */,
+				3845A01F2C6D37C400898F4E /* Environment.swift in Sources */,
 				385A714D2C01438100659C2D /* AlbumsResponse.swift in Sources */,
 				385A70EA2BF9A75F00659C2D /* ArtistResponse.swift in Sources */,
 				385D0A4E2BF45AB80076A5F3 /* AlbumEndpoint.swift in Sources */,
@@ -1012,6 +1018,7 @@
 /* Begin XCBuildConfiguration section */
 		382020472BF3046B00368FA7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3845A0192C6D356F00898F4E /* AuthConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1075,6 +1082,7 @@
 		};
 		382020482BF3046B00368FA7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3845A0192C6D356F00898F4E /* AuthConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1140,6 +1148,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MusicApp/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1169,6 +1178,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MusicApp/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
