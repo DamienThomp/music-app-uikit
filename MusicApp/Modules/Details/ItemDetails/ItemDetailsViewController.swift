@@ -300,6 +300,11 @@ extension ItemDetailsViewController: ItemDetailViewModelDelegate {
 
     func didFailLoading(with error: Error) {
 
+        guard let data = dataSource?.snapshot(),
+              data.numberOfItems == 0 else {
+            return
+        }
+
         showErrorState(for: error)
     }
     
