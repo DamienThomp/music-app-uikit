@@ -1,5 +1,5 @@
 //
-//  authConfig.xcconfig
+//  AuthConfig.xcconfig
 //  MusicApp
 //
 //  Created by Damien L Thompson on 2024-08-14.
@@ -8,5 +8,3 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
-// Authentication Settings:
-AUTH_BASE_URL = https:/$()/auth-server-express.onrender.com/api/auth

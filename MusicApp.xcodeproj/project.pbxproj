@@ -165,7 +165,7 @@
 		382020532BF30B0200368FA7 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		382020582BF3100F00368FA7 /* BrowseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
 		3823FFFE2C5729B90079B746 /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
-		3845A0192C6D356F00898F4E /* authConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = authConfig.xcconfig; sourceTree = "<group>"; };
+		3845A0192C6D356F00898F4E /* AuthConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AuthConfig.xcconfig; sourceTree = "<group>"; };
 		3845A01E2C6D37C400898F4E /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		3857EDC22BF53EE900F2B8ED /* ServiceLocatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocatorProtocol.swift; sourceTree = "<group>"; };
 		3857EDC42BF540EF00F2B8ED /* ServiceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
@@ -327,7 +327,7 @@
 				382020562BF30FC500368FA7 /* Resources */,
 				382020552BF30FAF00368FA7 /* Application */,
 				382020522BF30AE600368FA7 /* Protocols */,
-				3845A0192C6D356F00898F4E /* authConfig.xcconfig */,
+				3845A0192C6D356F00898F4E /* AuthConfig.xcconfig */,
 			);
 			path = MusicApp;
 			sourceTree = "<group>";
@@ -1018,7 +1018,7 @@
 /* Begin XCBuildConfiguration section */
 		382020472BF3046B00368FA7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3845A0192C6D356F00898F4E /* authConfig.xcconfig */;
+			baseConfigurationReference = 3845A0192C6D356F00898F4E /* AuthConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1082,7 +1082,7 @@
 		};
 		382020482BF3046B00368FA7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3845A0192C6D356F00898F4E /* authConfig.xcconfig */;
+			baseConfigurationReference = 3845A0192C6D356F00898F4E /* AuthConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
