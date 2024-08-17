@@ -11,7 +11,8 @@ protocol ItemDetailViewModelDelegate: AnyObject {
 
     @MainActor func reloadData()
     @MainActor func didFailLoading(with error: Error)
-    @MainActor func updateSavedStatus()
+    @MainActor func didUpdateSavedStatus()
+    @MainActor func didFailToSaveItem()
 }
 
 class ItemDetailsViewModel {
@@ -124,7 +125,11 @@ extension ItemDetailsViewModel {
 }
 
 extension ItemDetailsViewModel: ItemDetailsDataSourceDelegate {
-
+    
+    func didFailToSaveItem() {
+        delegate?.didFailToSaveItem()
+    }
+    
     func didFailLoading(with error: Error) {
 
         delegate?.didFailLoading(with: error)
@@ -145,7 +150,7 @@ extension ItemDetailsViewModel: ItemDetailsDataSourceDelegate {
         delegate?.reloadData()
     }
 
-    func updateSavedStatus() {
-        delegate?.updateSavedStatus()
+    func didUpdateSavedStatus() {
+        delegate?.didUpdateSavedStatus()
     }
 }

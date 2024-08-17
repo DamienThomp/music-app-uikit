@@ -8,3 +8,6 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
+// Authentication Settings:
+// add settings to .env file
+// AUTH_BASE_URL = url for auth server
