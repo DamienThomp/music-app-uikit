@@ -9,4 +9,5 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 
 // Authentication Settings:
-AUTH_BASE_URL = https:/$()/auth-server-express.onrender.com/api/auth
+// add settings to .env file
+// AUTH_BASE_URL = url for auth server
