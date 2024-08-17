@@ -21,6 +21,8 @@ class ItemDetailsViewController: UIViewController {
     var cellItemData: BrowseItem?
     var saveButton = UIBarButtonItem()
 
+    let notificationFeedback = UINotificationFeedbackGenerator()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -47,6 +49,21 @@ class ItemDetailsViewController: UIViewController {
         registerCells()
         configureDataSource()
         configureDataSourceSupplement()
+    }
+
+    func showErrorAlert() {
+        
+        let alertController = UIAlertController(
+            title: "Error",
+            message: "Could not complete action. please try again.",
+            preferredStyle: .alert
+        )
+
+        let alerTAction = UIAlertAction(title: "OK", style: .default)
+
+        alertController.addAction(alerTAction)
+
+        present(alertController, animated: true)
     }
 }
 
@@ -160,7 +177,9 @@ extension ItemDetailsViewController {
 
         guard let viewModel else { return }
 
-        saveButton.image = UIImage(systemName: viewModel.isSavedAlbum ? "checkmark.circle.fill" : "plus.circle" )
+        saveButton.image = UIImage(
+            systemName: viewModel.isSavedAlbum ? "checkmark.circle.fill" : "plus.circle"
+        )
     }
 }
 
@@ -195,15 +214,15 @@ extension ItemDetailsViewController {
                     withReuseIdentifier: AlbumsPageHeader.reuseIdentifier,
                     for: indexPath
                 ) as? AlbumsPageHeader else {
-                    return UICollectionViewCell()
+                    return UICollectionReusableView()
                 }
                 
                 guard let section = self?.dataSource?.snapshot().sectionIdentifiers[indexPath.section] else {
-                    return UICollectionViewCell()
+                    return UICollectionReusableView()
                 }
                 
                 guard let header = section.sectionHeader else {
-                    return UICollectionViewCell()
+                    return UICollectionReusableView()
                 }
                 
                 sectionHeader.configureView(
@@ -224,15 +243,15 @@ extension ItemDetailsViewController {
                     withReuseIdentifier: SectionHeader.reuseIdentifier,
                     for: indexPath
                 ) as? SectionHeader else {
-                    return UICollectionViewCell()
+                    return UICollectionReusableView()
                 }
 
                 guard let section = self?.dataSource?.snapshot().sectionIdentifiers[indexPath.section] else {
-                    return UICollectionViewCell()
+                    return UICollectionReusableView()
                 }
 
                 guard let header = section.sectionHeader else {
-                    return UICollectionViewCell()
+                    return UICollectionReusableView()
                 }
 
                 sectionHeader.title.text = header.title
@@ -244,15 +263,15 @@ extension ItemDetailsViewController {
                     withReuseIdentifier: SectionHeader.reuseIdentifier,
                     for: indexPath
                 ) as? SectionHeader else {
-                    return UICollectionViewCell()
+                    return UICollectionReusableView()
                 }
 
                 guard let section = self?.dataSource?.snapshot().sectionIdentifiers[indexPath.section] else {
-                    return UICollectionViewCell()
+                    return UICollectionReusableView()
                 }
 
                 guard let header = section.sectionHeader else {
-                    return UICollectionViewCell()
+                    return UICollectionReusableView()
                 }
 
                 sectionHeader.title.text = header.title
@@ -319,8 +338,17 @@ extension ItemDetailsViewController: ItemDetailViewModelDelegate {
         dataSource?.apply(snapshot)
     }
 
-    func updateSavedStatus() {
+    func didUpdateSavedStatus() {
+
+        notificationFeedback.notificationOccurred(.success)
         
         updateSaveButton()
+    }
+
+    func didFailToSaveItem() {
+
+        notificationFeedback.notificationOccurred(.error)
+
+        showErrorAlert()
     }
 }

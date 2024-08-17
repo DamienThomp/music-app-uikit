@@ -12,7 +12,8 @@ protocol ItemDetailsDataSourceDelegate: AnyObject {
     @MainActor func didLoadData(for sectionType: ItemDetailsSectionType, with data: Codable, of type: ItemType)
     @MainActor func didFinishLoading()
     @MainActor func didFailLoading(with error: Error)
-    @MainActor func updateSavedStatus()
+    @MainActor func didUpdateSavedStatus()
+    @MainActor func didFailToSaveItem()
 }
 
 class ItemDetailsDataSource {
@@ -90,7 +91,9 @@ extension ItemDetailsDataSource {
     func updateSavedAlbumStatus(with albumId: String) {
 
         Task { @MainActor in
+            
             do {
+
                 if let authManager, authManager.shouldRefreshToken {
                     try await authManager.refresshAccessToken()
                 }
@@ -102,9 +105,9 @@ extension ItemDetailsDataSource {
                     try await saveAlbum(with: albumId)
                     isSavedAlbum = true
                 }
-                self.delegate?.updateSavedStatus()
+                delegate?.didUpdateSavedStatus()
             } catch {
-                print(error)
+                delegate?.didFailToSaveItem()
             }
         }
     }
