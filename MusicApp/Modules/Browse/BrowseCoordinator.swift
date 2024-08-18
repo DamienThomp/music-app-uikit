@@ -26,10 +26,6 @@ class BrowseCoordinator: NSObject, Coordinator {
         self.parentCoordinator = parentCoordinator
     }
 
-    deinit {
-        print("deinit \(Self.description())")
-    }
-
     func start() {
         showBrowseView()
         navigationController.delegate = self
