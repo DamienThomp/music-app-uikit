@@ -29,7 +29,7 @@ class ItemDetailsCoordinator: NSObject, Coordinator {
         detailsAssembly.cellItem = details
 
         let viewController = detailsAssembly.assemble(serviceResolver, coordinator: self)
-        navigationController.delegate = self
+
         navigationController.pushViewController(viewController, animated: true)
     }
 
@@ -41,26 +41,5 @@ class ItemDetailsCoordinator: NSObject, Coordinator {
         coordinator.details = details
         childCoordinators.append(coordinator)
         coordinator.start()
-    }
-}
-
-// MARK: - Navigation Controller Delegate
-extension ItemDetailsCoordinator: UINavigationControllerDelegate {
-
-    func navigationController(
-        _ navigationController: UINavigationController,
-        didShow viewController: UIViewController,
-        animated: Bool
-    ) {
-
-        guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from),
-              !navigationController.viewControllers.contains(fromViewController)
-        else {
-            return
-        }
-
-        if let itemsDetailsController = fromViewController as? ItemDetailsViewController {
-            childDidFinish(itemsDetailsController.coordinator)
-        }
     }
 }

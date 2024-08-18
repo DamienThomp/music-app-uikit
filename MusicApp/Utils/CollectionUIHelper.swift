@@ -15,6 +15,13 @@ enum SectionHeaderType {
 
 struct CollectionUIHelper {
 
+    private static func getLayoutSize(
+        _ width: NSCollectionLayoutDimension,
+        _ height: NSCollectionLayoutDimension
+    ) -> NSCollectionLayoutSize {
+        .init(widthDimension: width, heightDimension: height)
+    }
+
     static func createTwoColumnFlowLayout(in view: UIView) -> UICollectionViewFlowLayout {
 
         let width = view.bounds.width
@@ -32,17 +39,19 @@ struct CollectionUIHelper {
 
     static func createFeaturedHorizontalSection() -> NSCollectionLayoutSection {
 
-        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: .fractionalHeight(1)
-        ))
+        let item = NSCollectionLayoutItem(
+            layoutSize: getLayoutSize(
+                .fractionalWidth(1),
+                .fractionalHeight(1)
+            )
+        )
 
         item.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 8, bottom: 0, trailing: 4)
 
         let hGroup = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(0.95),
-                heightDimension: .fractionalWidth(1.05)
+            layoutSize: getLayoutSize(
+               .fractionalWidth(0.95),
+               .fractionalWidth(1.05)
             ),
             repeatingSubitem: item,
             count: 1
@@ -59,26 +68,28 @@ struct CollectionUIHelper {
 
     static func createTwoRowHorizontalSection() -> NSCollectionLayoutSection {
 
-        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: .absolute(250)
-        ))
+        let item = NSCollectionLayoutItem(
+            layoutSize: getLayoutSize(
+                .fractionalWidth(1),
+                .absolute(250)
+            )
+        )
 
         item.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4)
 
         let vGroup = NSCollectionLayoutGroup.vertical(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
-                heightDimension: .fractionalHeight(0.9)
+            layoutSize: getLayoutSize(
+               .fractionalWidth(1),
+               .fractionalHeight(0.9)
             ),
             repeatingSubitem: item,
             count: 2
         )
 
         let hGroup = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(0.48),
-                heightDimension: .estimated(520)
+            layoutSize: getLayoutSize(
+                .fractionalWidth(0.48),
+                .estimated(520)
             ),
             repeatingSubitem: vGroup,
             count: 1
@@ -95,26 +106,28 @@ struct CollectionUIHelper {
 
     static func createMultiRowHorizontalListSection() -> NSCollectionLayoutSection {
 
-        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0)
-        ))
+        let item = NSCollectionLayoutItem(
+            layoutSize: getLayoutSize(
+                .fractionalWidth(1.0),
+                .fractionalHeight(1.0)
+            )
+        )
 
         item.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 4)
 
         let vGroup = NSCollectionLayoutGroup.vertical(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0),
-                heightDimension: .estimated(60)
+            layoutSize: getLayoutSize(
+                .fractionalWidth(1.0),
+                .estimated(60)
             ),
             repeatingSubitem: item,
             count: 4
         )
 
         let hGroup = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(0.94),
-                heightDimension: .estimated(240)
+            layoutSize: getLayoutSize(
+               .fractionalWidth(0.94),
+               .estimated(240)
             ),
             repeatingSubitem: vGroup,
             count: 1
@@ -131,17 +144,19 @@ struct CollectionUIHelper {
 
     static func createTrackListLayout() -> NSCollectionLayoutSection {
 
-        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0)
-        ))
+        let item = NSCollectionLayoutItem(
+            layoutSize: getLayoutSize(
+                .fractionalWidth(1.0),
+                .fractionalHeight(1.0)
+            )
+        )
 
         item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 0, bottom: 2, trailing: 0)
 
         let vGroup = NSCollectionLayoutGroup.vertical(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0),
-                heightDimension: .estimated(60)
+            layoutSize: getLayoutSize(
+                .fractionalWidth(1.0),
+                .estimated(60)
             ),
             repeatingSubitem: item,
             count: 1
@@ -157,17 +172,19 @@ struct CollectionUIHelper {
 
     static func createItemViewLayout() -> NSCollectionLayoutSection {
 
-        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: .fractionalHeight(1)
-        ))
+        let item = NSCollectionLayoutItem(
+            layoutSize: getLayoutSize(
+                .fractionalWidth(1),
+                .fractionalHeight(1)
+            )
+        )
 
         item.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 4)
 
         let hGroup = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .absolute(190),
-                heightDimension: .absolute(225)
+            layoutSize: getLayoutSize(
+                .absolute(190),
+                .absolute(300)
             ),
             repeatingSubitem: item,
             count: 1
@@ -182,7 +199,7 @@ struct CollectionUIHelper {
         let decorator = NSCollectionLayoutDecorationItem.background(elementKind: SectionDecorator.reuseIdentifier)
         section.decorationItems = [decorator]
 
-        section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 16, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 40, trailing: 0)
 
         return section
     }
@@ -192,9 +209,9 @@ struct CollectionUIHelper {
         switch sectionHeaderType {
         case .title:
 
-            let layoutSectionHeaderSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(0.93),
-                heightDimension: .estimated(150)
+            let layoutSectionHeaderSize = getLayoutSize(
+                .fractionalWidth(0.93),
+                .estimated(150)
             )
             let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
                 layoutSize: layoutSectionHeaderSize,
@@ -205,9 +222,9 @@ struct CollectionUIHelper {
             return layoutSectionHeader
         case .banner:
 
-            let layoutSectionHeaderSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
-                heightDimension: .fractionalHeight(0.65)
+            let layoutSectionHeaderSize = getLayoutSize(
+                .fractionalWidth(1),
+                .fractionalHeight(0.65)
             )
             let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
                 layoutSize: layoutSectionHeaderSize,

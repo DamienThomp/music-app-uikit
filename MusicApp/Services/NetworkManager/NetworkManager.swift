@@ -63,7 +63,7 @@ final class NetworkManager: NetworkManagerProtocol {
         authHeader?.forEach { request.setValue($0.value, forHTTPHeaderField: $0.key) }
         
         #if DEBUG
-        print(String(describing: request))
+       // print(String(describing: request))
         #endif
 
         return request

@@ -38,11 +38,16 @@ class ItemDetailsViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        collection?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: view.safeAreaInsets.bottom + 20, right: 0)
+        collection?.contentInset = UIEdgeInsets(
+            top: 0,
+            left: 0,
+            bottom: view.safeAreaInsets.bottom,
+            right: 0
+        )
     }
 
     func configure() {
-        
+
         configureBackButton()
         configureNavBarButtons()
         configureCollectionView()
@@ -104,8 +109,8 @@ extension ItemDetailsViewController {
 
     private func configureCollectionView() {
 
-        let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
-            return self.createSectionLayout(for: sectionIndex)
+        let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
+            return self?.createSectionLayout(for: sectionIndex)
         }
 
         layout.register(
@@ -114,7 +119,7 @@ extension ItemDetailsViewController {
         )
 
         let config = UICollectionViewCompositionalLayoutConfiguration()
-        config.interSectionSpacing = 20
+        config.interSectionSpacing = 40
         layout.configuration = config
 
         collection = UICollectionView(frame: view.bounds, collectionViewLayout: layout)

@@ -84,8 +84,8 @@ extension BrowseViewController {
     
     private func configureCollectionView() {
 
-        let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
-            return self.createSectionLayout(for: sectionIndex)
+        let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
+            return self?.createSectionLayout(for: sectionIndex)
         }
 
         let config = UICollectionViewCompositionalLayoutConfiguration()
