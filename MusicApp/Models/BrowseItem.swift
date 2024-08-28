@@ -49,4 +49,12 @@ extension BrowseItem {
         self.image = data.album.images?.smallImageUrl
         self.type = data.type
     }
+
+    init(_ data: Artist) {
+        self.id = data.id
+        self.title = data.name
+        self.subTitle = ""
+        self.image = data.images?.imageUrl
+        self.type = data.type
+    }
 }
