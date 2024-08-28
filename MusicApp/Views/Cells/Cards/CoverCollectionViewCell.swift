@@ -73,6 +73,7 @@ class CoverCollectionViewCell: ItemViewCell, CellConfigurationProtocol {
     }
 }
 
+@available(iOS 17.0, *)
 #Preview(traits: .fixedLayout(width: 200, height: 250)) {
 
     let cellModel = BrowseItem(

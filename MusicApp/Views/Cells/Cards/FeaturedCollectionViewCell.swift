@@ -73,6 +73,7 @@ class FeaturedCollectionViewCell: ItemViewCell, CellConfigurationProtocol {
     }
 }
 
+@available(iOS 17.0, *)
 #Preview(traits: .fixedLayout(width: 250, height: 300)) {
 
     let cellModel = BrowseItem(

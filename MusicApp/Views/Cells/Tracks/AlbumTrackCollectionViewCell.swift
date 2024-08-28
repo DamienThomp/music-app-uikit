@@ -99,6 +99,7 @@ extension AlbumTrackCollectionViewCell {
     }
 }
 
+@available(iOS 17.0, *)
 #Preview(traits: .fixedLayout(width: 300, height: 60)) {
     let model = BrowseItem(
         id: UUID().uuidString,

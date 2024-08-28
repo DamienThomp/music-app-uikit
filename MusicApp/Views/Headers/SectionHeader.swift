@@ -58,6 +58,7 @@ class SectionHeader: UICollectionReusableView {
     }
 }
 
+@available(iOS 17.0, *)
 #Preview(traits: .sizeThatFitsLayout) {
     let viewController = SectionHeader()
     viewController.title.text = "New Release"

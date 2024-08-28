@@ -80,15 +80,7 @@ class LibraryViewModel {
             
             guard let data = data as? SavedArtistsResponse else { return nil }
 
-            return data.artists.items.compactMap { item in
-                BrowseItem(
-                    id: item.id,
-                    title: item.name,
-                    subTitle: "",
-                    image: item.images?.imageUrl,
-                    type: item.type
-                )
-            }
+            return data.artists.items.compactMap(BrowseItem.init)
         }
     }
 }

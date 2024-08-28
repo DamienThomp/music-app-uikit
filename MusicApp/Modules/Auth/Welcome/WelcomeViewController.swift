@@ -93,6 +93,7 @@ extension WelcomeViewController {
     }
 }
 
+@available(iOS 17.0, *)
 #Preview {
     WelcomeViewController()
 }
