@@ -106,6 +106,7 @@ class PlaylistTrackCollectionViewCell: UICollectionViewCell, CellConfigurationPr
     }
 }
 
+@available(iOS 17.0, *)
 #Preview(traits: .fixedLayout(width: 300, height: 50)) {
 
     let model = BrowseItem(

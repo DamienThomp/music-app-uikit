@@ -81,6 +81,7 @@ class CategoryCollectionViewCell: ItemViewCell, CellConfigurationProtocol {
     }
 }
 
+@available(iOS 17.0, *)
 #Preview(traits: .fixedLayout(width: 360, height: 360)) {
     let model = BrowseItem(
         id: "",

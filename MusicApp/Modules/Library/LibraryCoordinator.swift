@@ -11,7 +11,7 @@ class LibraryCoordinator: NSObject, Coordinator {
 
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
-    var parentCoordinator: Coordinator?
+    weak var parentCoordinator: Coordinator?
 
     var serviceResolver: ServiceLocatorProtocol
 

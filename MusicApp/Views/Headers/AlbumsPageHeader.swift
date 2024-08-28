@@ -238,6 +238,7 @@ extension AlbumsPageHeader {
     }
 }
 
+@available(iOS 17.0, *)
 #Preview(traits: .fixedLayout(width: 390, height: 390)) {
     let model = AlbumsPageHeaderViewModel(
         title: "From Bone to Satellite",
