@@ -18,7 +18,7 @@ Content provided by calling [Spotify Web Api](https://developer.spotify.com/docu
 - Artist Page
 - Playlist add/remove
 - Artist follow/unfollow 
-- Player (which will only play previews if available, Spotify ain't free)
+- Player (which will only play previews if available)
 
 ## Screenshots
 
