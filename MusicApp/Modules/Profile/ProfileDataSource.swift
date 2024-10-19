@@ -53,7 +53,7 @@ extension ProfileDataSource {
         }
     }
 
-    func fetchDispayData() { 
+    func fetchDisplayData() { 
         Task {
             do {
                 if let authManager, authManager.shouldRefreshToken {

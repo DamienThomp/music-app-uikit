@@ -39,7 +39,7 @@ class ItemDetailsViewModel {
         guard let data,
               let type = data.type else { return }
 
-        dataSource?.fetchDispayData(with: data.id, for: type)
+        dataSource?.fetchDisplayData(with: data.id, for: type)
     }
 
     func updateSavedAlbumStatus(for albumId: String) {

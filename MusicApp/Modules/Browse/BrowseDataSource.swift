@@ -151,7 +151,7 @@ extension BrowseDataSource {
         return try await networkManager.request(for: endPoint)
     }
 
-    func fetchDispayData() {
+    func fetchDisplayData() {
 
         Task {
             do {

@@ -49,7 +49,7 @@ extension LibraryDataSource {
         return try decoder.decode(T.self, from: data)
     }
 
-    func fetchDispayData() {
+    func fetchDisplayData() {
 
         Task {
 

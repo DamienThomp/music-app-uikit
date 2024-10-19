@@ -47,7 +47,7 @@ class LibraryViewModel {
     }
 
     func fetchData() {
-        dataSource?.fetchDispayData()
+        dataSource?.fetchDisplayData()
     }
 
     func createInitialSnapshot() {

@@ -112,7 +112,7 @@ extension ItemDetailsDataSource {
         }
     }
 
-    func fetchDispayData(with id: String, for type: ItemType) {
+    func fetchDisplayData(with id: String, for type: ItemType) {
 
         Task {
             do {
