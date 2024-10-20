@@ -30,11 +30,12 @@ class SearchViewModel {
         self.dataSource = dataSource
     }
 
-    func fetchData(for type: SearchDataSourceType, with query: String?) {
-        dataSource?.fetchDisplayData(for: type, with: query)
+    func fetchData(for type: SearchDataSourceType) {
+        dataSource?.fetchDisplayData(for: type, with: nil)
     }
 
     func updateCategoriesSnapshot(with data: Codable) {
+
         guard let data = data as? CategoriesResponse else { return }
 
         let viewModel = data.categories.items.compactMap(BrowseItem.init)
@@ -44,22 +45,24 @@ class SearchViewModel {
         categoriesSnapshot?.appendSections([.main])
         categoriesSnapshot?.appendItems(viewModel, toSection: .main)
     }
+
+    func updateSearchSnapshot(with data: Codable) {}
 }
 
 extension SearchViewModel: SearchDataSourceDelegate {
 
     func didLoadData(for type: SearchDataSourceType, with data: Codable) {
-        switch type {
 
+        switch type {
         case .categories:
             updateCategoriesSnapshot(with: data)
-            delegate?.reloadData(for: type)
         case .search:
-            print("todo")
+           updateSearchSnapshot(with: data)
         }
+
+        delegate?.reloadData(for: type)
     }
 
-    
     func didFailLoading(with error: Error) {
         delegate?.didFailLoading(with: error)
     }

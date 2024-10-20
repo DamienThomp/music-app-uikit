@@ -41,7 +41,7 @@ class SearchViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        viewModel?.fetchData(for: .categories, with: nil)
+        viewModel?.fetchData(for: .categories)
         setNeedsUpdateContentUnavailableConfiguration()
     }
 
