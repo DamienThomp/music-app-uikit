@@ -34,7 +34,7 @@ class LibraryCoordinator: NSObject, Coordinator {
         let viewController = libraryAssembly.assemble(serviceResolver, coordinator: self)
 
         viewController.title = "Library"
-        viewController.tabBarItem = UITabBarItem(title: "Library", image: UIImage(systemName: "music.note.list"), tag: 2)
+        viewController.tabBarItem = UITabBarItem(title: "Library", image: UIImage(systemName: "music.note.list"), tag: 1)
         viewController.navigationItem.largeTitleDisplayMode = .always
         navigationController.navigationBar.prefersLargeTitles = true
         navigationController.setViewControllers([viewController], animated: false)

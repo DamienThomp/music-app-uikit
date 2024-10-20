@@ -28,7 +28,7 @@ class BrowseViewModel {
     }
 
     func fetchData() {
-        dataSource?.fetchDispayData()
+        dataSource?.fetchDisplayData()
     }
 
     func createInitialSnapshot() {

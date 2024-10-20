@@ -25,7 +25,7 @@ class ProfileViewModel {
     }
 
     func fetchData() {
-        dataSource?.fetchDispayData()
+        dataSource?.fetchDisplayData()
     }
 
     func signOut() {

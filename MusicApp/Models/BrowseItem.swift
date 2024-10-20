@@ -57,4 +57,12 @@ extension BrowseItem {
         self.image = data.images?.imageUrl
         self.type = data.type
     }
+
+    init(_ data: CategoryItems.Category) {
+        self.id = data.id
+        self.title = data.name
+        self.subTitle = ""
+        self.image = data.icons?.first?.url
+        self.type = .category
+    }
 }

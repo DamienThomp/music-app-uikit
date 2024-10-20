@@ -34,6 +34,8 @@ struct CollectionUIHelper {
         flowLayout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
         flowLayout.itemSize = CGSize(width: cellWidth, height: cellWidth)
 
+        flowLayout.headerReferenceSize = CGSize(width: width, height: 50)
+
         return flowLayout
     }
 

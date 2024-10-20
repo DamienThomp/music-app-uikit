@@ -62,16 +62,26 @@ class MainCoordinator: Coordinator {
     }
 
     func createSearchViewController() -> UINavigationController {
-        let searchViewController = SearchViewController()
 
-        searchViewController.title = "Search"
-        searchViewController.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 1)
-        searchViewController.navigationItem.largeTitleDisplayMode = .always
+        let searchNavigationController = UINavigationController()
 
-        let navigationController = UINavigationController(rootViewController: searchViewController)
-        navigationController.navigationBar.prefersLargeTitles = true
+        let searchCoordinator = SearchCoordinator(
+            navigationController: searchNavigationController,
+            serviceResolver: serviceResolver
+        )
 
-        return navigationController
+        searchCoordinator.start()
+        childCoordinators.append(searchCoordinator)
+//        let searchViewController = SearchViewController()
+//
+//        searchViewController.title = "Search"
+//        searchViewController.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 1)
+//        searchViewController.navigationItem.largeTitleDisplayMode = .always
+//
+//        let navigationController = UINavigationController(rootViewController: searchViewController)
+//        navigationController.navigationBar.prefersLargeTitles = true
+//
+        return searchCoordinator.navigationController
     }
 
     func createLibraryViewController() -> UINavigationController {

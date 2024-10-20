@@ -33,8 +33,8 @@ class AlbumsPageHeader: UICollectionReusableView {
     let coverImage = UIImageView()
     let titleLabel = UILabel()
     let artisNameButton = UIButton(type: .system)
-    let playButton = UIButton(type: .system)
-    let shuffleButton = UIButton(type: .system)
+    let playButton = FilledButton(foregroundColor: .tintColor, backgroundColor: .systemGray5)
+    let shuffleButton = FilledButton(foregroundColor: .tintColor, backgroundColor: .systemGray5)
 
     var itemType: ItemType = .album
 
@@ -100,17 +100,17 @@ extension AlbumsPageHeader {
         let color = UIColor.black
 
         gradient.colors = [
-            color.withAlphaComponent(0.1).cgColor,
+            color.withAlphaComponent(0.0).cgColor,
             color.cgColor,
-            color.withAlphaComponent(0.2).cgColor,
+            color.cgColor,
             color.withAlphaComponent(0.0).cgColor
         ]
 
         gradient.locations = [
-            0.05,
-            0.50,
-            0.85,
-            0.95
+            0,
+            0.30,
+            0.45,
+            1
         ]
 
         maskLayer.addSublayer(gradient)
@@ -130,8 +130,8 @@ extension AlbumsPageHeader {
     func configureArtistButton() {
 
         var configuration = UIButton.Configuration.plain()
-        configuration.baseForegroundColor = .systemGreen
-        configuration.buttonSize = .medium
+        configuration.baseForegroundColor = .tintColor
+        configuration.buttonSize = .large
         configuration.titlePadding = 0
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         artisNameButton.configuration = configuration
@@ -142,29 +142,13 @@ extension AlbumsPageHeader {
 
     func configurePlayButtons() {
 
-        var baseConfiguration = UIButton.Configuration.borderedTinted()
-        baseConfiguration.cornerStyle = .medium
-        baseConfiguration.buttonSize = .large
-        baseConfiguration.titleAlignment = .center
-        baseConfiguration.imagePadding = 10
-        baseConfiguration.baseBackgroundColor = .systemGray
-
-        var playButtonConfig = baseConfiguration
-        playButtonConfig.image = UIImage(systemName: "play.fill")
-        playButtonConfig.title = "Play"
-
-        var shuffleButtonConfig = baseConfiguration
-        shuffleButtonConfig.image = UIImage(systemName: "shuffle")
-        shuffleButtonConfig.title = "Shuffle"
-
-        playButton.configuration = playButtonConfig
+        playButton.configuration?.title = "Play"
+        playButton.configuration?.image = UIImage(systemName: "play.fill")
         playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
 
-        shuffleButton.configuration = shuffleButtonConfig
+        shuffleButton.configuration?.title = "Shuffle"
+        shuffleButton.configuration?.image = UIImage(systemName: "shuffle")
         shuffleButton.addTarget(self, action: #selector(shuffleButtonTapped), for: .touchUpInside)
-
-        playButton.translatesAutoresizingMaskIntoConstraints = false
-        shuffleButton.translatesAutoresizingMaskIntoConstraints = false
     }
 
     func configureViewLayout() {
@@ -214,9 +198,7 @@ extension AlbumsPageHeader {
                 coverImage.topAnchor.constraint(equalTo: topAnchor),
                 coverImage.leadingAnchor.constraint(equalTo: leadingAnchor),
                 coverImage.trailingAnchor.constraint(equalTo: trailingAnchor),
-                coverImage.widthAnchor.constraint(equalTo: widthAnchor),
-                coverImage.centerXAnchor.constraint(equalTo: centerXAnchor),
-                coverImage.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.80)
+                coverImage.bottomAnchor.constraint(equalTo: self.bottomAnchor)
             ])
         }
     }
