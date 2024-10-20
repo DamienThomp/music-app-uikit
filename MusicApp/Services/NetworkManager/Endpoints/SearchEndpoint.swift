@@ -7,8 +7,8 @@
 
 import Foundation
 
-enum SearchType: String {
-    
+enum SearchType: String, CaseIterable {
+
     case album
     case artist
     case track
@@ -23,7 +23,7 @@ enum SearchType: String {
 
 enum SearchEndpoint: EndpointProtocol {
 
-    case search(query: String, searchType: [SearchType])
+    case search(query: String)
 
     var path: String { "/search" }
 
@@ -32,11 +32,15 @@ enum SearchEndpoint: EndpointProtocol {
     var queryItems: [URLQueryItem]? {
 
         switch self {
-        case .search(let query, let searchType):
+        case .search(let query):
             return [
                 URLQueryItem(
                     name: "type",
-                    value: searchType.map { $0.type }.joined(separator: ",")
+                    value: SearchType.allCases.map {
+                        $0.type
+                    }.joined(
+                        separator: ","
+                    )
                 ),
                 URLQueryItem(
                     name: "q",
