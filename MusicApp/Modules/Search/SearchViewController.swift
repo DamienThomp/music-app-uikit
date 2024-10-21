@@ -129,6 +129,8 @@ extension SearchViewController: UISearchResultsUpdating {
         else {
             return
         }
+
+        viewModel?.fetchSearchResult(with: queryText)
     }
 }
 
@@ -144,11 +146,13 @@ extension SearchViewController: SearchViewModelDelegate {
 
             dataSource?.apply(snapshot)
         case .search:
-            // todo
-            print("todo")
+            guard let resultController = resultsController as? SearchResultsViewController,
+                  let snapshot = viewModel?.searchSnapshot else { return }
+
+            resultController.updateSnapshot(with: snapshot)
         }
     }
-    
+
     func didFailLoading(with error: any Error) {
 
         guard let data = dataSource?.snapshot(),
