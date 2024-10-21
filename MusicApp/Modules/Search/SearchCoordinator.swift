@@ -40,6 +40,18 @@ class SearchCoordinator: NSObject, Coordinator {
         navigationController.navigationBar.prefersLargeTitles = true
         navigationController.setViewControllers([searchViewController], animated: false)
     }
+
+    func showDetails(for item: BrowseItem) {
+
+        let coordinator = ItemDetailsCoordinator(
+            navigationController: navigationController,
+            serviceResolver: serviceResolver
+        )
+
+        coordinator.details = item
+        childCoordinators.append(coordinator)
+        coordinator.start()
+    }
 }
 
 extension SearchCoordinator: UINavigationControllerDelegate {}

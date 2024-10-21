@@ -17,7 +17,7 @@ class SearchViewController: UIViewController {
     var viewModel: SearchViewModel?
 
     var searchController: UISearchController?
-    let resultsController: UIViewController = SearchResultsViewController()
+    let resultsController: SearchResultsViewController = SearchResultsViewController()
 
     typealias DataSource = UICollectionViewDiffableDataSource<SearchSection, BrowseItem>
 
@@ -29,6 +29,8 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .systemBackground
+
+        resultsController.delegate = self
 
         configureSearchController()
         configureCollectionView()
@@ -134,6 +136,27 @@ extension SearchViewController: UISearchResultsUpdating {
     }
 }
 
+// MARK: - SearchResultsViewControllerDelegate
+extension SearchViewController: SearchResultsViewControllerDelegate {
+
+    func didSelectItem(item: BrowseItem) {
+
+        guard let type = item.type else { return }
+
+        switch type {
+        case .album:
+            coordinator?.showDetails(for: item)
+        case .artist:
+            print("todo: handle when artist page is complete")
+        case .track:
+            print("todo: add play function for track")
+        default:
+            print("unhandled type")
+        }
+    }
+}
+
+// MARK: - SearchViewModelDelegate
 extension SearchViewController: SearchViewModelDelegate {
 
     func reloadData(for type: SearchDataSourceType) {
@@ -146,10 +169,9 @@ extension SearchViewController: SearchViewModelDelegate {
 
             dataSource?.apply(snapshot)
         case .search:
-            guard let resultController = resultsController as? SearchResultsViewController,
-                  let snapshot = viewModel?.searchSnapshot else { return }
+            guard let snapshot = viewModel?.searchSnapshot else { return }
 
-            resultController.updateSnapshot(with: snapshot)
+            resultsController.updateSnapshot(with: snapshot)
         }
     }
 
