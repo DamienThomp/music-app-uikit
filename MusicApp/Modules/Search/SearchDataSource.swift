@@ -67,6 +67,10 @@ extension SearchDataSource {
         of type: T.Type
     ) async throws -> T {
 
+        if let authManager, authManager.shouldRefreshToken {
+            try await authManager.refresshAccessToken()
+        }
+
         guard let networkManager else {
             throw ServiceResolverErrors.failedToResolveService
         }
@@ -76,14 +80,24 @@ extension SearchDataSource {
         return try decoder.decode(T.self, from: data)
     }
 
+    func performSearch(with query: String) {
+        Task {
+            do {
+
+                let endpoint = SearchEndpoint.search(query: query)
+                let data = try await executeRequest(for: endpoint, of: SearchResponse.self)
+
+                await delegate?.didLoadData(for: .search, with: data)
+            } catch {
+                await delegate?.didFailLoading(with: error)
+            }
+        }
+    }
+
     func fetchDisplayData(for type: SearchDataSourceType, with query: String?) {
 
         Task {
             do {
-
-                if let authManager, authManager.shouldRefreshToken {
-                    try await authManager.refresshAccessToken()
-                }
 
                 guard let endpoint = getEndpointForRequest(with: type, for: query) else {
                     throw SearchError.unableToResolveEndpoint

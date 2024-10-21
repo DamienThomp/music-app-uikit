@@ -12,9 +12,7 @@ enum SearchType: String, CaseIterable {
     case album
     case artist
     case track
-    case show
-    case episode
-    case audiobook
+    case playlist
 
     var type: String {
         self.rawValue

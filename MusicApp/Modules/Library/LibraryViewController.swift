@@ -125,15 +125,15 @@ extension LibraryViewController {
                 for: indexPath
             ) as? SectionHeader else {
 
-                return UICollectionViewCell()
+                return nil
             }
 
             guard let section = self?.dataSource?.snapshot().sectionIdentifiers[indexPath.section] else {
 
-                return UICollectionViewCell()
+                return nil
             }
 
-            if section.title.isEmpty { return UICollectionViewCell() }
+            if section.title.isEmpty { return nil }
 
             sectionHeader.title.text = section.title
 

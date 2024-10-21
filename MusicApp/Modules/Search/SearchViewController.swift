@@ -103,7 +103,6 @@ extension SearchViewController {
                 withReuseIdentifier: SectionHeader.reuseIdentifier,
                 for: indexPath
             ) as? SectionHeader else {
-
                 return nil
             }
 
@@ -115,7 +114,12 @@ extension SearchViewController {
 }
 
 // MARK: - UICollectionViewDelegate
-extension SearchViewController: UICollectionViewDelegate { }
+extension SearchViewController: UICollectionViewDelegate { 
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("indexPath: \(indexPath)")
+    }
+}
 
 // MARK: - UISearchResultsUpdating
 extension SearchViewController: UISearchResultsUpdating {
@@ -129,6 +133,8 @@ extension SearchViewController: UISearchResultsUpdating {
         else {
             return
         }
+
+        viewModel?.fetchSearchResult(with: queryText)
     }
 }
 
@@ -144,8 +150,10 @@ extension SearchViewController: SearchViewModelDelegate {
 
             dataSource?.apply(snapshot)
         case .search:
-            // todo
-            print("todo")
+            guard let resultController = resultsController as? SearchResultsViewController,
+                  let snapshot = viewModel?.searchSnapshot else { return }
+
+            resultController.updateSnapshot(with: snapshot)
         }
     }
     
