@@ -22,6 +22,7 @@ class ItemDetailsViewController: UIViewController {
     var saveButton = UIBarButtonItem()
 
     let notificationFeedback = UINotificationFeedbackGenerator()
+    var mainHeader: AlbumsPageHeader?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,7 +110,7 @@ extension ItemDetailsViewController {
 
     private func configureCollectionView() {
 
-        let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
+        let layout = DynamicHeader { [weak self] sectionIndex, _ in
             return self?.createSectionLayout(for: sectionIndex)
         }
 
@@ -123,7 +124,6 @@ extension ItemDetailsViewController {
         layout.configuration = config
 
         collection = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
-
         collection.contentInsetAdjustmentBehavior = .never
         collection.delegate = self
 
@@ -167,7 +167,6 @@ extension ItemDetailsViewController {
     }
 
     private func createSectionLayout(for sectionIndex: Int) -> NSCollectionLayoutSection {
-
         switch sectionIndex {
         case 0:
             return CollectionUIHelper.createTrackListLayout()
@@ -219,15 +218,15 @@ extension ItemDetailsViewController {
                     withReuseIdentifier: AlbumsPageHeader.reuseIdentifier,
                     for: indexPath
                 ) as? AlbumsPageHeader else {
-                    return UICollectionReusableView()
+                    return nil
                 }
                 
                 guard let section = self?.dataSource?.snapshot().sectionIdentifiers[indexPath.section] else {
-                    return UICollectionReusableView()
+                    return nil
                 }
                 
                 guard let header = section.sectionHeader else {
-                    return UICollectionReusableView()
+                    return nil
                 }
                 
                 sectionHeader.configureView(
@@ -239,9 +238,12 @@ extension ItemDetailsViewController {
                         type: header.type ?? .album
                     )
                 )
-                
+
+                self?.mainHeader = sectionHeader
+                self?.mainHeader?.delegate = self
+
                 return sectionHeader
-                
+
             case 1:
                 guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
                     ofKind: kind,
@@ -316,6 +318,35 @@ extension ItemDetailsViewController: UICollectionViewDelegate {
         case .related:
             coordinator?.showChildDetails(with: item)
         }
+    }
+}
+
+// MARK: - UIScrollViewDelegate
+extension ItemDetailsViewController: UIScrollViewDelegate {
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard let navigationController else { return }
+        mainHeader?.scrollViewDidScroll(scrollView: scrollView, navigationController: navigationController)
+    }
+}
+
+// MARK: - AlbumPageHeaderDelegate
+extension ItemDetailsViewController: AlbumPageHeaderDelegate {
+    
+    func didTapArtistNameButton() {
+        // todo
+    }
+    
+    func didTapPlayButton() {
+        // todo
+    }
+    
+    func didTapShuffleButton() {
+        // todo
+    }
+    
+    func titleLabel(show: Bool) {
+        title = show ? mainHeader?.titleLabel.text : nil
     }
 }
 

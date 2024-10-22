@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol SearchResultsViewControllerDelegate: AnyObject {
+
+    @MainActor func didSelectItem(item: BrowseItem)
+}
+
 class SearchResultsViewController: UIViewController {
 
     typealias DataSource = UICollectionViewDiffableDataSource<SearchResultSection, BrowseItem>
@@ -14,6 +19,8 @@ class SearchResultsViewController: UIViewController {
     private var dataSource: DataSource?
     private var collectionView: UICollectionView!
     private var snapshot: NSDiffableDataSourceSnapshot<SearchResultSection, BrowseItem>?
+
+    weak var delegate: SearchResultsViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -137,4 +144,13 @@ extension SearchResultsViewController {
 }
 
 // MARK: - UICollectionViewDelegate
-extension SearchResultsViewController: UICollectionViewDelegate {}
+extension SearchResultsViewController: UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+        guard let item = self.dataSource?.itemIdentifier(for: indexPath),
+              let type = item.type else { return }
+
+        delegate?.didSelectItem(item: item)
+    }
+}

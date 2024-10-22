@@ -31,10 +31,10 @@ struct CollectionUIHelper {
         let cellWidth = availableWidth / 2
 
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
-        flowLayout.itemSize = CGSize(width: cellWidth, height: cellWidth)
+        flowLayout.sectionInset = .init(top: padding, left: padding, bottom: padding, right: padding)
+        flowLayout.itemSize = .init(width: cellWidth, height: cellWidth)
 
-        flowLayout.headerReferenceSize = CGSize(width: width, height: 50)
+        flowLayout.headerReferenceSize = .init(width: width, height: 50)
 
         return flowLayout
     }
@@ -48,7 +48,7 @@ struct CollectionUIHelper {
             )
         )
 
-        item.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 8, bottom: 0, trailing: 4)
+        item.contentInsets = .init(top: 4, leading: 8, bottom: 0, trailing: 4)
 
         let hGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: getLayoutSize(
@@ -77,7 +77,7 @@ struct CollectionUIHelper {
             )
         )
 
-        item.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4)
+        item.contentInsets = .init(top: 4, leading: 4, bottom: 4, trailing: 4)
 
         let vGroup = NSCollectionLayoutGroup.vertical(
             layoutSize: getLayoutSize(
@@ -115,7 +115,7 @@ struct CollectionUIHelper {
             )
         )
 
-        item.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 4)
+        item.contentInsets = .init(top: 4, leading: 8, bottom: 4, trailing: 4)
 
         let vGroup = NSCollectionLayoutGroup.vertical(
             layoutSize: getLayoutSize(
@@ -153,7 +153,7 @@ struct CollectionUIHelper {
             )
         )
 
-        item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 0, bottom: 2, trailing: 0)
+        item.contentInsets = .init(top: 2, leading: 0, bottom: 2, trailing: 0)
 
         let vGroup = NSCollectionLayoutGroup.vertical(
             layoutSize: getLayoutSize(
@@ -168,7 +168,7 @@ struct CollectionUIHelper {
 
         let layoutSectionHeader = createSectionHeader(for: .banner)
         section.boundarySupplementaryItems = [layoutSectionHeader]
-
+        
         return section
     }
 
@@ -181,7 +181,7 @@ struct CollectionUIHelper {
             )
         )
 
-        item.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 4)
+        item.contentInsets = .init(top: 4, leading: 8, bottom: 4, trailing: 4)
 
         let hGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: getLayoutSize(
@@ -201,7 +201,7 @@ struct CollectionUIHelper {
         let decorator = NSCollectionLayoutDecorationItem.background(elementKind: SectionDecorator.reuseIdentifier)
         section.decorationItems = [decorator]
 
-        section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 40, trailing: 0)
+        section.contentInsets = .init(top: 8, leading: 0, bottom: 40, trailing: 0)
 
         return section
     }
