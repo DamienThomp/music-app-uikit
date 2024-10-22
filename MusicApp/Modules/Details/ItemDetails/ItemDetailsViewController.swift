@@ -109,7 +109,7 @@ extension ItemDetailsViewController {
 
     private func configureCollectionView() {
 
-        let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
+        let layout = DynamicHeader { [weak self] sectionIndex, _ in
             return self?.createSectionLayout(for: sectionIndex)
         }
 
@@ -123,7 +123,6 @@ extension ItemDetailsViewController {
         layout.configuration = config
 
         collection = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
-
         collection.contentInsetAdjustmentBehavior = .never
         collection.delegate = self
 
@@ -167,7 +166,6 @@ extension ItemDetailsViewController {
     }
 
     private func createSectionLayout(for sectionIndex: Int) -> NSCollectionLayoutSection {
-
         switch sectionIndex {
         case 0:
             return CollectionUIHelper.createTrackListLayout()
@@ -219,15 +217,15 @@ extension ItemDetailsViewController {
                     withReuseIdentifier: AlbumsPageHeader.reuseIdentifier,
                     for: indexPath
                 ) as? AlbumsPageHeader else {
-                    return UICollectionReusableView()
+                    return nil
                 }
                 
                 guard let section = self?.dataSource?.snapshot().sectionIdentifiers[indexPath.section] else {
-                    return UICollectionReusableView()
+                    return nil
                 }
                 
                 guard let header = section.sectionHeader else {
-                    return UICollectionReusableView()
+                    return nil
                 }
                 
                 sectionHeader.configureView(
@@ -239,7 +237,7 @@ extension ItemDetailsViewController {
                         type: header.type ?? .album
                     )
                 )
-                
+
                 return sectionHeader
                 
             case 1:

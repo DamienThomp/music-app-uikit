@@ -81,10 +81,6 @@ class AlbumsPageHeader: UICollectionReusableView {
 extension AlbumsPageHeader {
 
     func configureImage() {
-
-        coverImage.clipsToBounds = true
-        coverImage.frame = self.bounds
-        coverImage.layer.cornerRadius = 8
         coverImage.contentMode = .scaleAspectFill
         coverImage.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -184,6 +180,10 @@ extension AlbumsPageHeader {
 
         if type == .playlist {
 
+            coverImage.clipsToBounds = true
+            coverImage.frame = self.bounds
+            coverImage.layer.cornerRadius = 8
+
             NSLayoutConstraint.activate([
                 coverImage.centerXAnchor.constraint(equalTo: centerXAnchor),
                 coverImage.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -24),
@@ -193,12 +193,12 @@ extension AlbumsPageHeader {
         }
 
         if type == .album {
-
+            
             NSLayoutConstraint.activate([
                 coverImage.topAnchor.constraint(equalTo: topAnchor),
                 coverImage.leadingAnchor.constraint(equalTo: leadingAnchor),
                 coverImage.trailingAnchor.constraint(equalTo: trailingAnchor),
-                coverImage.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+                coverImage.bottomAnchor.constraint(equalTo: bottomAnchor)
             ])
         }
     }

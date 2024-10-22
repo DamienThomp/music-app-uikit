@@ -168,7 +168,7 @@ struct CollectionUIHelper {
 
         let layoutSectionHeader = createSectionHeader(for: .banner)
         section.boundarySupplementaryItems = [layoutSectionHeader]
-
+        
         return section
     }
 

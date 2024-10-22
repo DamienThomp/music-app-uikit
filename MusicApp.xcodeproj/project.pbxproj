@@ -133,6 +133,7 @@
 		3891829D2C8BDB6E00DF742F /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3891829C2C8BDB6E00DF742F /* SearchCoordinator.swift */; };
 		389805312C5EFE6F001E02D7 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389805302C5EFE6E001E02D7 /* UIViewController+Extensions.swift */; };
 		389805332C5F2C2D001E02D7 /* ItemDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389805322C5F2C2D001E02D7 /* ItemDetailsModel.swift */; };
+		3899A5BF2CC72AB800D5F63C /* DynamicHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3899A5BE2CC72AB800D5F63C /* DynamicHeader.swift */; };
 		38CE729D2CC465AC000E98D5 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CE729C2CC465AC000E98D5 /* SearchResultsViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -266,6 +267,7 @@
 		3891829C2C8BDB6E00DF742F /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
 		389805302C5EFE6E001E02D7 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		389805322C5F2C2D001E02D7 /* ItemDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailsModel.swift; sourceTree = "<group>"; };
+		3899A5BE2CC72AB800D5F63C /* DynamicHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeader.swift; sourceTree = "<group>"; };
 		38CE729C2CC465AC000E98D5 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -495,6 +497,7 @@
 				385A71102BFB275D00659C2D /* CollectionUIHelper.swift */,
 				385A713A2C00334700659C2D /* ImageCache.swift */,
 				3845A01E2C6D37C400898F4E /* Environment.swift */,
+				3899A5BE2CC72AB800D5F63C /* DynamicHeader.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -987,6 +990,7 @@
 				385A711D2BFC42C700659C2D /* AlbumsPageHeader.swift in Sources */,
 				38081D132C607EA200D8E6E2 /* ProfileViewModel.swift in Sources */,
 				385D0A562BF45AB80076A5F3 /* PlaylistsEndpoint.swift in Sources */,
+				3899A5BF2CC72AB800D5F63C /* DynamicHeader.swift in Sources */,
 				385D0A4C2BF45AB80076A5F3 /* CachedResponse.swift in Sources */,
 				3857EDCD2BF69CE800F2B8ED /* SignInViewModel.swift in Sources */,
 				385A713E2C004DA500659C2D /* SearchViewController.swift in Sources */,
