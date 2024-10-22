@@ -22,6 +22,7 @@ protocol AlbumPageHeaderDelegate: AnyObject {
     func didTapArtistNameButton()
     func didTapPlayButton()
     func didTapShuffleButton()
+    func titleLabel(show: Bool)
 }
 
 class AlbumsPageHeader: UICollectionReusableView {
@@ -217,6 +218,23 @@ extension AlbumsPageHeader {
 
     @objc func shuffleButtonTapped() {
         delegate?.didTapShuffleButton()
+    }
+}
+
+// MARK: - Scrollview
+extension AlbumsPageHeader {
+
+    func scrollViewDidScroll(scrollView: UIScrollView, navigationController: UINavigationController) {
+
+        let labelHeight = titleLabel.frame.height
+        let labelTop = titleLabel.convert(self.bounds, to: nil).maxY - labelHeight
+        let navBottom = navigationController.navigationBar.convert(self.bounds, to: nil).maxY
+        
+        if labelTop < navBottom {
+            delegate?.titleLabel(show: true)
+        } else {
+            delegate?.titleLabel(show: false)
+        }
     }
 }
 

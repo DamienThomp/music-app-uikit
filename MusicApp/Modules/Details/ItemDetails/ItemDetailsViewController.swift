@@ -22,6 +22,7 @@ class ItemDetailsViewController: UIViewController {
     var saveButton = UIBarButtonItem()
 
     let notificationFeedback = UINotificationFeedbackGenerator()
+    var mainHeader: AlbumsPageHeader?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -238,8 +239,11 @@ extension ItemDetailsViewController {
                     )
                 )
 
+                self?.mainHeader = sectionHeader
+                self?.mainHeader?.delegate = self
+
                 return sectionHeader
-                
+
             case 1:
                 guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
                     ofKind: kind,
@@ -314,6 +318,35 @@ extension ItemDetailsViewController: UICollectionViewDelegate {
         case .related:
             coordinator?.showChildDetails(with: item)
         }
+    }
+}
+
+// MARK: - UIScrollViewDelegate
+extension ItemDetailsViewController: UIScrollViewDelegate {
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard let navigationController else { return }
+        mainHeader?.scrollViewDidScroll(scrollView: scrollView, navigationController: navigationController)
+    }
+}
+
+// MARK: - AlbumPageHeaderDelegate
+extension ItemDetailsViewController: AlbumPageHeaderDelegate {
+    
+    func didTapArtistNameButton() {
+        // todo
+    }
+    
+    func didTapPlayButton() {
+        // todo
+    }
+    
+    func didTapShuffleButton() {
+        // todo
+    }
+    
+    func titleLabel(show: Bool) {
+        title = show ? mainHeader?.titleLabel.text : nil
     }
 }
 
