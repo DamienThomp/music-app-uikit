@@ -24,9 +24,10 @@ class DynamicHeader: UICollectionViewCompositionalLayout {
                 if contentOffsetY <= 0 {
                     attributes.alpha = 1
                 } else {
-                    let offset = contentOffsetY
-                    let dif = abs(contentOffsetY - collectionView.frame.height) / 1000
-                    attributes.alpha = CGFloat(dif)
+                    let height = attributes.frame.size.height
+                    let position = contentOffsetY
+                    let percentage = position / height
+                    attributes.alpha = CGFloat(1.0 - percentage)
                 }
             }
         })

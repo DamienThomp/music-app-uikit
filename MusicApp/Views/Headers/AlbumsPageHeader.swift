@@ -81,6 +81,10 @@ class AlbumsPageHeader: UICollectionReusableView {
 extension AlbumsPageHeader {
 
     func configureImage() {
+
+        coverImage.clipsToBounds = true
+        coverImage.frame = self.bounds
+        coverImage.layer.cornerRadius = 8
         coverImage.contentMode = .scaleAspectFill
         coverImage.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -179,10 +183,6 @@ extension AlbumsPageHeader {
     private func configureImageLayout(for type: ItemType) {
 
         if type == .playlist {
-
-            coverImage.clipsToBounds = true
-            coverImage.frame = self.bounds
-            coverImage.layer.cornerRadius = 8
 
             NSLayoutConstraint.activate([
                 coverImage.centerXAnchor.constraint(equalTo: centerXAnchor),
