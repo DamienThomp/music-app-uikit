@@ -33,6 +33,7 @@ class SearchViewController: UIViewController {
         resultsController.delegate = self
 
         configureSearchController()
+        configureKeyBoardDoneButton()
         configureCollectionView()
         registerCells()
         configureDataSource()
@@ -55,6 +56,21 @@ class SearchViewController: UIViewController {
         searchController?.definesPresentationContext = true
         searchController?.searchResultsUpdater = self
         navigationItem.searchController = searchController
+    }
+
+    private func configureKeyBoardDoneButton() {
+
+        let toolbar = UIToolbar(frame: .zero)
+        toolbar.sizeToFit()
+
+        let doneAction = UIAction { [weak self] _ in
+            self?.searchController?.searchBar.endEditing(true)
+        }
+
+        let doneButton = UIBarButtonItem(systemItem: .done, primaryAction: doneAction)
+        toolbar.items = [doneButton]
+
+        searchController?.searchBar.inputAccessoryView = toolbar
     }
 
     private func configureCollectionView() {
