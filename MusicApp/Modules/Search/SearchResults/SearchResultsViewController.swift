@@ -148,8 +148,7 @@ extension SearchResultsViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-        guard let item = self.dataSource?.itemIdentifier(for: indexPath),
-              let type = item.type else { return }
+        guard let item = self.dataSource?.itemIdentifier(for: indexPath) else { return }
 
         delegate?.didSelectItem(item: item)
     }
