@@ -51,7 +51,7 @@ class SearchViewController: UIViewController {
     private func configureSearchController() {
 
         searchController = UISearchController(searchResultsController: resultsController)
-        searchController?.searchBar.placeholder = "Songs, Artists, Albums, Playlists"
+        searchController?.searchBar.placeholder = "Albums, Artists, Songs"
         searchController?.searchBar.searchBarStyle = .minimal
         searchController?.definesPresentationContext = true
         searchController?.searchResultsUpdater = self
@@ -68,7 +68,8 @@ class SearchViewController: UIViewController {
         }
 
         let doneButton = UIBarButtonItem(systemItem: .done, primaryAction: doneAction)
-        toolbar.items = [doneButton]
+        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        toolbar.items = [spacer, doneButton]
 
         searchController?.searchBar.inputAccessoryView = toolbar
     }

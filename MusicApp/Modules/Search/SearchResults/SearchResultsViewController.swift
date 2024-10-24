@@ -15,10 +15,11 @@ protocol SearchResultsViewControllerDelegate: AnyObject {
 class SearchResultsViewController: UIViewController {
 
     typealias DataSource = UICollectionViewDiffableDataSource<SearchResultSection, BrowseItem>
+    typealias SearchSnapshot = NSDiffableDataSourceSnapshot<SearchResultSection, BrowseItem>
 
     private var dataSource: DataSource?
     private var collectionView: UICollectionView!
-    private var snapshot: NSDiffableDataSourceSnapshot<SearchResultSection, BrowseItem>?
+    private var snapshot: SearchSnapshot?
 
     weak var delegate: SearchResultsViewControllerDelegate?
 
@@ -34,7 +35,7 @@ class SearchResultsViewController: UIViewController {
         configureDataSourceSupplement()
     }
 
-    func updateSnapshot(with data: NSDiffableDataSourceSnapshot<SearchResultSection, BrowseItem>) {
+    func updateSnapshot(with data: SearchSnapshot) {
         self.snapshot = data
         clearContentUnavailableState()
         dataSource?.apply(snapshot!)
