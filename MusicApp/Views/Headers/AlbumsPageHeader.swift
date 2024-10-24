@@ -7,16 +7,6 @@
 
 import UIKit
 
-#warning("Move AlbumsPageHeaderViewModel out of view controller file")
-struct AlbumsPageHeaderViewModel {
-
-    let title: String
-    let artisName: String
-    let coverImage: URL?
-    let genre: [String]?
-    let type: ItemType
-}
-
 protocol AlbumPageHeaderDelegate: AnyObject {
 
     func didTapArtistNameButton()
