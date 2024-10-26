@@ -244,41 +244,21 @@ extension ItemDetailsViewController {
 
                 return sectionHeader
 
-            case 1:
-                guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
-                    ofKind: kind,
-                    withReuseIdentifier: SectionHeader.reuseIdentifier,
-                    for: indexPath
-                ) as? SectionHeader else {
-                    return UICollectionReusableView()
-                }
-
-                guard let section = self?.dataSource?.snapshot().sectionIdentifiers[indexPath.section] else {
-                    return UICollectionReusableView()
-                }
-
-                guard let header = section.sectionHeader else {
-                    return UICollectionReusableView()
-                }
-
-                sectionHeader.title.text = header.title
-
-                return sectionHeader
             default:
                 guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
                     ofKind: kind,
                     withReuseIdentifier: SectionHeader.reuseIdentifier,
                     for: indexPath
                 ) as? SectionHeader else {
-                    return UICollectionReusableView()
+                    return nil
                 }
 
                 guard let section = self?.dataSource?.snapshot().sectionIdentifiers[indexPath.section] else {
-                    return UICollectionReusableView()
+                    return nil
                 }
 
                 guard let header = section.sectionHeader else {
-                    return UICollectionReusableView()
+                    return nil
                 }
 
                 sectionHeader.title.text = header.title
