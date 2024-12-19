@@ -39,6 +39,29 @@ struct CollectionUIHelper {
         return flowLayout
     }
 
+    static func createSingleItemBannerLayout() -> NSCollectionLayoutSection {
+
+        let item = NSCollectionLayoutItem(
+            layoutSize: getLayoutSize(
+                .fractionalWidth(1),
+                .fractionalHeight(1)
+            )
+        )
+
+        let hGroup = NSCollectionLayoutGroup.horizontal(
+            layoutSize: getLayoutSize(
+               .fractionalWidth(1),
+               .fractionalWidth(1)
+            ),
+            repeatingSubitem: item,
+            count: 1
+        )
+
+        let section = NSCollectionLayoutSection(group: hGroup)
+
+        return section
+    }
+
     static func createFeaturedHorizontalSection() -> NSCollectionLayoutSection {
 
         let item = NSCollectionLayoutItem(

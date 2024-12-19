@@ -115,31 +115,26 @@ extension BrowseDataSource {
         return try decoder.decode(NewReleases.self, from: data)
     }
 
-    private func fetchFeaturedPlaylists() async throws -> FeaturedPlaylists? {
+    private func fetchFeaturedPlaylists() async throws -> SavedPlaylistsResponse? {
 
-        let limit = 30
-        let data = try await self.executeRequest(
-            for: BrowseEndpoint.featuredPlaylists(
-                limit
-            )
-        )
+        let endPoint = UsersSavedItems.playlists(limit: 25)
+        let data = try await executeRequest(for: endPoint)
 
-        return try decoder.decode(FeaturedPlaylists.self, from: data)
+        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+        print(json)
+
+        return try decoder.decode(SavedPlaylistsResponse.self, from: data)
     }
 
-    private func fetchRecommendations() async throws -> Recommendations? {
+    private func fetchTopTracks() async throws -> TrackResponse {
+        let endpoint = UsersTopItemsEnpoint.tracks(limit: 25, offset: 0)
+        let data = try await executeRequest(for: endpoint)
 
-        let (artistSeeds, genreSeeds) = try await fetchRecommendationSeeds()
+        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+        print(json)
 
-        let recommendationsData = try await self.executeRequest(
-            for: RecommendationsEndpoint.recommedations(
-                limit: 20,
-                genreSeeds: genreSeeds,
-                artistSeeds: artistSeeds
-            )
-        )
+        return try decoder.decode(TrackResponse.self, from: data)
 
-        return try decoder.decode(Recommendations.self, from: recommendationsData)
     }
 
     private func executeRequest(for endPoint: EndpointProtocol) async throws -> Data {
@@ -173,14 +168,15 @@ extension BrowseDataSource {
                     }
 
                     taskGroup.addTask {
-                        let recommendations = try await self.fetchRecommendations()
-                        await self.delegate?.didLoadData(for: .recommended, with: recommendations)
+                      //  let recommendations = try await self.fetchTopTracks()
+                       // await self.delegate?.didLoadData(for: .recommended, with: recommendations)
                     }
 
                     try await taskGroup.waitForAll()
                     await self.delegate?.didFinishLoading()
                 }
             } catch {
+                print(error)
                 await delegate?.didFailLoading(with: error)
             }
         }
