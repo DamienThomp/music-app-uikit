@@ -314,15 +314,18 @@ extension ItemDetailsViewController: UIScrollViewDelegate {
 extension ItemDetailsViewController: AlbumPageHeaderDelegate {
     
     func didTapArtistNameButton() {
-        // todo
+
+        guard let id = viewModel?.artistId else { return }
+
+        coordinator?.showArtistDetails(for: id)
     }
     
     func didTapPlayButton() {
-        // todo
+        // API Deprecation tracks are unplayable
     }
     
     func didTapShuffleButton() {
-        // todo
+        // API Deprecation tracks are unplayable
     }
     
     func titleLabel(show: Bool) {

@@ -115,16 +115,12 @@ extension BrowseDataSource {
         return try decoder.decode(NewReleases.self, from: data)
     }
 
-    private func fetchFeaturedPlaylists() async throws -> FeaturedPlaylists? {
+    private func fetchFeaturedPlaylists() async throws -> SavedPlaylistsResponse? {
 
-        let limit = 30
-        let data = try await self.executeRequest(
-            for: BrowseEndpoint.featuredPlaylists(
-                limit
-            )
-        )
+        let endPoint = UsersSavedItems.playlists(limit: 25)
+        let data = try await executeRequest(for: endPoint)
 
-        return try decoder.decode(FeaturedPlaylists.self, from: data)
+        return try decoder.decode(SavedPlaylistsResponse.self, from: data)
     }
 
     private func fetchRecommendations() async throws -> Recommendations? {
@@ -173,14 +169,16 @@ extension BrowseDataSource {
                     }
 
                     taskGroup.addTask {
-                        let recommendations = try await self.fetchRecommendations()
-                        await self.delegate?.didLoadData(for: .recommended, with: recommendations)
+                        // deprecation of web api, can't fetch recommendations:
+                        // let recommendations = try await self.fetchRecommendations()
+                        // await self.delegate?.didLoadData(for: .recommended, with: recommendations)
                     }
 
                     try await taskGroup.waitForAll()
                     await self.delegate?.didFinishLoading()
                 }
             } catch {
+                print(error)
                 await delegate?.didFailLoading(with: error)
             }
         }

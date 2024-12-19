@@ -15,7 +15,7 @@ struct TopArtists: Codable {
     let offset: Int
     let previous: URL?
     let total: Int
-    let items: [ArtistItem]
+    let items: [Artist]
 }
 
 struct ArtistItem: Codable {

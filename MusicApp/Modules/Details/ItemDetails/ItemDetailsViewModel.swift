@@ -30,6 +30,10 @@ class ItemDetailsViewModel {
         dataSource?.isSavedAlbum ?? false
     }
 
+    var artistId: String? {
+        dataSource?.artistId
+    }
+
     init(dataSource: ItemDetailsDataSource) {
         self.dataSource = dataSource
     }

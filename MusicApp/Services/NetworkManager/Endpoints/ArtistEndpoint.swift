@@ -21,6 +21,7 @@ enum ArtistEndpoint: EndpointProtocol {
     case albums(id: String, includeGroup: [IncludeGroup], limit: Int = 20, offset: Int = 0)
     case topTracks(id: String)
     case relatedArtists(id: String)
+    case contains(ids: [String])
 
     var path: String {
 
@@ -33,15 +34,17 @@ enum ArtistEndpoint: EndpointProtocol {
             return "/artists/\(id)/top-tracks"
         case .relatedArtists(let id):
             return "/artists/\(id)/related-artists"
+        case .contains:
+            return "/me/following/contains"
         }
     }
 
     var httpMethod: HTTPMethod { .get }
 
     var queryItems: [URLQueryItem]? {
-        
+
         switch self {
-        case .artist, .topTracks, .relatedArtists:
+        case .artist, .relatedArtists, .topTracks:
             return nil
         case .albums(_, let includeGroup, let limit, let offset):
             return [
@@ -56,6 +59,17 @@ enum ArtistEndpoint: EndpointProtocol {
                 URLQueryItem(
                     name: "offset",
                     value: "\(offset)"
+                )
+            ]
+        case .contains(let ids):
+            return [
+                URLQueryItem(
+                    name: "ids",
+                    value: ids.map { $0 }.joined(separator: ",")
+                ),
+                URLQueryItem(
+                    name: "type",
+                    value: "artist"
                 )
             ]
         }

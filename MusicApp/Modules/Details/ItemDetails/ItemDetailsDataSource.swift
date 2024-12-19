@@ -32,6 +32,7 @@ class ItemDetailsDataSource {
     weak var delegate: ItemDetailsDataSourceDelegate?
 
     var isSavedAlbum: Bool = false
+    var artistId: String?
 }
 
 // MARK: - Data Fetching
@@ -138,6 +139,8 @@ extension ItemDetailsDataSource {
                             await self.delegate?.didLoadData(for: .main, with: album, of: .album)
 
                             guard let artistId = album.artists.first?.id else { return }
+
+                            self.artistId = artistId
 
                             let related = try await self.getRelatedAlbums(for: artistId)
                             await self.delegate?.didLoadData(for: .related, with: related, of: .album)

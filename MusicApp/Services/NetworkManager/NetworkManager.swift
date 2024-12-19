@@ -61,10 +61,6 @@ final class NetworkManager: NetworkManagerProtocol {
 
         endPoint.headers?.forEach { request.setValue($0.value, forHTTPHeaderField: $0.key) }
         authHeader?.forEach { request.setValue($0.value, forHTTPHeaderField: $0.key) }
-        
-        #if DEBUG
-       // print(String(describing: request))
-        #endif
 
         return request
     }

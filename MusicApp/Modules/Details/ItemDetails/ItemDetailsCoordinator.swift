@@ -42,4 +42,15 @@ class ItemDetailsCoordinator: NSObject, Coordinator {
         childCoordinators.append(coordinator)
         coordinator.start()
     }
+
+    func showArtistDetails(for artistId: String) {
+        let coordinator = ArtistDetailsCoordinator(
+            navigationController: navigationController,
+            serviceResolver: serviceResolver
+        )
+
+        coordinator.artistId = artistId
+        childCoordinators.append(coordinator)
+        coordinator.start()
+    }
 }

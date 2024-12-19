@@ -18,6 +18,8 @@ enum UsersSavedItems: EndpointProtocol {
     case following(limit: Int = 5, type: FollowingType)
     case saveAlbums(ids: [String])
     case removeAlbums(ids: [String])
+    case follow(ids: [String])
+    case unfollow(ids: [String])
 
     var path: String {
 
@@ -26,7 +28,7 @@ enum UsersSavedItems: EndpointProtocol {
             return "/me/albums"
         case .playlists:
             return "/me/playlists"
-        case .following:
+        case .following, .follow, .unfollow:
             return "/me/following"
         }
     }
@@ -34,9 +36,9 @@ enum UsersSavedItems: EndpointProtocol {
     var httpMethod: HTTPMethod {
         
         switch self {
-        case .saveAlbums:
+        case .saveAlbums, .follow:
             .put
-        case .removeAlbums:
+        case .removeAlbums, .unfollow:
             .delete
         case .albums, .playlists, .following:
             .get
@@ -71,6 +73,11 @@ enum UsersSavedItems: EndpointProtocol {
             ]
         case .saveAlbums, .removeAlbums:
             return nil
+        case .follow, .unfollow:
+            return [URLQueryItem(
+                name: "type",
+                value: FollowingType.artist.rawValue
+            )]
         }
     }
 
@@ -79,7 +86,7 @@ enum UsersSavedItems: EndpointProtocol {
         switch self {
         case .albums, .following, .playlists:
             return nil
-        case .saveAlbums(let ids), .removeAlbums(let ids):
+        case .saveAlbums(let ids), .removeAlbums(let ids), .follow(let ids), .unfollow(let ids):
             return ["ids": ids ]
         }
     }
@@ -87,10 +94,8 @@ enum UsersSavedItems: EndpointProtocol {
     var cachePolicy: URLRequest.CachePolicy {
 
         switch self {
-        case .albums, .playlists, .saveAlbums, .removeAlbums:
+        case .albums, .playlists, .saveAlbums, .removeAlbums, .follow, .unfollow, .following:
             .useProtocolCachePolicy
-        case .following:
-            .returnCacheDataElseLoad
         }
     }
 }

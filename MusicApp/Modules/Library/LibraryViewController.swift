@@ -36,6 +36,17 @@ class LibraryViewController: UIViewController {
         setNeedsUpdateContentUnavailableConfiguration()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        collection?.contentInset = UIEdgeInsets(
+            top: 0,
+            left: 0,
+            bottom: view.safeAreaInsets.bottom,
+            right: 0
+        )
+    }
+
     private func configure() {
         configureCollectionView()
         registerCells()
@@ -54,7 +65,7 @@ extension LibraryViewController {
         }
 
         let config = UICollectionViewCompositionalLayoutConfiguration()
-        config.interSectionSpacing = 40
+        config.interSectionSpacing = 60
         layout.configuration = config
 
         collection = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
@@ -155,7 +166,7 @@ extension LibraryViewController: UICollectionViewDelegate {
         case .albums, .playlists:
             coordinator?.showDetails(for: item)
         case .artists:
-            print("artists item: \(item.title)")
+            coordinator?.showArtistPage(for: item.id)
         }
     }
 }
