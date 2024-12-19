@@ -9,12 +9,11 @@ import Foundation
 
 protocol ArtistDetailsDataSourceDelegate: AnyObject {
 
-    @MainActor func didLoadData(for sectionType: ArtistDetailSection, with data: Codable)
-    @MainActor func didLoadHeader(with data: ArtistDetailsResponse)
+    @MainActor func didLoadData(for sectionType: ArtistDetailSectionType, with data: Codable)
     @MainActor func didFinishLoading()
     @MainActor func didFailLoading(with error: Error)
-    @MainActor func didUpdateSavedStatus()
-    @MainActor func didFailToSaveItem()
+    @MainActor func didUpdateFollowedStatus()
+    @MainActor func didFailToFollowArtist()
 }
 
 class ArtistDetailsDataSource {
@@ -32,14 +31,40 @@ class ArtistDetailsDataSource {
 
     weak var delegate: ArtistDetailsDataSourceDelegate?
 
-    var isFollowingArtist: Bool = false
+    var isFollowingArtist: Bool = false {
+        didSet {
+            Task { @MainActor in
+                delegate?.didUpdateFollowedStatus()
+            }
+        }
+    }
 }
 
 // MARK: - Data Fetching
 extension ArtistDetailsDataSource {
 
+    private func getIsFollowedStatus(for id: String) async throws -> [Bool] {
+
+        let endPoint = ArtistEndpoint.contains(ids: [id])
+        let responseData = try await executeRequest(for: endPoint)
+
+        return try decoder.decode([Bool].self, from: responseData)
+    }
+
+    func followArtist(with id: String) async throws {
+
+        let endPoint = UsersSavedItems.follow(ids: [id])
+        _ = try await executeRequest(for: endPoint)
+    }
+
+    func unFollowArtist(with id: String) async throws {
+
+        let endPoint = UsersSavedItems.unfollow(ids: [id])
+        _ = try await executeRequest(for: endPoint)
+    }
+
     private func getArtistDetails(for id: String) async throws -> ArtistDetailsResponse {
-        print("getArtistDetails")
+
         let artistEndpoint = ArtistEndpoint.artist(id: id)
         let responseData = try await executeRequest(for: artistEndpoint)
         return try decoder.decode(ArtistDetailsResponse.self, from: responseData)
@@ -56,8 +81,7 @@ extension ArtistDetailsDataSource {
             ]
         )
         let responseData = try await executeRequest(for: artistAlbumsEndpoint)
-       // let json = try? JSONSerialization.jsonObject(with: responseData, options: [])
-       return try decoder.decode(ArtistAlbumsResponse.self, from: responseData)
+        return try decoder.decode(ArtistAlbumsResponse.self, from: responseData)
     }
 
     private func getArtistTopTracks(for id: String) async throws -> TrackResponse {
@@ -76,6 +100,29 @@ extension ArtistDetailsDataSource {
         return try await networkManager.request(for: endPoint)
     }
 
+    func updateFollowStatus(with id: String) {
+
+        Task { @MainActor in
+
+            do {
+                if let authManager, authManager.shouldRefreshToken {
+                    try await authManager.refresshAccessToken()
+                }
+
+                if isFollowingArtist {
+                    try await followArtist(with: id)
+                    isFollowingArtist = false
+                } else {
+                    try await unFollowArtist(with: id)
+                    isFollowingArtist = true
+                }
+                delegate?.didUpdateFollowedStatus()
+            } catch {
+                delegate?.didFailToFollowArtist()
+            }
+        }
+    }
+
     func fetchDisplayData(for id: String) {
 
         Task {
@@ -84,30 +131,23 @@ extension ArtistDetailsDataSource {
                     try await authManager.refresshAccessToken()
                 }
 
-                try await withThrowingTaskGroup(of: Void.self) { taskGroup in
+                let response = try await self.getArtistDetails(for: id)
+                await self.delegate?.didLoadData(for: .main, with: response)
 
-                    taskGroup.addTask {
-                        let response = try await self.getArtistDetails(for: id)
-                        await self.delegate?.didLoadHeader(with: response)
-                    }
+                let albumsResponse = try await self.getArtistAlbums(for: id)
+                await self.delegate?.didLoadData(for: .album, with: albumsResponse)
 
-                    taskGroup.addTask {
-                        let response = try await self.getArtistAlbums(for: id)
-                        await self.delegate?.didLoadData(for: .albums, with: response)
-                    }
+                let trackResponse = try await self.getArtistTopTracks(for: id)
+                await self.delegate?.didLoadData(for: .tracks, with: trackResponse)
 
-                    taskGroup.addTask {
-                        let response = try await self.getArtistTopTracks(for: id)
-                        await self.delegate?.didLoadData(for: .tracks, with: response)
-                    }
+                let isFollowingResponse = try await self.getIsFollowedStatus(for: id)
 
-                    try await taskGroup.waitForAll()
-                    await self.delegate?.didFinishLoading()
+                if let responseValue = isFollowingResponse.first {
+                    self.isFollowingArtist = responseValue
                 }
+
+                await self.delegate?.didFinishLoading()
             } catch {
-                print(
-                    error
-                )
                 await delegate?.didFailLoading(with: error)
             }
         }

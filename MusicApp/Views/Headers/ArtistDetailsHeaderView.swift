@@ -1,5 +1,5 @@
 //
-//  BannerCollectionViewCell.swift
+//  ArtistDetailsHeaderView.swift
 //  MusicApp
 //
 //  Created by Damien L Thompson on 2024-12-19.
@@ -7,11 +7,12 @@
 
 import UIKit
 
-class BannerCollectionViewCell: ItemViewCell, CellConfigurationProtocol {
+class ArtistDetailsHeaderView: UICollectionReusableView {
 
-    static let reuseIdentifier: String = "BannerCollectionViewCell"
+    static let reuseIdentifier = "ArtistDetailsHeaderView"
 
-    let placeHolder = UIImage(systemName: "person.and.background.dotted")
+    let coverImage = AsyncImageView(frame: .zero)
+    let titleLabel = UILabel()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,11 +25,25 @@ class BannerCollectionViewCell: ItemViewCell, CellConfigurationProtocol {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-       // configureImageMask()
+        configureImageMask()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func configure(with item: CellItemProtocol) {
+
+        titleLabel.text = item.title
+        coverImage.executeLoad(from: item.image)
+    }
+
+    private func configureImageView() {
+
+        coverImage.clipsToBounds = true
+        coverImage.frame = self.bounds
+        coverImage.contentMode = .scaleAspectFill
+        coverImage.translatesAutoresizingMaskIntoConstraints = false
     }
 
     func configureImageMask() {
@@ -59,36 +74,27 @@ class BannerCollectionViewCell: ItemViewCell, CellConfigurationProtocol {
 
         coverImage.layer.mask = maskLayer
     }
-    
-    private func configureImageView() {
-
-        coverImage.image = placeHolder
-        coverImage.clipsToBounds = true
-        coverImage.translatesAutoresizingMaskIntoConstraints = false
-    }
 
     private func configureLabel() {
 
-        titleLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        titleLabel.font = UIFont.preferredFont(forTextStyle: .extraLargeTitle)
         titleLabel.textColor = .white
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
     }
 
     func configureViews() {
 
-        contentView.addSubViews(coverImage, titleLabel)
+        addSubViews(coverImage, titleLabel)
         translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            coverImage.topAnchor.constraint(equalTo: contentView.topAnchor),
-            coverImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            coverImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            coverImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            coverImage.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-            coverImage.heightAnchor.constraint(equalTo: coverImage.widthAnchor),
+            coverImage.topAnchor.constraint(equalTo: topAnchor),
+            coverImage.leadingAnchor.constraint(equalTo: leadingAnchor),
+            coverImage.trailingAnchor.constraint(equalTo: trailingAnchor),
+            coverImage.bottomAnchor.constraint(equalTo: bottomAnchor),
 
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 22),
-            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -22)
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40)
         ])
     }
 }
@@ -106,7 +112,7 @@ class BannerCollectionViewCell: ItemViewCell, CellConfigurationProtocol {
         type: .playlist
     )
 
-    let viewController = BannerCollectionViewCell()
+    let viewController = ArtistDetailsHeaderView()
     viewController.configure(with: cellModel)
 
     return viewController

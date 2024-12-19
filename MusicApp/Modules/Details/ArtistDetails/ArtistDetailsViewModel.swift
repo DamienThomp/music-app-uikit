@@ -7,19 +7,34 @@
 
 import UIKit
 
-enum ArtistDetailSection: Hashable, CaseIterable {
-    
-    case albums
+enum ArtistDetailSectionType: Hashable, CaseIterable {
+
+    case main
+    case album
     case tracks
+}
 
-    var title: String? {
+struct ArtistDetailsSection: Hashable {
 
-        switch self {
-        case .albums:
-            return "Albums"
-        case .tracks:
-            return "Tracks"
-        }
+    let sectionType: ArtistDetailSectionType
+    let sectionHeader: ArtistDetailsSectionHeader?
+    let items: [BrowseItem]
+}
+
+struct ArtistDetailsSectionHeader: Hashable {
+
+    let id: String
+    let title: String
+    let image: URL?
+
+    init(
+        id: String,
+        title: String,
+        image: URL? = nil
+    ) {
+        self.id = id
+        self.title = title
+        self.image = image
     }
 }
 
@@ -27,21 +42,20 @@ protocol ArtistDetailViewModelDelegate: AnyObject {
 
     @MainActor func reloadData()
     @MainActor func didFailLoading(with error: Error)
-    @MainActor func didUpdateSavedStatus()
-    @MainActor func didFailToSaveItem()
+    @MainActor func didUpdateFollowedStatus()
+    @MainActor func didFailToFollowArtist()
 }
 
 class ArtistDetailsViewModel {
 
-    typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<ArtistDetailSection, BrowseItem>
+    typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<ArtistDetailsSection, BrowseItem>
 
     private(set) var snapshot = DataSourceSnapshot()
 
     weak var delegate: ArtistDetailViewModelDelegate?
     var dataSource: ArtistDetailsDataSource?
 
-    var sections = [ArtistDetailSection]()
-    var header: BrowseItem?
+    var sections = [ArtistDetailsSection]()
 
     var isFollowingArtist: Bool {
         dataSource?.isFollowingArtist ?? false
@@ -55,72 +69,90 @@ class ArtistDetailsViewModel {
 
         guard let id else { return }
 
-        print("fetch data for id: \(id)")
-
         dataSource?.fetchDisplayData(for: id)
+    }
+
+    func updateFollowStatus(for id: String) {
+        dataSource?.updateFollowStatus(with: id)
     }
 }
 
 extension ArtistDetailsViewModel {
-    
-    func createInitialSnapshot() {
-        snapshot.appendSections(ArtistDetailSection.allCases)
-    }
 
-    private func updateSnapshot(for section: ArtistDetailSection, with items: [BrowseItem]) {
-        snapshot.appendItems(items, toSection: section)
-    }
+    private func updateSnapShot() {
 
-    private func configureViewModel(for section: ArtistDetailSection, with data: Codable) -> [BrowseItem]? {
+        snapshot.appendSections(sections)
 
-        switch section {
-        case .albums:
-
-            guard let data = data as? ArtistAlbumsResponse else { return nil }
-
-            return data.items.compactMap(BrowseItem.init)
-        case .tracks:
-
-            guard let data = data as? TrackResponse else { return nil }
-
-            return data.tracks.compactMap(BrowseItem.init)
+        for section in sections {
+            snapshot.appendItems(section.items, toSection: section)
         }
     }
 
-    private func updateHeader(with data: ArtistDetailsResponse) {
-        
-        let headerItem = BrowseItem(id: data.id, title: data.name, subTitle: "", image: data.images.imageUrl, type: nil)
+    private func configureSection(for section: ArtistDetailSectionType, with data: Codable) {
 
-        header = headerItem
+        switch section {
+        case .main:
+
+            guard let data = data as? ArtistDetailsResponse else { return }
+
+            let sectionHeader = ArtistDetailsSectionHeader(id: data.id, title: data.name, image: data.images.imageUrl)
+
+            let sectionData = ArtistDetailsSection(
+                sectionType: section,
+                sectionHeader: sectionHeader,
+                items: []
+            )
+
+            sections.append(sectionData)
+
+        case .album:
+            guard let data = data as? ArtistAlbumsResponse else { return }
+
+            let section = ArtistDetailsSection(
+                sectionType: section,
+                sectionHeader: ArtistDetailsSectionHeader(
+                    id: UUID().uuidString,
+                    title: "Albums by \(data.items.first?.artists.first?.name ?? "")"
+                ),
+                items: data.items.compactMap(BrowseItem.init)
+            )
+            sections.append(section)
+        case .tracks:
+            guard let data = data as? TrackResponse else { return }
+
+            let section = ArtistDetailsSection(
+                sectionType: section,
+                sectionHeader: ArtistDetailsSectionHeader(
+                    id: UUID().uuidString,
+                    title: "Tracks"
+                ),
+                items: data.tracks.compactMap(BrowseItem.init)
+            )
+            sections.append(section)
+        }
     }
 }
 
 extension ArtistDetailsViewModel: ArtistDetailsDataSourceDelegate {
 
-    func didLoadHeader(with data: ArtistDetailsResponse) {
-        updateHeader(with: data)
-    }
-
-    func didLoadData(for sectionType: ArtistDetailSection, with data: Codable) {
-
-        guard let items = configureViewModel(for: sectionType, with: data) else { return }
-
-        updateSnapshot(for: sectionType, with: items)
+    func didLoadData(for sectionType: ArtistDetailSectionType, with data: Codable) {
+        configureSection(for: sectionType, with: data)
     }
 
     func didFinishLoading() {
+        updateSnapShot()
         delegate?.reloadData()
     }
-    
+
     func didFailLoading(with error: Error) {
         // todo
     }
-    
-    func didUpdateSavedStatus() {
-        // todo
+
+    func didUpdateFollowedStatus() {
+        delegate?.didUpdateFollowedStatus()
     }
-    
-    func didFailToSaveItem() {
-        // todo
+
+    func didFailToFollowArtist() {
+        //
     }
 }

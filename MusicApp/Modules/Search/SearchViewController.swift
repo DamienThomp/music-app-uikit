@@ -164,7 +164,7 @@ extension SearchViewController: SearchResultsViewControllerDelegate {
         case .album:
             coordinator?.showDetails(for: item)
         case .artist:
-            print("todo: handle when artist page is complete")
+            coordinator?.showArtistPage(for: item.id)
         case .track:
             print("todo: add play function for track")
         default:

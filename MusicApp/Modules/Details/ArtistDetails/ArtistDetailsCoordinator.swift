@@ -19,7 +19,7 @@ class ArtistDetailsCoordinator: NSObject, Coordinator {
     init(
         navigationController: UINavigationController,
         serviceResolver: ServiceLocatorProtocol
-    ){
+    ) {
         self.navigationController = navigationController
         self.serviceResolver = serviceResolver
     }
@@ -34,5 +34,3 @@ class ArtistDetailsCoordinator: NSObject, Coordinator {
         navigationController.pushViewController(viewController, animated: true)
     }
 }
-
-

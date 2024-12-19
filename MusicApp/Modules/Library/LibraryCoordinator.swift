@@ -51,6 +51,18 @@ class LibraryCoordinator: NSObject, Coordinator {
         childCoordinators.append(coordinator)
         coordinator.start()
     }
+
+    func showArtistPage(for artistId: String) {
+        
+        let coordinator = ArtistDetailsCoordinator(
+            navigationController: navigationController,
+            serviceResolver: serviceResolver
+        )
+
+        coordinator.artistId = artistId
+        childCoordinators.append(coordinator)
+        coordinator.start()
+    }
 }
 
 extension LibraryCoordinator: UINavigationControllerDelegate {

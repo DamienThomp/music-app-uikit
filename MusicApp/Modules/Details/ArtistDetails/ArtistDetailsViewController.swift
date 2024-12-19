@@ -9,15 +9,16 @@ import UIKit
 
 class ArtistDetailsViewController: UIViewController {
 
-    typealias DataSource = UICollectionViewDiffableDataSource<ArtistDetailSection, BrowseItem>
+    typealias DataSource = UICollectionViewDiffableDataSource<ArtistDetailsSection, BrowseItem>
 
     weak var coordinator: ArtistDetailsCoordinator?
     var viewModel: ArtistDetailsViewModel?
 
     var artistId: String?
     var dataSource: DataSource?
-    
+
     private var collection: UICollectionView!
+    private var followButton = UIBarButtonItem()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +29,9 @@ class ArtistDetailsViewController: UIViewController {
 
         showLoadingState()
 
-        viewModel?.createInitialSnapshot()
-        
         viewModel?.fetchData(for: artistId)
+
+        setNeedsUpdateContentUnavailableConfiguration()
     }
 
     override func viewDidLayoutSubviews() {
@@ -45,11 +46,52 @@ class ArtistDetailsViewController: UIViewController {
     }
 
     func configure() {
+
         configureCollectionView()
+        configureBackButton()
+        configureNavBarButtons()
         registerCells()
         configureDataSource()
         configureDataSource()
         configureDataSourceSupplement()
+    }
+
+    private func configureBackButton() {
+
+        let imageConfig = UIImage.SymbolConfiguration(paletteColors: [.systemGray5, .systemGreen])
+        let backImage = UIImage(systemName: "chevron.backward.circle.fill", withConfiguration: imageConfig)
+
+        navigationController?.navigationBar.backIndicatorImage = backImage
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
+
+        let backButton = UIBarButtonItem()
+        backButton.title = ""
+
+        navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+    }
+
+    private func configureNavBarButtons() {
+
+        let imageConfig = UIImage.SymbolConfiguration(paletteColors: [.systemGreen])
+
+        let buttonImage = UIImage(systemName: "plus.circle", withConfiguration: imageConfig)
+        followButton = UIBarButtonItem(image: buttonImage, primaryAction: UIAction { [weak self] _ in
+
+            guard let id = self?.artistId else { return }
+
+            self?.viewModel?.updateFollowStatus(for: id)
+        })
+
+        navigationItem.rightBarButtonItems = [followButton]
+    }
+
+    private func updateFollowButton() {
+
+        guard let viewModel else { return }
+
+        followButton.image = UIImage(
+            systemName: viewModel.isFollowingArtist ? "checkmark.circle.fill" : "plus.circle"
+        )
     }
 }
 
@@ -58,50 +100,59 @@ extension ArtistDetailsViewController {
 
     private func configureCollectionView() {
 
-        let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
+        let layout = DynamicHeader { [weak self] sectionIndex, _ in
             return self?.createSectionLayout(for: sectionIndex)
         }
 
+        layout.register(
+            SectionDecorator.self,
+            forDecorationViewOfKind: SectionDecorator.reuseIdentifier
+        )
+
         let config = UICollectionViewCompositionalLayoutConfiguration()
-        config.interSectionSpacing = 40
+        config.interSectionSpacing = 60
         layout.configuration = config
 
         collection = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
+        collection.contentInsetAdjustmentBehavior = .never
         collection.delegate = self
+
         collection.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collection.backgroundColor = .systemBackground
-        collection.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(collection)
     }
 
     private func createSectionLayout(for sectionIndex: Int) -> NSCollectionLayoutSection? {
 
-        guard let snapshot = self.viewModel?.snapshot else { return nil }
-
-        switch snapshot.sectionIdentifiers[sectionIndex] {
-        case .albums:
+        switch sectionIndex {
+        case 0:
+            return CollectionUIHelper.createSingleItemBannerLayout()
+        case 1:
             return CollectionUIHelper.createTwoRowHorizontalSection()
-        case .tracks:
+        case 2:
             return CollectionUIHelper.createMultiRowHorizontalListSection()
+        default:
+            return CollectionUIHelper.createItemViewLayout()
         }
     }
 
     private func registerCells() {
-        
-        collection.register(
-            AlbumTrackCollectionViewCell.self,
-            forCellWithReuseIdentifier: AlbumTrackCollectionViewCell.reuseIdentifier
-        )
 
         collection.register(
-            BannerCollectionViewCell.self,
-            forCellWithReuseIdentifier: BannerCollectionViewCell.reuseIdentifier
+            PlaylistTrackCollectionViewCell.self,
+            forCellWithReuseIdentifier: PlaylistTrackCollectionViewCell.reuseIdentifier
         )
 
         collection.register(
             CoverCollectionViewCell.self,
             forCellWithReuseIdentifier: CoverCollectionViewCell.reuseIdentifier
+        )
+
+        collection.register(
+            ArtistDetailsHeaderView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier:
+                ArtistDetailsHeaderView.reuseIdentifier
         )
 
         collection.register(
@@ -122,21 +173,21 @@ extension ArtistDetailsViewController {
 
         dataSource = DataSource(collectionView: collection, cellProvider: { [weak self] _, indexPath, item in
 
-            guard let snapshot = self?.viewModel?.snapshot else { return UICollectionViewCell() }
-
-            switch snapshot.sectionIdentifiers[indexPath.section] {
-            case .albums:
+            switch item.type {
+            case .album:
                 return self?.collection.configureCell(
                     of: CoverCollectionViewCell.self,
                     for: item,
                     at: indexPath
                 )
-            case .tracks:
+            case .track:
                 return self?.collection.configureCell(
-                    of: AlbumTrackCollectionViewCell.self,
+                    of: PlaylistTrackCollectionViewCell.self,
                     for: item,
                     at: indexPath
                 )
+            default:
+                return UICollectionViewCell()
             }
         })
     }
@@ -145,23 +196,53 @@ extension ArtistDetailsViewController {
 
         dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
 
-            guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind,
-                withReuseIdentifier: SectionHeader.reuseIdentifier,
-                for: indexPath
-            ) as? SectionHeader else {
+            switch indexPath.section {
+            case 0:
+                guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: ArtistDetailsHeaderView.reuseIdentifier,
+                    for: indexPath
+                ) as? ArtistDetailsHeaderView else {
+                    return UICollectionReusableView()
+                }
 
-                return UICollectionViewCell()
+                guard let section = self?.dataSource?.snapshot().sectionIdentifiers[indexPath.section] else {
+                    return UICollectionReusableView()
+                }
+
+                guard let header = section.sectionHeader else {
+                    return UICollectionReusableView()
+                }
+
+                sectionHeader.configure(
+                    with: BrowseItem(id: header.id, title: header.title, subTitle: "", image: header.image, type: nil)
+                )
+
+                return sectionHeader
+
+            default:
+                guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: SectionHeader.reuseIdentifier,
+                    for: indexPath
+                ) as? SectionHeader else {
+
+                    return nil
+                }
+
+                guard let section = self?.dataSource?.snapshot().sectionIdentifiers[indexPath.section] else {
+
+                    return nil
+                }
+
+                guard let header = section.sectionHeader else {
+                    return nil
+                }
+
+                sectionHeader.title.text = header.title
+
+                return sectionHeader
             }
-
-            guard let section = self?.dataSource?.snapshot().sectionIdentifiers[indexPath.section] else {
-
-                return UICollectionViewCell()
-            }
-
-            sectionHeader.title.text = section.title
-
-            return sectionHeader
         }
     }
 }
@@ -171,29 +252,25 @@ extension ArtistDetailsViewController: UICollectionViewDelegate {
 }
 
 extension ArtistDetailsViewController: ArtistDetailViewModelDelegate {
-    
+
     func reloadData() {
-        
-        guard let snapshot = viewModel?.snapshot,
-              let header = viewModel?.header
-        else { return }
+
+        guard let snapshot = viewModel?.snapshot else { return }
 
         clearContentUnavailableState()
 
-        updateHeader(with: header)
-
         dataSource?.apply(snapshot)
     }
-    
+
     func didFailLoading(with error: Error) {
         showErrorState(for: error)
     }
-    
-    func didUpdateSavedStatus() {
-        // todo
+
+    func didUpdateFollowedStatus() {
+        updateFollowButton()
     }
-    
-    func didFailToSaveItem() {
-        // todo
+
+    func didFailToFollowArtist() {
+        //
     }
 }

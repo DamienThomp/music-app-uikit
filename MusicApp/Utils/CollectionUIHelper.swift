@@ -59,6 +59,9 @@ struct CollectionUIHelper {
 
         let section = NSCollectionLayoutSection(group: hGroup)
 
+        let layoutSectionHeader = createSectionHeader(for: .banner)
+        section.boundarySupplementaryItems = [layoutSectionHeader]
+
         return section
     }
 

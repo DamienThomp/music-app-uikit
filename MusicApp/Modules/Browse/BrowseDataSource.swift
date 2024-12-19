@@ -120,21 +120,22 @@ extension BrowseDataSource {
         let endPoint = UsersSavedItems.playlists(limit: 25)
         let data = try await executeRequest(for: endPoint)
 
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
-        print(json)
-
         return try decoder.decode(SavedPlaylistsResponse.self, from: data)
     }
 
-    private func fetchTopTracks() async throws -> TrackResponse {
-        let endpoint = UsersTopItemsEnpoint.tracks(limit: 25, offset: 0)
-        let data = try await executeRequest(for: endpoint)
+    private func fetchRecommendations() async throws -> Recommendations? {
 
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
-        print(json)
+        let (artistSeeds, genreSeeds) = try await fetchRecommendationSeeds()
 
-        return try decoder.decode(TrackResponse.self, from: data)
+        let recommendationsData = try await self.executeRequest(
+            for: RecommendationsEndpoint.recommedations(
+                limit: 20,
+                genreSeeds: genreSeeds,
+                artistSeeds: artistSeeds
+            )
+        )
 
+        return try decoder.decode(Recommendations.self, from: recommendationsData)
     }
 
     private func executeRequest(for endPoint: EndpointProtocol) async throws -> Data {
@@ -168,8 +169,9 @@ extension BrowseDataSource {
                     }
 
                     taskGroup.addTask {
-                      //  let recommendations = try await self.fetchTopTracks()
-                       // await self.delegate?.didLoadData(for: .recommended, with: recommendations)
+                        // deprecation of web api, can't fetch recommendations:
+                        // let recommendations = try await self.fetchRecommendations()
+                        // await self.delegate?.didLoadData(for: .recommended, with: recommendations)
                     }
 
                     try await taskGroup.waitForAll()

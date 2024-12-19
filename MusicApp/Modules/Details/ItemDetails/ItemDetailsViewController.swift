@@ -321,11 +321,11 @@ extension ItemDetailsViewController: AlbumPageHeaderDelegate {
     }
     
     func didTapPlayButton() {
-        // todo 
+        // API Deprecation tracks are unplayable
     }
     
     func didTapShuffleButton() {
-        // todo
+        // API Deprecation tracks are unplayable
     }
     
     func titleLabel(show: Bool) {
