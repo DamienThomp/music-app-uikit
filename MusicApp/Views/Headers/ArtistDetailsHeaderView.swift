@@ -78,6 +78,7 @@ class ArtistDetailsHeaderView: UICollectionReusableView {
     private func configureLabel() {
 
         titleLabel.font = UIFont.preferredFont(forTextStyle: .extraLargeTitle)
+        titleLabel.numberOfLines = 0
         titleLabel.textColor = .white
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -94,6 +95,7 @@ class ArtistDetailsHeaderView: UICollectionReusableView {
             coverImage.bottomAnchor.constraint(equalTo: bottomAnchor),
 
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40)
         ])
     }
@@ -104,7 +106,7 @@ class ArtistDetailsHeaderView: UICollectionReusableView {
 
     let cellModel = BrowseItem(
         id: UUID().uuidString,
-        title: "Test Name",
+        title: "Wolves in the Throne Room",
         subTitle: "Test Playlist Owner",
         image: URL(
             string: "https://i.scdn.co/image/66bf46ec1bfc2c72b97986f84af1a69f07531329"
