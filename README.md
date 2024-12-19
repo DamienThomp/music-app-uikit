@@ -5,20 +5,25 @@ Demo project built to experiment with UIKit features like UICollectionView [Comp
 This is a work in progress and new things will be added overtime.
 Content provided by calling [Spotify Web Api](https://developer.spotify.com/documentation/web-api).
 
+** NOTE: due to recent [depractions in the web api](https://developer.spotify.com/blog/2024-11-27-changes-to-the-web-api). This project has broken views and some functionality will never be complete. I will be leaving this up as sample code. **
+
 ## Working Features
 - Onboarding and Authorization Flow
-- Browse View with recommended tracks
 - Album and Playlist Page
 - User Library Page
 - Errors handled with content unavailable views
-- Album save/unsave 
+- Album save/unsave
+- Search Page
 
 ## Future Improvements
-- Search Page
 - Artist Page
 - Playlist add/remove
 - Artist follow/unfollow 
-- Player (which will only play previews if available)
+- ~~Player~~ deprecated preview tracks means player will never be complete 
+
+## Broken Views
+- Browse: missing featured playslists and recommendations
+- Artist page: can't display related artists
 
 ## Screenshots
 
