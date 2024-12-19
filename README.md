@@ -14,11 +14,11 @@ Content provided by calling [Spotify Web Api](https://developer.spotify.com/docu
 - Errors handled with content unavailable views
 - Album save/unsave
 - Search Page
+- Artist Page
+- Artist follow/unfollow 
 
 ## Future Improvements
-- Artist Page
 - Playlist add/remove
-- Artist follow/unfollow 
 - ~~Player~~ deprecated preview tracks means player will never be complete 
 
 ## Broken Views
