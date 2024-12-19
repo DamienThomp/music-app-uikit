@@ -110,10 +110,10 @@ extension ArtistDetailsDataSource {
                 }
 
                 if isFollowingArtist {
-                    try await followArtist(with: id)
+                    try await unFollowArtist(with: id)
                     isFollowingArtist = false
                 } else {
-                    try await unFollowArtist(with: id)
+                    try await followArtist(with: id)
                     isFollowingArtist = true
                 }
                 delegate?.didUpdateFollowedStatus()
@@ -143,6 +143,7 @@ extension ArtistDetailsDataSource {
                 let isFollowingResponse = try await self.getIsFollowedStatus(for: id)
 
                 if let responseValue = isFollowingResponse.first {
+                    print("response: \(responseValue)")
                     self.isFollowingArtist = responseValue
                 }
 
