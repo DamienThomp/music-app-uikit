@@ -90,8 +90,15 @@ class ArtistDetailsViewController: UIViewController {
         guard let viewModel else { return }
 
         followButton.image = UIImage(
-            systemName: viewModel.isFollowingArtist ? "checkmark.circle.fill" : "plus.circle"
+            systemName: viewModel.isFollowingArtist ? "star.fill" : "star"
         )
+    }
+
+    private func retryFetch() {
+
+        showLoadingState()
+        viewModel?.fetchData(for: artistId)
+        setNeedsUpdateContentUnavailableConfiguration()
     }
 }
 
@@ -249,6 +256,20 @@ extension ArtistDetailsViewController {
 
 extension ArtistDetailsViewController: UICollectionViewDelegate {
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+        guard let snapshot = self.viewModel?.snapshot,
+              let item = self.dataSource?.itemIdentifier(for: indexPath) else { return }
+
+        switch snapshot.sectionIdentifiers[indexPath.section].sectionType {
+        case .main:
+            return
+        case .album:
+            coordinator?.showAlbumDetails(with: item)
+        case .tracks:
+            print("clicked track: \(item.title)")
+        }
+    }
 }
 
 extension ArtistDetailsViewController: ArtistDetailViewModelDelegate {
@@ -263,8 +284,9 @@ extension ArtistDetailsViewController: ArtistDetailViewModelDelegate {
     }
 
     func didFailLoading(with error: Error) {
-        showErrorState(for: error) {
-            print("reload")
+
+        showErrorState(for: error) { [weak self] in
+            self?.retryFetch()
         }
     }
 
@@ -273,6 +295,6 @@ extension ArtistDetailsViewController: ArtistDetailViewModelDelegate {
     }
 
     func didFailToFollowArtist() {
-        //
+        // TODO: present alert for failed api call
     }
 }

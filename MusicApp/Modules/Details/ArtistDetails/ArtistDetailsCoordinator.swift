@@ -33,4 +33,14 @@ class ArtistDetailsCoordinator: NSObject, Coordinator {
 
         navigationController.pushViewController(viewController, animated: true)
     }
+
+    func showAlbumDetails(with details: BrowseItem) {
+        let coordinator = ItemDetailsCoordinator(
+            navigationController: navigationController,
+            serviceResolver: serviceResolver
+        )
+        coordinator.details = details
+        childCoordinators.append(coordinator)
+        coordinator.start()
+    }
 }
