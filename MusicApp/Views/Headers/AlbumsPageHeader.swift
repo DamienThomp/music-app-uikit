@@ -124,6 +124,12 @@ extension AlbumsPageHeader {
         configuration.baseForegroundColor = .tintColor
         configuration.buttonSize = .large
         configuration.titlePadding = 0
+        configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
+
+            var outgoing = incoming
+            outgoing.font = UIFont.preferredFont(forTextStyle: .title2)
+            return outgoing
+        }
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         artisNameButton.configuration = configuration
         artisNameButton.translatesAutoresizingMaskIntoConstraints = false
