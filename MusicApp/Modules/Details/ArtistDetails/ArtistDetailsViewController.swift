@@ -128,9 +128,9 @@ extension ArtistDetailsViewController {
         case 0:
             return CollectionUIHelper.createSingleItemBannerLayout()
         case 1:
-            return CollectionUIHelper.createTwoRowHorizontalSection()
-        case 2:
             return CollectionUIHelper.createMultiRowHorizontalListSection()
+        case 2:
+            return CollectionUIHelper.createItemViewLayout()
         default:
             return CollectionUIHelper.createItemViewLayout()
         }

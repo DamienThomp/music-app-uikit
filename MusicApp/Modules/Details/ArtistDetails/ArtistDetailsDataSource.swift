@@ -134,11 +134,11 @@ extension ArtistDetailsDataSource {
                 let response = try await self.getArtistDetails(for: id)
                 await self.delegate?.didLoadData(for: .main, with: response)
 
-                let albumsResponse = try await self.getArtistAlbums(for: id)
-                await self.delegate?.didLoadData(for: .album, with: albumsResponse)
-
                 let trackResponse = try await self.getArtistTopTracks(for: id)
                 await self.delegate?.didLoadData(for: .tracks, with: trackResponse)
+
+                let albumsResponse = try await self.getArtistAlbums(for: id)
+                await self.delegate?.didLoadData(for: .album, with: albumsResponse)
 
                 let isFollowingResponse = try await self.getIsFollowedStatus(for: id)
 
