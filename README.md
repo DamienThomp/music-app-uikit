@@ -5,7 +5,7 @@ Demo project built to experiment with UIKit features like UICollectionView [Comp
 This is a work in progress and new things will be added overtime.
 Content provided by calling [Spotify Web Api](https://developer.spotify.com/documentation/web-api).
 
-** NOTE: due to recent [depractions in the web api](https://developer.spotify.com/blog/2024-11-27-changes-to-the-web-api). This project has broken views and some functionality will never be complete. I will be leaving this up as sample code. **
+** NOTE: due to recent [deprecations in the web api](https://developer.spotify.com/blog/2024-11-27-changes-to-the-web-api). This project has broken views and some functionality will never be complete. I will be leaving this up as sample code. **
 
 ## Working Features
 - Onboarding and Authorization Flow
