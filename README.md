@@ -22,7 +22,7 @@ Content provided by calling [Spotify Web Api](https://developer.spotify.com/docu
 - ~~Player~~ deprecated preview tracks means player will never be complete 
 
 ## Broken Views
-- Browse: missing featured playslists and recommendations
+- Browse: missing featured playlists and recommendations
 - Artist page: can't display related artists
 
 ## Screenshots
