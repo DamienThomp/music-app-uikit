@@ -170,8 +170,8 @@ extension BrowseDataSource {
 
                     taskGroup.addTask {
                         // deprecation of web api, can't fetch recommendations:
-                        // let recommendations = try await self.fetchRecommendations()
-                        // await self.delegate?.didLoadData(for: .recommended, with: recommendations)
+//                         let recommendations = try await self.fetchRecommendations()
+//                         await self.delegate?.didLoadData(for: .recommended, with: recommendations)
                     }
 
                     try await taskGroup.waitForAll()

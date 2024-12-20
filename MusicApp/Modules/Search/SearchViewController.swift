@@ -199,6 +199,8 @@ extension SearchViewController: SearchViewModelDelegate {
             return
         }
 
-        showErrorState(for: error)
+        showErrorState(for: error) {
+            print("reload")
+        }
     }
 }
