@@ -185,6 +185,13 @@ extension ItemDetailsViewController {
             systemName: viewModel.isSavedAlbum ? "checkmark.circle.fill" : "plus.circle"
         )
     }
+
+    private func retryFetch() {
+
+        showLoadingState()
+        viewModel?.fetchData(with: cellItemData)
+        setNeedsUpdateContentUnavailableConfiguration()
+    }
 }
 
 // MARK: - Data Source Configuration
@@ -343,8 +350,8 @@ extension ItemDetailsViewController: ItemDetailViewModelDelegate {
             return
         }
 
-        showErrorState(for: error) {
-            print("reload")
+        showErrorState(for: error) { [weak self] in
+            self?.retryFetch()
         }
     }
     
