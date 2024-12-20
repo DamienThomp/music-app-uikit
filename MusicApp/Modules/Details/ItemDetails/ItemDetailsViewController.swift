@@ -343,7 +343,9 @@ extension ItemDetailsViewController: ItemDetailViewModelDelegate {
             return
         }
 
-        showErrorState(for: error)
+        showErrorState(for: error) {
+            print("reload")
+        }
     }
     
     func reloadData() {

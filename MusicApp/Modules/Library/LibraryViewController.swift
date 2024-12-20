@@ -181,7 +181,9 @@ extension LibraryViewController: LibraryViewModelDelegate {
             return
         }
 
-        showErrorState(for: error)
+        showErrorState(for: error) {
+            print("reload")
+        }
     }
 
     func reloadData() {

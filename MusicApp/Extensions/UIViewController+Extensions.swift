@@ -19,13 +19,22 @@ extension UIViewController {
         contentUnavailableConfiguration = config
     }
 
-    func showErrorState(for error: Error) {
+    func showErrorState(for error: Error, _ retryFunction: @escaping () -> Void) {
 
-        // TODO: - handle messages for loading errors
         var config = UIContentUnavailableConfiguration.empty()
         config.image = UIImage(systemName: "exclamationmark.circle.fill")
         config.text = "Something went wrong."
-        config.secondaryText = "Please try again later."
+        config.secondaryText = "\(error)"
+
+        var retryButtonConfig = UIButton.Configuration.borderedProminent()
+        retryButtonConfig.title = "Retry"
+        retryButtonConfig.image = UIImage(systemName: "arrow.clockwise.circle.fill")
+        retryButtonConfig.imagePadding = 16
+        config.button = retryButtonConfig
+
+        config.buttonProperties.primaryAction = UIAction { _ in
+            retryFunction()
+        }
 
         contentUnavailableConfiguration = config
     }

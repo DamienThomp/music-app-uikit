@@ -54,13 +54,13 @@ extension ArtistDetailsDataSource {
     func followArtist(with id: String) async throws {
 
         let endPoint = UsersSavedItems.follow(ids: [id])
-        _ = try await executeRequest(for: endPoint)
+        try await executeRequest(for: endPoint)
     }
 
     func unFollowArtist(with id: String) async throws {
 
         let endPoint = UsersSavedItems.unfollow(ids: [id])
-        _ = try await executeRequest(for: endPoint)
+        try await executeRequest(for: endPoint)
     }
 
     private func getArtistDetails(for id: String) async throws -> ArtistDetailsResponse {
@@ -91,6 +91,7 @@ extension ArtistDetailsDataSource {
         return try decoder.decode(TrackResponse.self, from: responseData)
     }
 
+    @discardableResult
     private func executeRequest(for endPoint: EndpointProtocol) async throws -> Data {
 
         guard let networkManager else {
@@ -143,7 +144,6 @@ extension ArtistDetailsDataSource {
                 let isFollowingResponse = try await self.getIsFollowedStatus(for: id)
 
                 if let responseValue = isFollowingResponse.first {
-                    print("response: \(responseValue)")
                     self.isFollowingArtist = responseValue
                 }
 

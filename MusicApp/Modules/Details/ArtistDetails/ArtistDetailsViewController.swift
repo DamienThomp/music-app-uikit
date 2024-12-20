@@ -263,7 +263,9 @@ extension ArtistDetailsViewController: ArtistDetailViewModelDelegate {
     }
 
     func didFailLoading(with error: Error) {
-        showErrorState(for: error)
+        showErrorState(for: error) {
+            print("reload")
+        }
     }
 
     func didUpdateFollowedStatus() {

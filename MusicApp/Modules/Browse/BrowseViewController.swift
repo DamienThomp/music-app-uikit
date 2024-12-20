@@ -70,6 +70,13 @@ class BrowseViewController: UIViewController {
         view.backgroundColor = .systemBackground
     }
 
+    private func retryFetch() {
+
+        showLoadingState()
+        viewModel?.fetchData()
+        setNeedsUpdateContentUnavailableConfiguration()
+    }
+
     private func configure() {
 
         configureCollectionView()
@@ -225,7 +232,9 @@ extension BrowseViewController: BrowseViewModelDelegate {
     
     func didFailLoading(with error: Error) {
 
-        showErrorState(for: error)
+        showErrorState(for: error) { [weak self] in
+            self?.retryFetch()
+        }
     }
 
     func reloadData() {
