@@ -48,6 +48,13 @@ class SearchViewController: UIViewController {
         setNeedsUpdateContentUnavailableConfiguration()
     }
 
+    private func retryFetch() {
+        
+        showLoadingState()
+        viewModel?.fetchData(for: .categories)
+        setNeedsUpdateContentUnavailableConfiguration()
+    }
+
     private func configureSearchController() {
 
         searchController = UISearchController(searchResultsController: resultsController)
@@ -199,8 +206,8 @@ extension SearchViewController: SearchViewModelDelegate {
             return
         }
 
-        showErrorState(for: error) {
-            print("reload")
+        showErrorState(for: error) { [weak self] in
+            self?.retryFetch()
         }
     }
 }

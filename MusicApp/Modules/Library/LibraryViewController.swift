@@ -53,6 +53,13 @@ class LibraryViewController: UIViewController {
         configureDataSource()
         configureDataSourceSupplement()
     }
+
+    private func retryFetch() {
+
+        showLoadingState()
+        viewModel?.fetchData()
+        setNeedsUpdateContentUnavailableConfiguration()
+    }
 }
 
 // MARK: - Collection View Configuration
@@ -181,8 +188,8 @@ extension LibraryViewController: LibraryViewModelDelegate {
             return
         }
 
-        showErrorState(for: error) {
-            print("reload")
+        showErrorState(for: error) { [weak self] in
+            self?.retryFetch()
         }
     }
 
