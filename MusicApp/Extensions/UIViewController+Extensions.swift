@@ -24,7 +24,7 @@ extension UIViewController {
         var config = UIContentUnavailableConfiguration.empty()
         config.image = UIImage(systemName: "exclamationmark.circle.fill")
         config.text = "Something went wrong."
-        config.secondaryText = "\(error)"
+        config.secondaryText = error.localizedDescription
 
         var retryButtonConfig = UIButton.Configuration.borderedProminent()
         retryButtonConfig.title = "Retry"
