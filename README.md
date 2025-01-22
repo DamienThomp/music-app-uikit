@@ -1,7 +1,7 @@
 # Music App
 
 Demo project built to experiment with UIKit features like UICollectionView [Compositional Layouts](https://developer.apple.com/documentation/uikit/uicollectionviewcompositionallayout) and 
-[Diffable Data Sources](https://developer.apple.com/documentation/uikit/uicollectionviewdiffabledatasource). App design pattern loosely follows an MVVM with Coordinators pattern.
+[Diffable Data Sources](https://developer.apple.com/documentation/uikit/uicollectionviewdiffabledatasource). App design loosely follows an MVP with Coordinators pattern.
 This is a work in progress and new things will be added overtime.
 Content provided by calling [Spotify Web Api](https://developer.spotify.com/documentation/web-api).
 
