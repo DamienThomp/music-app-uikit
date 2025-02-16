@@ -72,15 +72,7 @@ class MainCoordinator: Coordinator {
 
         searchCoordinator.start()
         childCoordinators.append(searchCoordinator)
-//        let searchViewController = SearchViewController()
-//
-//        searchViewController.title = "Search"
-//        searchViewController.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 1)
-//        searchViewController.navigationItem.largeTitleDisplayMode = .always
-//
-//        let navigationController = UINavigationController(rootViewController: searchViewController)
-//        navigationController.navigationBar.prefersLargeTitles = true
-//
+        
         return searchCoordinator.navigationController
     }
 
